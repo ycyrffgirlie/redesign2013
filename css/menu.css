@@ -1,0 +1,113 @@
+/*
+ The menu for the Cyrff site
+ Version 0. 1
+*/
+#menu{
+	z-index:100000;
+	float: left;
+	height: 190px;
+	width: 195px;
+	padding: 10px 20px 20px 10px;
+}
+
+ul.menu{
+	 padding-left: 0px;
+	 width: 180px;
+}
+
+ ul.menu ul {
+	  width: 180px;
+	  padding-left: 0px;
+  }
+
+ul.menu, ul.menu ul 
+{
+ 
+border: 1px solid #ffffff;      
+    background-color: #ffffff;
+  color: #800080;
+  
+  margin-left: 0px;
+-webkit-border-radius: 25px;
+-moz-border-radius: 25px;
+ border-radius: 25px;
+}
+
+ul.menu li 
+{
+  list-style-type: none;
+  margin: 0px;
+position: relative;
+  color: #800080;
+  padding-left: 10px;
+}
+
+ul.menu li:first-child{
+	padding-top:5px;
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+}
+
+ul.menu li:last-child{
+	padding-bottom: 5px;
+	border-bottom-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+	
+}
+
+ul.menu li ul li:first-child{
+	padding-top:5px;
+	border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+	
+}
+
+ul.menu li ul li:last-child{
+	padding-bottom: 5px;
+	border-bottom-left-radius: 25px;
+	border-bottom-right-radius: 25px;
+	
+}
+
+ul.menu li > ul 
+{          /* using the > selector prevents many lesser browsers (and IE - see below) hiding child ULs */
+  display: none;               /* hides child menu blocks - one of the most important declarations */
+  position: absolute;          /* make child blocks hover without leaving space for them */
+  top: 0px;                    /* position slightly lower than the parent menu item */
+  left: 180px;                  /* this must not be more than the width of the parent block, or the mouse will
+                                  have to move off the element to move between blocks, and the menu will close */
+}
+
+
+
+ul.menu li:hover, ul.menu li.CSStoHighlight 
+{
+  background-color: #800080;
+  color: #ffffff;
+}
+
+ul.menu li.CSStoHighlight{
+	margin-left: -20px;
+}
+
+ul.menu ul.CSStoShow 
+{
+  display: block; 
+}
+
+ul.menu li:hover > ul 
+{
+ display: block;
+}
+
+ul.menu li a 
+{ 
+ color: #800080;
+ display: block;
+ width: 100%;
+ text-decoration: none;
+}
+ul.menu li a:hover, ul.menu li a.CSStoHighLink { 
+color: #ffffff; 
+}
+ul.menu li:hover > a { color: ffffff; }

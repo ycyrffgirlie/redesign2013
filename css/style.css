@@ -1,0 +1,120 @@
+/* @@Author: Chritine Black
+The main style sheet for the Cyrff site
+Version 0. 1 - Create style sheet
+
+*/
+
+htmk, body{
+	height: 100%;
+}
+
+html{
+	/*width: 100%;*/
+	background-image:url('../background5.jpg');
+	background-repeat: no-repeat;
+	background-attachment:fixed;
+	 -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+}
+
+body{
+	/*background: -webkit-gradient(linear, left top, left bottom, from(#800080), to(#d200ee)) fixed;*/
+	/*background-image:url('background5.jpg');
+	background-repeat: no-repeat;
+	/*Background-position: center;
+	background-attachment:fixed;
+	/*background-size: cover;*/
+	/*background-color: #800080;*/
+	margin:0px;
+	color: #ffd700; 
+	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
+}
+
+.container{
+	margin: 0px auto;
+	width: 80%;
+	/*background-color: #fff;*/
+}
+
+p{
+	color: #ffd700; 
+	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
+}
+
+ .smaller{
+	font-size: 12px;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+p.smaller. span.smaller{
+	font-size: 12px;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+h1, h2, h3{
+	color: #ffd700; 
+	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
+}
+
+a.normal{
+	color: #ffffff;
+	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+a.normal:hover{
+	color: #800080;
+	background-color: #ffffff;
+	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
+	text-decoration: none;
+}
+
+
+hr {
+    color: #FFFFFF;
+}
+
+.button{
+	background: -webkit-gradient(linear, left top, left bottom, from(#002AB0), to(#57CDFF));
+	background: -moz-linear-gradient(top,  #002AB0,  #57CDFF);
+	padding: 10px;
+	border: 2px solid #0020A6;
+	-moz-border: 2px solid 0#020A6;
+	border-radius: 5px 5px 5px 5px; 
+	-moz-box-shadow: -5px -5px 5px #000C92;
+	-webkit-box-shadow: :-5px -5px 5px #000C92;
+	box-shadow: -5px -5px 5px #000C92;
+	font-family:\verdana;
+	font-size: 14px;
+}
+
+.button:hover{
+	background: -webkit-gradient(linear, left top, left bottom, from(#9B0000), to(#FF7140));
+	background: -moz-linear-gradient(top,  #9B0000,  #FF7140);
+	border: 2px solid #7D0000;
+	-moz-box-shadow: -5px -5px 5px #730000;
+	-webkit-box-shadow: :-5px -5px 5px #730000;
+	box-shadow: -5px -5px 5px #730000;
+}
+.back{
+	width:115px; 
+	margin: 0px auto;
+	padding:15px;
+}
+	
+.captioncontainer{
+	margin-top: -20px;
+	float:right;
+}
+
+.caption{
+	color:#800080; 
+	background-color:#ffffff;
+	z-index: 10;
+}
+

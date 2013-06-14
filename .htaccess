@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "redesign2013"
+AuthUserFile "/home/ycyrf718/.htpasswds/public_html/redesign2013/passwd"
+require valid-user
