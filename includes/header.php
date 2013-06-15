@@ -13,6 +13,8 @@ if (preg_match('%christine%', $filename)){
 	$filename = preg_replace('%/christine%','', $filename);
 }elseif(preg_match('%dev%',$filename)){
 	$filename = preg_replace('%/dev%','', $filename);
+}elseif (preg_match('%/redesign2013%', $filename)){
+	$filename = preg_replace('%/redesign2013%', '', $filename);
 }
 
 if ($filename == '/profiles/fanprofile.php'){
@@ -45,17 +47,15 @@ if (preg_match('%christine.ycy%', $_SERVER["HTTP_HOST"])){
 	print_r($fileinfo);
 	echo "</p>";
 
+}elseif (preg_match('%redesign2013.ycy%', $_SERVER["HTTP_HOST"])) {
+	session_name(cyrffRedesign);
+	session_start();
 }
 
 if ($fileinfo){
-if ($fileinfo[html5] == 1){
 ?>
 <!DOCTYPE HTML>
 
-<?php }else{
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<?php }?>
 <!--Need to query the database first and get the data from db about the currect page.-->
 <!--Now the db has given us the data, we can start making up the tags-->
 
@@ -63,29 +63,24 @@ if ($fileinfo[html5] == 1){
 
 <head lang="en-gb">
 <title><?=$fileinfo[title]?></title>
-<? if ($fileinfo[html5] == 1){
-?>
 <meta charset="UTF-8" />
-<?php }else{
-?>
-<meta http-equiv="Content-Type" content="text/html; charset=Iso-8859-14">
-<?php }?>
-<meta name="keywords" content="<?=$fileinfo[keywords]?>">
-<meta name="description" content="<?=$fileinfo[descriptionen];?> / <?=$fileinfo[descriptioncymraeg];?>">
+<meta name="keywords" content="<?=$fileinfo[keywords]?>" />
+<meta name="description" content="<?=$fileinfo[descriptionen];?> / <?=$fileinfo[descriptioncymraeg];?>" />
 <link rel="canonical"  href="http://www.ycyrffgroupie.co.uk<?=$fileinfo['filename']?>" />
 <!--For facebook-->
-<meta property="og:title" content="<?=$fileinfo[facebooktitle]?>">
-<meta property="og:url" content="http://www.ycyrffgroupie.co.uk<?=$fileinfo['filename']?>">
-<meta property="og:site_name" content="Y Cyrff Unofficial site" >
-<meta property="og:description" content="<?=$fileinfo[facebookdescription]?>">
+<meta property="og:title" content="<?=$fileinfo[facebooktitle]?>" />
+<meta property="og:url" content="http://www.ycyrffgroupie.co.uk<?=$fileinfo['filename']?>" />
+<meta property="og:site_name" content="Y Cyrff Unofficial site" />
+<meta property="og:description" content="<?=$fileinfo[facebookdescription]?>" />
 <!--end facebook-->
 <!--If your really need to know-->
-<meta name="author" content="Christine Black">
-<meta name="generator" content="SCiTE"> <!--An open soucre producct not shitty Microsoft. Anything they do is a virus. I like a Linux to keep me warm at night-->
+<meta name="author" content="Christine Black" />
+<meta name="generator" content="SCiTE" /> <!--An open soucre producct not shitty Microsoft. Anything they do is a virus. I like a Linux to keep me warm at night-->
 <!--end need to know section-->
-<meta name="rating" content="General">
+<meta name="rating" content="General" />
 <link rel="shortcut icon" href="/images/icon/cyrff.ico">
-<link rel="stylesheet" type="text/css" href="/css/style.css?v1.5"><!--IE couldn't get the style the other way. Don't know why.-->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v0.1" /><!--IE couldn't get the style the other way. Don't know why.-->
+ <link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />
  <?php
 if  ($fileinfo[htmlcode]) {
 echo $fileinfo[htmlcode];
@@ -105,34 +100,30 @@ echo $fileinfo[htmlcode];
 
 </script>
 </head>
-<!--At some point in the future, I am going over to html 5. Just waiting for better browser support.
-Warning:Some of the code on this page doesn't validate as html4 because it's actually-html 5. Please read the above comment for why 
-I haven't gone over to html 5
-It did validate about 7 years ago. The codebase is really old.No wonder the aite ia going white.-->
-
 <?php
 }else{
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <!--Okay need to use the default.-->
 <head lang="en-gb">
 <title>Y Cyrff</title>
-<meta name="keywords" content="Y Cyrff">
-<meta name="description" content="One of the only website about Y Cyrff. / Un o'r unig we safle am Y Cyrff.">
+<meta charset="UTF-8" />
+<meta name="keywords" content="Y Cyrff" />
+<meta name="description" content="One of the only website about Y Cyrff. / Un o'r unig we safle am Y Cyrff." />
 <!--For facebook-->
-<meta property="og:title" content="Y Cyrff">
-<meta property="og:url" content="http://www.ycyrffgroupie.co.uk<?=$_SERVER["PHP_SELF"]?>">
-<meta property="og:site_name" content="Y Cyrff Unofficial site" >
-<meta property="og:description" content="One of the only website about Y Cyrff. / Un o'r unig we safle am Y Cyrff.">
+<meta property="og:title" content="Y Cyrff" />
+<meta property="og:url" content="http://www.ycyrffgroupie.co.uk<?=$_SERVER["PHP_SELF"]?>" />
+<meta property="og:site_name" content="Y Cyrff Unofficial site"  />
+<meta property="og:description" content="One of the only website about Y Cyrff. / Un o'r unig we safle am Y Cyrff." />
 <!--end facebook-->
 <!--If your really need to know-->
-<meta name="author" content="Christine Black">
+<meta name="author" content="Christine Black" />
 <meta name="generator" content="SCiTE"> <!--An open soucre producct not shitty Microsoft. Anything they do is a virus. I like a Linux to keep me warm at night-->
 <!--end need to know section-->
-<meta http-equiv="Content-Type" content="text/html; charset=Iso-8859-14">
-<meta name="rating" content="General">
-<link rel="shortcut icon" href="/images/icon/cyrff.ico">
-<link rel="stylesheet" type="text/css" href="/css/style.css?v1.5"><!--IE couldn't get the style the other way. Don't know why.-->
+<meta name="rating" content="General" />
+<link rel="shortcut icon" href="/images/icon/cyrff.ico" />
+<link rel="stylesheet" type="text/css" href="/css/style.css?v0.1" /><!--IE couldn't get the style the other way. Don't know why.-->
+<link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />
  <?php
 }
 if ($fileinfo['filename'] == "/includes/header.php"){
