@@ -1,16 +1,11 @@
-<htmL>
-<head>
-<link rel="stylesheet" type="text/css" href="../css/style.css?v0.1">
-<link rel="stylesheet" type="text/css" href="../css/menu.css?v0.1">
-</head>
+<?php include '../includes/header.php'; ?>
 
 <body>
 <div class="container">
 <div id="menu">
-<ul class="menu">
-
-
-</ul>
+	<ul class="menu">
+		<?php include '../includes/menu.html';?>
+	</ul>
 </div>
 
 <h1>Catching up with Catatonia</h1>
@@ -58,13 +53,8 @@
 <p>At the moment their 'work in progress' is as Y FFyrc. 'When we've finished it we'll see what we do with it,' they say mysteriously.</p>
 
 
-<p>
-<div class="back">
-<span class="button">
-Back / Yn &ocirc;l
-</span>
-</div>
-</p>
+<?php echo backButton($filename ); ?>
+
 
 </div>
 

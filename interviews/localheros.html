@@ -1,16 +1,11 @@
-<htmL>
-<head>
-<link rel="stylesheet" type="text/css" href="../css/style.css?v0.1">
-<link rel="stylesheet" type="text/css" href="../css/menu.css?v0.1">
-</head>
+<?php include '../includes/header.php'; ?>
 
 <body>
 <div class="container">
 <div id="menu">
-<ul class="menu">
-
-
-</ul>
+	<ul class="menu">
+		<?php include '../includes/menu.html';?>
+	</ul>
 </div>
 
 <h1>Local Heros</h1>
@@ -35,13 +30,8 @@
 
 
 
-<p>
-<div class="back">
-<span class="button">
-Back / Yn &ocirc;l
-</span>
-</div>
-</p>
+<?php echo backButton($filename ); ?>
+
 
 </div>
 
