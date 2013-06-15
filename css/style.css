@@ -100,15 +100,19 @@ hr {
 	-moz-box-shadow: -5px -5px 5px #730000;
 	-webkit-box-shadow: :-5px -5px 5px #730000;
 	box-shadow: -5px -5px 5px #730000;
+	cursor: pointer;
 }
 .back{
 	width:115px; 
 	margin: 0px auto;
 	padding:15px;
+	color: #ffd700; 
+	text-decoration: none;
+	
 }
 	
 .captioncontainer{
-	margin-top: -25px;
+	margin-top: -28px;
 	float:right;
 	position: relative;
 }
@@ -118,5 +122,11 @@ hr {
 	background-color:#ffffff;
 	z-index: 10;
 	padding: 5px 10px;
+}
+
+a.buttonlink{
+	color: #ffd700; 
+	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
+	text-decoration: none;
 }
 
