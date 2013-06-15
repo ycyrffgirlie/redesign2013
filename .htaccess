@@ -2,3 +2,7 @@ AuthType Basic
 AuthName "redesign2013"
 AuthUserFile "/home/ycyrf718/.htpasswds/public_html/redesign2013/passwd"
 require valid-user
+
+#Enable php in html files.
+
+AddHandler application/x-httpd-php5 .html .htm
