@@ -3,6 +3,19 @@ AuthName "redesign2013"
 AuthUserFile "/home/ycyrf718/.htpasswds/public_html/redesign2013/passwd"
 require valid-user
 
+#Profile pages
+
+RewriteRule ^profiles/chantalprofile.html$ /profiles/fanprofile.php?profileid=1 [L]
+RewriteRule ^profiles/christineprofile.html$ /profiles/fanprofile.php?profileid=2  [L]
+RewriteRule ^profiles/ffwrchamotobeicsprofile.html$ /profiles/fanprofile.php?profileid=3  [L]
+RewriteRule ^profiles/jeniwineprofile.html$ /profiles/fanprofile.php?profileid=4  [L]
+RewriteRule ^profiles/khmerhunprofile.html$ /profiles/fanprofile.php?profileid=5  [L]
+RewriteRule ^profiles/llewelynrichardsprofile.html$ /profiles/fanprofile.php?profileid=6  [L]
+RewriteRule ^profiles/lukeprofile.html$ /profiles/fanprofile.php?profileid=7  [L]
+RewriteRule ^profiles/mrgroovyprofile.html$ /profiles/fanprofile.php?profileid=8  [L]
+RewriteRule ^profiles/rhysprofile.html$ /profiles/fanprofile.php?profileid=9  [L]
+
 #Enable php in html files.
 
 AddHandler application/x-httpd-php5 .html .htm
+
