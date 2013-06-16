@@ -130,3 +130,9 @@ a.buttonlink{
 	text-decoration: none;
 }
 
+#content{
+	 float: right;
+	width: 530px;
+	margin-bottom: 20px;
+	padding-bottom: 30px;
+}
