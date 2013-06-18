@@ -6,7 +6,7 @@ if (file_exists('../includes/connection.php')){
 }
 
 
-if (isset( $_GET['profileid']) && ($_GET['profileid'] != NULL OR $_GET['profileid'] !='' )){
+if (isset( $_GET['profileid']) && ($_GET['profileid'] != NULL && $_GET['profileid'] !='' )){
 	$profile_id = $_GET['profileid']; 
 	$sql = 'SELECT title FROM pages, fan_profile WHERE pages.filename = fan_profile.filename
 	AND profileid = '.$profile_id;
