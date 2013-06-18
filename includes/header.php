@@ -20,14 +20,17 @@ if (preg_match('%christine%', $filename)){
 }
 
 if ($filename == '/profiles/fanprofile.php'){
-
-	$profile_id = $_GET['profileid'];
-	$sql = 'SELECT pages.filename,title, keywords,descriptionen, descriptioncymraeg, facebooktitle, facebookdescription, 
-	facebookimage , facebookurl, html5, htmlcode
-	FROM pages, fan_profile
-	WHERE pages.filename = fan_profile.filename
-	AND fan_profile.profileid ='.$profile_id;
-	
+	if (isset( $_GET['profileid']) && ($_GET['profileid'] != NULL && $_GET['profileid'] !='' )){
+		$profile_id = $_GET['profileid'];
+		$sql = 'SELECT pages.filename,title, keywords,descriptionen, descriptioncymraeg, facebooktitle, facebookdescription, 
+		facebookimage , facebookurl, html5, htmlcode
+		FROM pages, fan_profile
+		WHERE pages.filename = fan_profile.filename
+		AND fan_profile.profileid ='.$profile_id;
+	}else{
+		$sql = "SELECT filename,title, keywords,descriptionen, descriptioncymraeg, facebooktitle, facebookdescription, 
+		facebookimage , facebookurl, html5, htmlcode FROM pages WHERE filename ='".$filename."'";
+	}
 	//echo '<!--'.$sql.'-->';
 
 }else{
