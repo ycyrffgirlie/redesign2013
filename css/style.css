@@ -133,8 +133,8 @@ a.buttonlink{
 #content{
 	 float: right;
 	width: 70%;
-	margin-bottom: 20px;
-	padding-bottom: 30px;
+	/*margin-bottom: 20px;
+	padding-bottom: 30px*/
 }
 
 .clear{
