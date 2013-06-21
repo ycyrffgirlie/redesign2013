@@ -136,3 +136,7 @@ a.buttonlink{
 	margin-bottom: 20px;
 	padding-bottom: 30px;
 }
+
+.clear{
+	clear:both;
+}
