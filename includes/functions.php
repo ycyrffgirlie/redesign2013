@@ -7,13 +7,15 @@ function backButton($filename){
 	$link  = trim($link );
 	
 	if ($filename == "/profiles/fanprofile.php"){
-		$internalURL = array ('http://'.$_SERVER[HTTP_HOST ].$link.'/profile.html');
-		$link  = 'http://'.$_SERVER[HTTP_HOST ].$link.'/profile.html';
+		$internalURL = array ('http://'.$_SERVER["HTTP_HOST" ].$link.'/profile.html');
+		$link  = 'http://'.$_SERVER["HTTP_HOST" ].$link.'/profile.html';
 	}else{
-		$internalURL = array ('http://'.$_SERVER[HTTP_HOST ].$link , 'http://'.$_SERVER[HTTP_HOST ].$link.'/' , 'http://'.$_SERVER[HTTP_HOST ].$link .'/index.html');
+		$internalURL = array ('http://'.$_SERVER["HTTP_HOST"].$link , 
+		'http://'.$_SERVER["HTTP_HOST"].$link.'/' , 
+		'http://'.$_SERVER["HTTP_HOST"].$link .'/index.html');
 		//$output = '<p class="internalURL">'.print_r($internalURL).'</p>';
 	}
-	if (in_array($_SERVER[HTTP_REFERER],$internalURL)){
+	if (in_array($_SERVER["HTTP_REFERER"],$internalURL)){
 		$output = '<script>
 $(document).ready(function(){
 	$(\'div[class="back"]\').click(function(){
