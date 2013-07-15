@@ -45,7 +45,7 @@ $fileinfo = mysql_fetch_assoc($query)/*or die(mysql_error())*/;
 
 if (preg_match('%christine.ycy%', $_SERVER["HTTP_HOST"])){
 	
-	session_name(cyrffTest);
+	session_name('cyrffTest');
 	session_start();
 	
 	echo "<p>";
@@ -53,8 +53,10 @@ if (preg_match('%christine.ycy%', $_SERVER["HTTP_HOST"])){
 	echo "</p>";
 
 }elseif (preg_match('%redesign2013.ycy%', $_SERVER["HTTP_HOST"])) {
-	session_name(cyrffRedesign);
-	session_start();
+	if (!isset($_SESSION)){
+		session_name('cyrffRedesign');
+		session_start() or die();
+	}
 }
 
 if ($fileinfo){
@@ -67,16 +69,16 @@ if ($fileinfo){
 <html lang="en-gb">
 
 <head lang="en-gb">
-<title><?=$fileinfo[title]?></title>
+<title><?=$fileinfo["title"]?></title>
 <meta charset="UTF-8" />
-<meta name="keywords" content="<?=$fileinfo[keywords]?>" />
-<meta name="description" content="<?=$fileinfo[descriptionen];?> / <?=$fileinfo[descriptioncymraeg];?>" />
+<meta name="keywords" content="<?=$fileinfo["keywords"]?>" />
+<meta name="description" content="<?=$fileinfo["descriptionen"];?> / <?=$fileinfo["descriptioncymraeg"];?>" />
 <link rel="canonical"  href="http://www.ycyrffgroupie.co.uk<?=$fileinfo['filename']?>" />
 <!--For facebook-->
-<meta property="og:title" content="<?=$fileinfo[facebooktitle]?>" />
+<meta property="og:title" content="<?=$fileinfo["facebooktitle"]?>" />
 <meta property="og:url" content="http://www.ycyrffgroupie.co.uk<?=$fileinfo['filename']?>" />
 <meta property="og:site_name" content="Y Cyrff Unofficial site" />
-<meta property="og:description" content="<?=$fileinfo[facebookdescription]?>" />
+<meta property="og:description" content="<?=$fileinfo["facebookdescription"]?>" />
 <!--end facebook-->
 <!--If your really need to know-->
 <meta name="author" content="Christine Black" />
@@ -88,8 +90,8 @@ if ($fileinfo){
  <link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />
  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
  <?php
-if  ($fileinfo[htmlcode]) {
-echo $fileinfo[htmlcode];
+if  ($fileinfo["htmlcode"]) {
+echo $fileinfo["htmlcode"];
 }
 ?>
 <script type="text/javascript">
