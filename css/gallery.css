@@ -1,0 +1,144 @@
+/* the Gallery (Unordered List) - position:relative is for ie7 
+We  now have style sheets - as my browser can't get the lastest version of the style sheets.
+ver 1.2.12
+---------------------------------------------------------------------------------------------------------
+Changes
+----------------------------------------------------------------------------------------------------------
+Ver 1.2.*
+Added styling the photos pages
+*/
+
+#gallery {
+	position:relative;
+	/*float:left;*/
+	margin-top:3px;
+	overflow:hidden;
+	height:390px 
+	/* FF .8 */;
+	width:444px;/*222px;*/
+	background:#80080;
+	/*border:3px solid #000;*/
+	z-index:1/* IE Mac */
+	}
+#gallery li {display:inline;overflow:hidden;height:120px}
+#gallery li img {/*border:3px solid #000;*/
+	/*width:105px;height:100px;*/
+	display:block;
+	margin-right:auto;
+	margin-left:auto;
+	margin-top:auto;
+	margin-bottom: auto;
+	padding: 0px;
+	text-align:center;
+	position:relative;z-index:10}
+/* overflow:hidden will break FF 0.8 */ 
+#gallery li a {display:block;float:left;height:120px !important /* IE5 Mac */;width:111px;position:relative;color:#fff}
+#gallery li img:hover {color:#000;background:#fff} 
+#gallery li a:hover img,
+#gallery li a:focus img,#gallery li a:active img {border-color:#fff}
+#gallery span {position:absolute;top:0;left:0;margin-top:2.2em;padding:0 3px;z-index:1}
+
+/*This for indivial images page*/
+
+#clear{
+	clear: both;
+}
+
+#imagecomtainer{
+	height:500px;
+	width:800px;
+	display:block;
+	margin:auto;
+}
+
+#copyright{
+height: 24px;
+}
+
+/*.back{
+	width:50px;
+	height:500px;
+	position:relative;
+	display:block;
+	margin:0 6px;
+	float:left;
+}*/
+.middle{
+	width: 500px;
+	height: 500px;
+	position:relative;
+	display:block;
+	margin:0 6px;	
+	float:left;
+	left:25px;
+}
+.next{
+	width:50px;
+	height:500px;
+	position:relative;
+	display:block;
+	margin:0 6px;
+	float:left;
+	left: 25px;
+}
+
+.arrowback{
+	float:left;
+	top:200px;
+	margin-top:250px;
+}
+
+.arrownext{
+	float;right;
+	top: 200px;
+	margin-top:250px;
+}
+
+.middle mg{
+	margin-right:auto;
+	margin-left:auto;
+	margin-top:auto;
+	margin-bottom: auto;
+	padding: 0;
+}
+
+
+
+/**This should gp in the othercss but I didn't want to ;ink to 3 style sheets on the photo pages . 
+I could had put in style.css but I am trying to keep that for the overall syle So it's going here*/
+
+A.photo:visited{
+color: #ffd700;
+font-size: 64px;
+text-decoration:none;
+}
+
+A.photo:unvisited{
+color: #ffd700;
+font-size: 64px;
+text-decoration:none;
+}
+
+A.photo:link{
+color: #ffd700;
+font-size: 64px;
+text-decoration:none;
+}
+
+A.close:visited{
+color: #ffd700;
+/*font-size: 64px;*/
+text-decoration:none;
+}
+
+A.close:unvisited{
+color: #ffd700;
+/*font-size: 64px;*/
+text-decoration:none;
+}
+
+A.close:link{
+color: #ffd700;
+/*font-size: 64px;*/
+text-decoration:none;
+}
