@@ -9,6 +9,9 @@ function backButton($filename){
 	if ($filename == "/profiles/fanprofile.php"){
 		$internalURL = array ('http://'.$_SERVER["HTTP_HOST" ].$link.'/profile.html');
 		$link  = 'http://'.$_SERVER["HTTP_HOST" ].$link.'/profile.html';
+	}elseif ( $filename == '/albums.html' OR $filename == "/compilations.html" OR $filename == '/singles.html'){
+		$internalURL = array ('http://'.$_SERVER["HTTP_HOST" ].'/discography.html');
+		$link  = 'http://'.$_SERVER["HTTP_HOST" ].'/discography.html';
 	}else{
 		$internalURL = array ('http://'.$_SERVER["HTTP_HOST"].$link , 
 		'http://'.$_SERVER["HTTP_HOST"].$link.'/' , 
@@ -32,7 +35,7 @@ $(document).ready(function(){
 </div>';
 
 	}else{
-		$output = '<a href="'.$link .'"class="buttonlink"><div class="back">
+		$output = '<a href="'.$link .'" class="buttonlink"><div class="back">
 	<span class="button">
 		Back / Yn &ocirc;l
 	</span>
