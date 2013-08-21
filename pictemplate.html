@@ -1,0 +1,63 @@
+<?php include '../includes/header.php'; ?>
+
+<body>
+
+<link rel="stylesheet" type="text/css" href="../css/gallery.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.fancybox.css">
+<style type="text/css">
+.fancybox-title-outside-wrap {
+	color: #FFD700;
+	font-family: Tahoma,Verdana,Ubuntu,Helvetica,sans-serif;
+}
+</style>
+<script src="../includes/javascript/jquery.fancybox.js"></script>
+<script src="../includes/javascript/jquery.fancybox.pack.js"></script>
+<script src="../includes/javascript/jquery.fancybox-thumbs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('img[class=pic]').css('border', 'none'); /*The hack for IE, IE is just a pain in the arse Microsoft, why can't you follow standards? Your not the leaders of the world - get over it. Anyway who wants to buy your crappy software anyway?*/
+		$('img[class=pic]').mouseover(function() {
+			$(this).css('border','3px solid #ffffff');
+		});
+		$('img[class=pic]').mouseout(function() {
+			$(this).css('border','none');
+		}); 
+		
+		$(".fancybox-thumbs").fancybox({
+			beforeLoad: function() {
+				this.title = $(this.element).attr('caption');
+			},
+			helpers:{
+				title:{
+					type: 'outside'
+				},
+				overlay:{
+					css:{
+						'background': 'rgba(128, 0, 128, 0.6)'
+					}
+				}
+			}
+		});
+	});
+</script>
+
+<div class="container">
+<div id="menu">
+	<ul class="menu">
+		<?php include '../includes/menu.html';?>
+	</ul>
+</div>
+
+
+
+
+<?php echo backButton($filename ); ?>
+
+
+</div>
+
+
+
+</body>
+
+</html>
