@@ -76,6 +76,7 @@ ul.menu li > ul
   top: 0px;                    /* position slightly lower than the parent menu item */
   left: 180px;                  /* this must not be more than the width of the parent block, or the mouse will
                                   have to move off the element to move between blocks, and the menu will close */
+	z-index:100000;
 }
 
 
