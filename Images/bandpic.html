@@ -1,0 +1,174 @@
+<?php include '../includes/header.php'; ?>
+
+<body>
+
+<link rel="stylesheet" type="text/css" href="../css/gallery.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.fancybox.css">
+<style type="text/css">
+#gallery {
+	height:600px;
+}
+.fancybox-title-outside-wrap {
+	color: #FFD700;
+	font-family: Tahoma,Verdana,Ubuntu,Helvetica,sans-serif;
+}
+</style>
+<script src="../includes/javascript/jquery.fancybox.js"></script>
+<script src="../includes/javascript/jquery.fancybox.pack.js"></script>
+<script src="../includes/javascript/jquery.fancybox-thumbs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('img[class=photo]').css('border', 'none'); /*The hack for IE, IE is just a pain in the arse Microsoft, why can't you follow standards? Your not the leaders of the world - get over it. Anyway who wants to buy your crappy software anyway?*/
+		$('img[class=photo]').mouseover(function() {
+			$(this).css('border','3px solid #ffffff');
+		});
+		$('img[class=photo]').mouseout(function() {
+			$(this).css('border','none');
+		}); 
+		
+		$(".fancybox-thumbs").fancybox({
+			beforeLoad: function() {
+				this.title = $(this.element).attr('caption');
+			},
+			helpers:{
+				title:{
+					type: 'outside'
+				},
+				overlay:{
+					css:{
+						'background': 'rgba(128, 0, 128, 0.6)'
+					}
+				}
+			}
+		});
+	});
+</script>
+
+<div class="container">
+<div id="menu">
+	<ul class="menu">
+		<?php include '../includes/menu.html';?>
+	</ul>
+</div>
+
+<h1>Band Pictures/ LLuniau o y band</h1>
+
+<p>Click on a thumbnail for a larger picture.
+<br>
+<span lang="cy">Clec ar y thumbnail i'r llun mwy.</span>
+</p>
+
+<ul id="gallery">
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff.jpg" title="Y Cyrff" 
+		caption="Picture taken by J.Griffiths <br />LLun gan J.Griffiths">
+		<img class="photo" src="cyrff_small.jpg" height="56" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff2.jpg" title="Y Cyrff" 
+		caption="Picture taken by Rolant Dafis. <br />LLun gan Rolant Dafis.">
+		<img class="photo" src="cyrff2_small.jpg" height="98" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff7.jpg" title="Y Cyrff" 
+		caption="">
+		<img class="photo" src="cyrff7_small.jpg" height="89" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff8.jpg" title="Y Cyrff" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="photo" src="cyrff8_small.jpg" height="74" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff9.jpg" title="Y Cyrff"
+		caption="Picture taken by Peter Telfer. <br />LLun gan Peter Telfer.">
+		<img class="photo" src="cyrff9_small.jpg" height="67" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff10.jpg" title="Y Cyrff" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="photo" src="cyrff10_small.jpg" height="63" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff11.jpg" title="Y Cyrff" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="photo" src="cyrff11_small.jpg" height="70" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff12.jpg" title="Y Cyrff" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="photo" src="cyrff12_small.jpg" height="64" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff13.jpg" title="Y Cyrff"
+		caption="">
+		<img class="photo" src="cyrff13_small.jpg" height="114" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff14.jpg" title="Y Cyrff" 
+		caption="">
+		<img class="photo" src="cyrff14_small.jpg" height="94" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff15.jpg" title="Y Cyrff" 
+		caption="">
+		<img class="photo" src="cyrff15_small.jpg" height="51" width="100" /></a>
+	</li>	
+	<li>
+
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff16.jpg" title="Y Cyrff" 
+		caption="Picture taken by Huw G. Jones. <br />LLun gan Huw G. Jones.">
+		<img class="photo" src="cyrff16_small.jpg" height="67" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff17.jpg" title="Y Cyrff"
+		caption="">
+		<img class="photo" src="cyrff17_small.jpg" height="68" width="100" /></a>
+	</li>
+	<li>
+
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff18.jpg" title="Y Cyrff" 
+		caption="Picture taken by G.Thomas. <br />LLun gan G.Thomas.">
+		<img class="photo" src="cyrff18_small.jpg" height="66" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff19.jpg"  title="Y Cyrff" 
+		caption="Picture taken by G.Thomas. <br />LLun gan G.Thomas.">
+		<img class="photo" src="cyrff19_small.jpg" height="66" width="100" /></a>
+	</li>
+	<li>
+
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff20.jpg" title="Y Cyrff" 
+		caption="">
+		<img class="photo" src="cyrff20_small.jpg" height="68" width="100" /></a>
+	</li>
+	<li>
+	&nbsp;
+	</li>
+	<li>
+
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff21.jpg" title="Y Cyrff" 
+		caption="">
+		<img class="photo" src="cyrff21_small.jpg" height="67" width="100" /></a>
+	</li>
+	<li>
+
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff22.jpg" title="Y Cyrff" 
+		caption="Picture taken by G.Thomas. <br />LLun gan G.Thomas.">
+		<img class="photo" src="cyrff22_small.jpg" height="68" width="100" /></a>
+	</li>
+	<li>
+	&nbsp;
+	</li>
+</ul>
+
+<?php echo backButton($filename ); ?>
+
+
+</div>
+
+
+
+</body>
+
+</html>

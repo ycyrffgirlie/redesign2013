@@ -1,0 +1,178 @@
+<?php include '../includes/header.php'; ?>
+
+<body>
+
+<link rel="stylesheet" type="text/css" href="../css/gallery.css">
+<link rel="stylesheet" type="text/css" href="../css/jquery.fancybox.css">
+<style type="text/css">
+/**thumbnails are longer on this page. This is the fix**/
+#gallery {
+	height:800px;
+}
+#gallery li {
+	height:160px;
+}
+#gallery li a {
+	height:160px !important /* IE5 Mac */;
+}
+.fancybox-title-outside-wrap {
+	color: #FFD700;
+	font-family: Tahoma,Verdana,Ubuntu,Helvetica,sans-serif;
+}
+</style>
+<script src="../includes/javascript/jquery.fancybox.js"></script>
+<script src="../includes/javascript/jquery.fancybox.pack.js"></script>
+<script src="../includes/javascript/jquery.fancybox-thumbs.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('img[class=pic]').css('border', 'none'); /*The hack for IE, IE is just a pain in the arse Microsoft, why can't you follow standards? Your not the leaders of the world - get over it. Anyway who wants to buy your crappy software anyway?*/
+		$('img[class=pic]').mouseover(function() {
+			$(this).css('border','3px solid #ffffff');
+		});
+		$('img[class=pic]').mouseout(function() {
+			$(this).css('border','none');
+		}); 
+		
+		$(".fancybox-thumbs").fancybox({
+			beforeLoad: function() {
+				this.title = $(this.element).attr('caption');
+			},
+			helpers:{
+				title:{
+					type: 'outside'
+				},
+				overlay:{
+					css:{
+						'background': 'rgba(128, 0, 128, 0.6)'
+					}
+				}
+			}
+		});
+	});
+</script>
+
+<div class="container">
+<div id="menu">
+	<ul class="menu">
+		<?php include '../includes/menu.html';?>
+	</ul>
+</div>
+
+<h1>Individual Band Members Pictures/ LLuniau o Aelodau Unigol o Band </h1>
+
+<p>Click on a thumbnail for a larger picture.
+<br>
+<span lang="cy">Clec ar y thumbnail i'r llun mwy.</span>
+</p>
+
+<ul id="gallery">
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="barry.jpg" title="Barry"  
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic"src="barry_small.jpg" height="141" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="barry_marine.jpg" title="Barry and Mark" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic" src="barry_marine_small.jpg" height="100" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff3.jpg" title="Y Cyrff" 
+		caption="Picture taken by Huw G. Jones. <br />LLun gan Huw G. Jones.">
+		<img class="pic" src="cyrff3_small.jpg" height="65" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff4.jpg" title="Y Cyrff" 
+		caption="Picture taken by Huw G. Jones. <br />LLun gan Huw G. Jones.">
+		<img class="pic" src="cyrff4_small.jpg" height="68" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff5.jpg" title="Y Cyrff" 
+		caption="">
+		<img class="pic" src="cyrff5_small.jpg" height="155" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="cyrff6.jpg" title="Y Cyrff" 
+		caption="Picture taken by Huw G. Jones. <br />LLun gan Huw G. Jones.">
+		<img class="pic" src="cyrff6_small.jpg" height="64" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="dylan.jpg" title="Dylan" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic" src="dylan_small.jpg" height="73" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="mark_barry.jpg" title="Barry and Mark" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic" src="mark_barry_small.jpg" height="88" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="mark.jpg" title="Mark" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic" src="mark_small.jpg" height="145" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="mark2.jpg" title="Mark" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic" src="mark2_small.jpg" height="147" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="mark3.jpg" title="Mark" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic" src="mark3_small.jpg" height="67" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="mark4.jpg" title="Mark" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic" src="mark4_small.jpg" height="146" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="mark5.jpg" title="Mark" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic" src="mark5_small.jpg" height="66" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="paul.jpg" title="Paul" 
+		caption="Picture taken by Medwyn Jones. <br />LLun gan Medwyn Jones.">
+		<img class="pic" src="paul_small.jpg" height="147" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="barry2.jpg" title="Barry" 
+		caption="Picture taken by Huw G. Jones. <br />LLun gan Huw G. Jones.">
+		<img class="pic" src="barry2_small.jpg" height="153" width="100" /></a>
+	</li>
+		<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="mark6.jpg" title="Mark" 
+		caption="Picture taken by Huw G. Jones. <br />LLun gan Huw G. Jones.">
+		<img class="pic" src="mark6_small.jpg" height="153" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="dylan2.jpg" title="Dylan" 
+		caption="Picture taken by Huw G. Jones. <br />LLun gan Huw G. Jones.">
+		<img class="pic" src="dylan2_small.jpg" height="147" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="paul2.jpg" title="Paul" 
+		caption="Picture taken by Huw G. Jones. <br />LLun gan Huw G. Jones.">
+		<img class="pic" src="paul2_small.jpg" height="67" width="100" /></a>
+	</li>
+	<li>
+		<a class="fancybox-thumbs" rel="fancybox-thumb" href="barrymark.jpg" title="Barry and Mark" 
+		caption="Picture taken by Huw G. Jones. <br />LLun gan Huw G. Jones.">
+		<img class="pic" src="barrymark_small.jpg" height="67" width="100" /></a>
+	</li>
+	<li>
+	&nbsp;
+	</li>
+</ul>
+
+<?php echo backButton($filename ); ?>
+
+
+</div>
+
+
+
+</body>
+
+</html>
