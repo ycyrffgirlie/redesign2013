@@ -15,6 +15,11 @@ RewriteRule ^profiles/lukeprofile.html$ /profiles/fanprofile.php?profileid=7  [L
 RewriteRule ^profiles/mrgroovyprofile.html$ /profiles/fanprofile.php?profileid=8  [L]
 RewriteRule ^profiles/rhysprofile.html$ /profiles/fanprofile.php?profileid=9  [L]
 
+RewriteRule ^about.html$ about.php?lang=en&page=1 [L]
+RewriteRule ^about1.html$ about.php?lang=en&page=2 [L]
+RewriteRule ^am.html$ about.php?lang=cy&page=1 [L]
+RewriteRule ^am1.html$ about.php?lang=cy&page=2 [L]
+
 #Enable php in html files.
 
 AddHandler application/x-httpd-php5 .html .htm
