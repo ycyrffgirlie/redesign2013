@@ -1,6 +1,6 @@
 <?php
-//session_start();
 
+global $filename , $profile_id, $fileinfo ;
 if (file_exists('/includes/connection.php')){
 	require('includes/connection.php');
 }else{
@@ -31,17 +31,17 @@ if ($filename == '/profiles/fanprofile.php'){
 		$sql = "SELECT filename,title, keywords,descriptionen, descriptioncymraeg, facebooktitle, facebookdescription, 
 		facebookimage , facebookurl, html5, htmlcode FROM pages WHERE filename ='".$filename."'";
 	}
-	//echo '<!--'.$sql.'-->';
 
 }else{
 	$sql = "SELECT filename,title, keywords,descriptionen, descriptioncymraeg, facebooktitle, facebookdescription, 
 	facebookimage , facebookurl, html5, htmlcode FROM pages WHERE filename ='".$filename."'";
 	
-	//echo '<!--'.$sql.'-->';
 }
-$query = mysql_query($sql) or die(mysql_error());
-$fileinfo = mysql_fetch_assoc($query)/*or die(mysql_error())*/;
 
+$query = $database->prepare($sql);
+$query ->execute();
+
+$fileinfo = $query->fetch();
 
 if (preg_match('%christine.ycy%', $_SERVER["HTTP_HOST"])){
 	
@@ -141,11 +141,7 @@ if ($fileinfo['filename'] == "/includes/header.php"){
 		</body>
 		</html>';
 }
-//echo $aql;
-//echo '<body>';
-//print_r($fileinfo);
 
-mysql_close($connection);
 ?>
 <!-- Still reading this. It only gets worse.-->
 <!--end being in another file-->
