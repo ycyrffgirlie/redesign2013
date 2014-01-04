@@ -1,9 +1,4 @@
-<?
-$connection = mysql_connect("localhost","ycyrf718_ycyrff","y1986Cyrff") or die(mysql_error());
-//ycyrf718_holdingGuestbook
-
-mysql_select_db("ycyrf718_Copy_cyrff", $connection) or die(mysql_error());
-
-//mysql_close($connection);
-
-?>
+<?php ini_set('error_reporting', E_ALL);try {	$database = new PDO('mysql: host=localhost; dbname=ycyrf718_Copy_cyrff',	'ycyrf718_ycyrff', 'y1986Cyrff');}catch (DATABASEException $error) {
+		echo '<p>There is an error with the db. '.$error->getMessage();	exit;
+	}
+?>
