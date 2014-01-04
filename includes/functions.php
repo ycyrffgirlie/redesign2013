@@ -3,7 +3,6 @@
 function backButton($filename){
 
 	$link = substr_replace($filename, ' ', strrpos($filename, "/"));
-	//$output = '<p>'.$link.'</p>';
 	$link  = trim($link );
 	
 	if ($filename == "/profiles/fanprofile.php"){
@@ -16,7 +15,6 @@ function backButton($filename){
 		$internalURL = array ('http://'.$_SERVER["HTTP_HOST"].$link , 
 		'http://'.$_SERVER["HTTP_HOST"].$link.'/' , 
 		'http://'.$_SERVER["HTTP_HOST"].$link .'/index.html');
-		//$output = '<p class="internalURL">'.print_r($internalURL).'</p>';
 	}
 	if (in_array($_SERVER["HTTP_REFERER"],$internalURL)){
 		$output = '<script>
@@ -56,8 +54,11 @@ function getprofile($profileid){
 			profileid, name, place, website, email, firstheard,favesong, favealbum, comment
 			FROM fan_profile 
 			WHERE profileid ='.$profileid;
-	$query = mysql_query($sql);
-	$profileinfo = mysql_fetch_assoc($query);
+	
+	$query = $database ->prepare($sql);
+	$query ->execute();
+	
+	$profileinfo = $query ->fetch();
 	
 	if ($profileinfo){
 	$output = '<p><strong>Name/Enw:</strong>&nbsp;'.$profileinfo['name'].'
@@ -80,7 +81,7 @@ function getprofile($profileid){
 			$output = '<p>This profile doesn\'t exist</p>';
 		}
 	
-	mysql_close($connection);
+	
 	return $output;
 }
 
