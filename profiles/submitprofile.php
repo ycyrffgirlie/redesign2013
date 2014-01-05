@@ -145,7 +145,7 @@ include '../includes/header.php'; ?>
 		require('/home/ycyrf718/public_html/redesign2013/includes/connection.php');
 		
 		$sql= sprintf("INSERT INTO fan_profile ( name, place, website, email, email_hidden, firstheard, favesong, favealbum, comment) 
-			VALUES('%s','%s','%s','%s', ".$hideEmailAddress.",'%s','%s','%s','%s')",
+			VALUES(%s,%s,%s,%s, ".$hideEmailAddress.",%s,%s,%s,%s)",
 			$database ->quote($name),
 			$database ->quote($location),
 			$database ->quote($website),
@@ -155,7 +155,6 @@ include '../includes/header.php'; ?>
 			$database ->quote($favealbum),
 			$database ->quote($comments));
 
-		//mysql_query($sql);
 		$query = $database ->prepare($sql);
 		$query ->execute();
 	
