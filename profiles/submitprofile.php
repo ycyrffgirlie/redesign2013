@@ -62,7 +62,7 @@ include '../includes/header.php'; ?>
 		$to ='"Christine" <ycyrffgroupie@gmail.com>';
 		$subject ="Fan profile submitted";
 		$html = "<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">
-
+<html>
 <head></head>
 		
 <body style=\"background-image:url('http://www.ycyrffgroupie.co.uk/images/background5.jpg'); background-color: #800080; width:100%;\">
@@ -111,7 +111,8 @@ include '../includes/header.php'; ?>
 	</td>
 	</tr>
 </table>
-</body>";
+</body>
+</html>";
 
 		$txt = strip_tags(str_replace('&nbsp;',' ',$html));
 		
@@ -232,12 +233,12 @@ $('document').ready(function(){
 
 <form name=\"profileForm\" method=\"post\" action=\"submitprofile.php\" id=\"profileForm\">
 
-". ($_GET["v"] == 'fail'? '<p class="white">Please check that you have enter your name and email address correctly.
+". (isset($_GET["v"] )?$_GET["v"] == 'fail'? '<p class="white">Please check that you have enter your name and email address correctly.
 	<br />
 	Plis gwiriwch eich bod wedi rhoi eich enw a\'ch cyfeiriad e-bost yn gywir.</p>'  :   '<div id="error">
 	<p class="white">Please check that you have enter your name and email address correctly.
 	<br />Plis gwiriwch eich bod wedi rhoi eich enw a\'ch cyfeiriad e-bost yn gywir.</p>
-</div>' )."
+</div>':'' )."
 
 <p class=\"white\">* Required information</p>
 <div id=\"content\">
@@ -268,6 +269,10 @@ $('document').ready(function(){
 	<div class=\"fieldline\">
 		<div class=\"fieldname\"><p>E-mail/<span lang=\"cy\">E-bost:</span><span class=\"white\">*</span>&nbsp;</p></div>
 		<div class=\"field\"><p><input type=\"text\" size=\"20\" name=\"email\" ".(isset($_SESSION["profileEmail"])? 'value="'.$_SESSION["profileEmail"].'"' : '' )."></p></div>
+	</div>
+	<div class=\"fieldline\">
+		<div class=\"fieldname\" style=\"width: 250px;\"><p>Do you wish for your email address to be hidden?</p></div>
+		<div class=\"field\" style=\"width: 150px;\"><p><input></p></div>
 	</div>
 	<div>
 		<div align=\"center\">
