@@ -140,25 +140,27 @@ include '../includes/header.php'; ?>
 'Content-Type: text/html; charset="utf-8"'. "\r\n".
 'Content-Transfer-Encoding: 7-bit'. "\r\n\r\n".$html."\r\n";
 
-		//mail($to,$subject,$message, $headers);
+		mail($to,$subject,$message, $headers);
 		
 		require('/home/ycyrf718/public_html/redesign2013/includes/connection.php');
 		
-		$sql= sprintf("INSERT INTO fan_profile ( name, place, website, email, hideEmailAddress, firstheard, favesong, favealbum, comment) 
+		$sql= sprintf("INSERT INTO fan_profile ( name, place, website, email, email_hidden, firstheard, favesong, favealbum, comment) 
 			VALUES('%s','%s','%s','%s', ".$hideEmailAddress.",'%s','%s','%s','%s')",
-			mysql_real_escape_string($name),
-			mysql_real_escape_string($location),
-			mysql_real_escape_string($website),
-			mysql_real_escape_string($email),
-			mysql_real_escape_string($heardcyrff),
-			mysql_real_escape_string($favesong),
-			mysql_real_escape_string($favealbum),
-			mysql_real_escape_string($comments));
+			$database ->quote($name),
+			$database ->quote($location),
+			$database ->quote($website),
+			$database ->quote($email),
+			$database ->quote($heardcyrff),
+			$database ->quote($favesong),
+			$database ->quote($favealbum),
+			$database ->quote($comments));
 
 		//mysql_query($sql);
+		$query = $database ->prepare($sql);
+		$query ->execute();
 	
-	echo "<p>".$sql."</p>";
-	die();
+	//echo "<p>".$sql."</p>";
+	//die();
 		echo "<p>Thank you, your profile has been submitted. I will add your profile soon so come back to check.</p>
 	<p>Diolch i chi, eich proffil wedi ei gyflwyno. Byddaf yn ychwanegu eich proffil fuan er mwyn dod yn &ocirc;l i wirio.</p>";
 	
