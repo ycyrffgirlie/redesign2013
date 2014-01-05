@@ -9,9 +9,7 @@ include '../includes/header.php'; ?>
 	</ul>
 </div>
 
-<h1><?php echo isset($fileinfo["title"])?$fileinfo["title"]:'Error'; ?></h1>
-
-<?php echo getprofile($profile_id);?>
+<?php echo getprofile($profile_id,$fileinfo["title"]);?>
 
 <?php echo backButton($filename ); ?>
 
