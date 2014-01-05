@@ -13,13 +13,19 @@ if ($_POST["name"] !=NULL && $_POST["name"] != ' ' &&  $_POST["email"]  != NULL 
 	$location = $_POST["location"];
 	$website = $_POST["website"];
 	$email = $_POST["email"];
+	$hideEmailAddress = $_POST["hideEmailAddress"] == "Yes"? 1: 0;
 	$heardcyrff = $_POST["heardcyrff"];
 	$favesong = $_POST["favesong"];
 	$favealbum = $_POST["favealbum"];
 	$comments = $_POST["comments"];
 	$_GET["v"] = '';
 	
-
+	/*echo '<p>Post data: ';
+	print_r($_POST);
+	echo '</p>
+	<p>Session data: '.$hideEmailAddress ;
+	echo '</p>';
+	die();*/
 }else{
 	$_SESSION["profileName"] = $_POST["name"];
 	$_SESSION["profileLocation"] = $_POST["location"];
@@ -134,12 +140,12 @@ include '../includes/header.php'; ?>
 'Content-Type: text/html; charset="utf-8"'. "\r\n".
 'Content-Transfer-Encoding: 7-bit'. "\r\n\r\n".$html."\r\n";
 
-		mail($to,$subject,$message, $headers);
+		//mail($to,$subject,$message, $headers);
 		
 		require('/home/ycyrf718/public_html/redesign2013/includes/connection.php');
 		
-		$sql= sprintf("INSERT INTO fan_profile ( name, place, website, email, firstheard, favesong, favealbum, comment) 
-			VALUES('%s','%s','%s','%s','%s','%s','%s','%s')",
+		$sql= sprintf("INSERT INTO fan_profile ( name, place, website, email, hideEmailAddress, firstheard, favesong, favealbum, comment) 
+			VALUES('%s','%s','%s','%s', ".$hideEmailAddress.",'%s','%s','%s','%s')",
 			mysql_real_escape_string($name),
 			mysql_real_escape_string($location),
 			mysql_real_escape_string($website),
@@ -149,9 +155,10 @@ include '../includes/header.php'; ?>
 			mysql_real_escape_string($favealbum),
 			mysql_real_escape_string($comments));
 
-		mysql_query($sql);
+		//mysql_query($sql);
 	
-	//echo "<p>".$sql."</p>";
+	echo "<p>".$sql."</p>";
+	die();
 		echo "<p>Thank you, your profile has been submitted. I will add your profile soon so come back to check.</p>
 	<p>Diolch i chi, eich proffil wedi ei gyflwyno. Byddaf yn ychwanegu eich proffil fuan er mwyn dod yn &ocirc;l i wirio.</p>";
 	
@@ -271,8 +278,17 @@ $('document').ready(function(){
 		<div class=\"field\"><p><input type=\"text\" size=\"20\" name=\"email\" ".(isset($_SESSION["profileEmail"])? 'value="'.$_SESSION["profileEmail"].'"' : '' )."></p></div>
 	</div>
 	<div class=\"fieldline\">
-		<div class=\"fieldname\" style=\"width: 250px;\"><p>Do you wish for your email address to be hidden?</p></div>
-		<div class=\"field\" style=\"width: 150px;\"><p><input></p></div>
+		<div class=\"fieldname\" style=\"width: 250px;padding-right: 5px;\">
+			<p>Do you wish for your email address to be hidden?</p>
+		</div>
+		<div class=\"field\" style=\"width: 60px;padding-left:75px;\">
+			<p>
+				<select name=\"hideEmailAddress\">
+					<option>Yes</option>
+					<option>No</option>
+				</select>
+			</p>
+		</div>
 	</div>
 	<div>
 		<div align=\"center\">
