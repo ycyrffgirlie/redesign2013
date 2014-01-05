@@ -54,7 +54,7 @@ $(document).ready(function(){
 	return $output;
 }
 
-function getprofile($profileid){
+function getprofile($profileid,$title){
 	if (file_exists('/includes/connection.php')){
 	require('includes/connection.php');
 }else{
@@ -73,13 +73,16 @@ function getprofile($profileid){
 	
 	if ($profileinfo){
 	//print_r($profileinfo);
-	$output = '<p><strong>Name/Enw:</strong>&nbsp;'.$profileinfo['name'].'
+	
+	$output = '<h1> '.( isset($title)?$title:$profileinfo['name'].'\'s profile') .'</h1>
+			<p><strong>Name/Enw:</strong>&nbsp;'.$profileinfo['name'].'
 			<br>
 			<strong>Location/<span lang="cy">LLe:</span></strong>&nbsp;'.$profileinfo['place'].'
 			<br>
-			<strong>Website/<span lang="cy">Gwe safle:</span></strong>&nbsp;'.($profileinfo["email_hidden"] == 0?$profileinfo['website']:'').'
+			<strong>Website/<span lang="cy">Gwe safle:</span></strong>&nbsp;'.$profileinfo['website'].'
 			<br>
-			<strong>E-mail/<span lang="cy">E-bost:</span></strong>&nbsp;'.$profileinfo['email'].'
+			<strong>E-mail/<span lang="cy">E-bost:</span></strong>&nbsp;'.
+			($profileinfo["email_hidden"] == 0?$profileinfo['email']:'').'
 			<br>
 			<strong>Where first heard about Cyrff?/<span lang="cy">LLe naethoch chi cyntaf wedi clywed am Y Cyrff?</span></strong>&nbsp;'.$profileinfo['firstheard'].'
 			<br>
@@ -90,7 +93,8 @@ function getprofile($profileid){
 			<strong>Other comments/<span lang="cy">Eraill sywl:</span></strong>&nbsp;'.$profileinfo['comment'].'
 			</p>';
 		}else{
-			$output = '<p>This profile doesn\'t exist</p>';
+			$output = '<h1> '.( isset($title)?$$title:'Error') .'</h1>
+			<p>This profile doesn\'t exist</p>';
 		}
 	
 	
