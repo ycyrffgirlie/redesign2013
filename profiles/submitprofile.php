@@ -48,9 +48,53 @@ if (isset($_GET["v"])){
 }
 
 include '../includes/header.php'; ?>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
+<script>
+$('document').ready(function(){
+	$('input[name="favesong"]').keypress(function(){
+		var textEnter = $(this).val();
+		
+		//alert(textEnter);
+		if (textEnter){
+		
+		}
+	});
+	
+	var songs = [
+		"Ansicrwydd",
+		"Y Cyrifoldeb",
+		"Defnyddia Fi",
+		"Y Pleser",
+		"Fy Enaid Noeth",
+		"Y Deffro"
+	];
+	
+	var albums = [
+		"Dan y Cownter",
+		"Y Testament Newydd",
+		"Yr Atgyfodi",
+		"Awdl o Anobaith",
+		"LLawenydd Heb DDiwedd",
+		"Mae DDoe Yn DDoe",
+		"Damwain Mewn FFatri Cyllyll a FFyrc",
+		"Atalnod LLawn"
+	];
+	
+	$('input[name="favesong"]').autocomplete({
+		//source: songs
+		source: "profiles.ajax.php",
+		minLemgth: 2
+	});
+	
+	$('input[name="favealbum"]').autocomplete({
+		source: albums
+	});
+});
+</script>
 
-<body>
+<body>"
 <div class="container">
 <div id="menu">
 	<ul class="menu">
