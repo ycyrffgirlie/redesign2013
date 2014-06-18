@@ -1,6 +1,7 @@
 /* @@Author: Chritine Black
 The main style sheet for the Cyrff site
 Version 0. 1 - Create style sheet
+Version 0.2 - Added footer styling and the styling for for sale and submit profile pages
 
 */
 
@@ -151,6 +152,28 @@ a.buttonlink{
 	clear:both;
 }
 
+footer{
+	background-color: #FFFFFF;
+	color: #800080; 
+	width: 100%; 
+	margin: 10px; 
+	padding: 10px;
+}
+
+footer  p{
+	color: #800080; 
+}
+
+.footerLeft{
+	float:left;
+	width:49%;
+}
+
+.footerRight{
+	float:right;
+	width:263px;
+}
+
 .recordContainer {
     padding: 10px;
     width: 100%;
@@ -174,4 +197,44 @@ a.buttonlink{
     list-style: none outside none;
     padding: 5px;
     width: 200px;
+}
+
+.fieldline{
+	/*border: 2px solid #FFFFFF;*/
+	min-height: 50px;
+	padding: 5px;
+}
+.fieldname{
+	float: left;
+	padding: 0;
+	width: 150px;
+	min-height: 35px;
+}
+
+.field{
+	float: left;
+	width: 250px;
+}
+
+.white{
+	color: #ffffff;
+}
+
+#error{
+	display:none;
+}
+
+.shopsContainer{
+	/*border: 3px solid #fff;*/
+	height: 116px;
+	margin: 0 auto;
+	width: 435px;
+}
+
+.shops{
+	/*border: 3px solid #fff;*/
+	float: left;
+	height: 75px;
+	width: 105px;
+	padding: 20px;
 }
