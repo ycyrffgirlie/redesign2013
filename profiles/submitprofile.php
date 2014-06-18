@@ -377,6 +377,7 @@ $('document').ready(function(){
 
 <?php echo backButton($filename ); ?>
 
+<?php include '../includes/footer.php'; ?>
 
 </div>
 
