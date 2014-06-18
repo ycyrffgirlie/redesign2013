@@ -13,6 +13,8 @@ include '../includes/header.php'; ?>
 
 <?php echo backButton($filename ); ?>
 
+<?php include '../includes/footer.php'; ?>
+
 </div>
 
 </body>
