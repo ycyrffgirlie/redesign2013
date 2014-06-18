@@ -88,7 +88,7 @@ if ($fileinfo){
 <link rel="shortcut icon" href="/images/icon/cyrff.ico">
 <link rel="stylesheet" type="text/css" href="/css/style.css?v0.1" /><!--IE couldn't get the style the other way. Don't know why.-->
  <link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />
- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  <?php
 if  ($fileinfo["htmlcode"]) {
 echo $fileinfo["htmlcode"];
@@ -132,7 +132,7 @@ echo $fileinfo["htmlcode"];
 <link rel="shortcut icon" href="/images/icon/cyrff.ico" />
 <link rel="stylesheet" type="text/css" href="/css/style.css?v0.1" /><!--IE couldn't get the style the other way. Don't know why.-->
 <link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  <?php
 }
 if ($fileinfo['filename'] == "/includes/header.php"){
