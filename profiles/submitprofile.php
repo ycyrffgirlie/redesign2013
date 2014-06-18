@@ -211,30 +211,6 @@ $('document').ready(function(){
 }else{
 	
 echo "<style>
-.fieldline{
-	/*border: 2px solid #FFFFFF;*/
-	min-height: 50px;
-	padding: 5px;
-}
-.fieldname{
-	float: left;
-	padding: 0;
-	width: 150px;
-	min-height: 35px;
-}
-
-.field{
-	float: left;
-	width: 250px;
-}
-
-.white{
-	color: #ffffff;
-}
-
-#error{
-	display:none;
-}
 
 </style>
 
