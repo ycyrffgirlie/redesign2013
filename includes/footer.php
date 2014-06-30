@@ -1,37 +1,3 @@
-<style>
-footer a{
-	color: #800080;
-}
-
-.supportedBrowersContainer{
-	height: 107px; 
-	width: 602px; 
-	margin: 0px auto;  
-	border: 2px solid purple; 
-}
-
-.supportedBrowser{
-	height: 87px; 
-	width: 130px;
-	float: left; 
-	padding: 10px;
-}
-
-.text{
-	height: 34px; 
-	width: 130px; 
-}
-
-.text p{
-	font-size: 11px;
-}
-
-.image{
-	width: 30px;
-	margin: 0px auto;
-}
-</style>
-
 <div class="clear"></div>
 
 <footer>
@@ -44,8 +10,9 @@ ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
 @Version:0.2
-@todo: remove the css., comment the rest of the rest of the code, set vars to default 
+@todo: comment the rest of the rest of the code, set vars to default 
 values, sort out the url params, sort out the debug. 
+Version 0.3 - remove the css from this file. 
 Version 0.2 - added the visitor.
 Version 0.1 - added a footer to the site.
 */
