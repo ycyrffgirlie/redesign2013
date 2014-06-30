@@ -1,8 +1,9 @@
-/* @@Author: Chritine Black
+/* @@Author: Chritine A. Black
+@Version:0.3 
 The main style sheet for the Cyrff site
-Version 0. 1 - Create style sheet
+Version 0.3 - Added more footer styling.
 Version 0.2 - Added footer styling and the styling for for sale and submit profile pages
-
+Version 0. 1 - Create style sheet
 */
 
 htmk, body{
@@ -172,6 +173,38 @@ footer  p{
 .footerRight{
 	float:right;
 	width:263px;
+}
+
+footer a{
+	color: #800080;
+}
+
+.supportedBrowersContainer{
+	height: 107px; 
+	width: 602px; 
+	margin: 0px auto;  
+	border: 2px solid purple; 
+}
+
+.supportedBrowser{
+	height: 87px; 
+	width: 130px;
+	float: left; 
+	padding: 10px;
+}
+
+.text{
+	height: 34px; 
+	width: 130px; 
+}
+
+.text p{
+	font-size: 11px;
+}
+
+.image{
+	width: 30px;
+	margin: 0px auto;
 }
 
 .recordContainer {
