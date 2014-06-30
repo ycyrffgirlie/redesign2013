@@ -42,7 +42,10 @@ footer a{
 error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
-/*
+/*@Author; Christine A. Black
+@Version:0.2
+@todo: remove the css., comment the rest of the rest of the code, set vars to default 
+values, sort out the url params, sort out the debug. 
 Version 0.2 - added the visitor.
 Version 0.1 - added a footer to the site.
 */
