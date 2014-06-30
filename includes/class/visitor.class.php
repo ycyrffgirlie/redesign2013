@@ -1,5 +1,10 @@
 <?php
-/**/
+/*@Author; Christine A. Black
+@Version:0.1
+@todo: add the get filename method, sort out the visitor_table method, add the e-mail class, 
+remove comment it out code, comment the rest of the rest of the code, set params to 
+default values.
+Version 0.1 - Added the visitor class to the footer*/
 
 
 class visitor{
