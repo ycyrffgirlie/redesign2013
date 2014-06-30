@@ -1,5 +1,35 @@
 <style>
+footer a{
+	color: #800080;
+}
 
+.supportedBrowersContainer{
+	height: 107px; 
+	width: 602px; 
+	margin: 0px auto;  
+	border: 2px solid purple; 
+}
+
+.supportedBrowser{
+	height: 87px; 
+	width: 130px;
+	float: left; 
+	padding: 10px;
+}
+
+.text{
+	height: 34px; 
+	width: 130px; 
+}
+
+.text p{
+	font-size: 11px;
+}
+
+.image{
+	width: 30px;
+	margin: 0px auto;
+}
 </style>
 
 <div class="clear"></div>
@@ -9,9 +39,22 @@
 	<div class="footerLeft">
 <?php
 
+error_reporting(E_ALL | E_WARNING | E_NOTICE);
+ini_set('display_errors', TRUE);
+
+/*
+Version 0.2 - added the visitor.
+Version 0.1 - added a footer to the site.
+*/
+
+include 'class/visitor.class.php';
+
+//set debugging info
+$debug = isset($_GET["debug"])? $_GET["debug"] : '' ;
+$browser = isset($_GET["browser"])? $_GET["browser"] : '' ;
+
 //set variables
 $browserinfo = get_browser(NULL, true);
-//print_r($browserinfo);
 $browsername = $browserinfo["browser"];
 $browsernversion = $browserinfo["version"];
 
@@ -22,20 +65,60 @@ else{
 	$os = $browserinfo["platform_description"];
 }
 
-$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
-$_SESSION["browsername"] = $browsername;
-$_SESSION["browsernversion"] = $browsernversion;
-$_SESSION["os"] = $os;
-$_SESSION["ip_address"]  = $_SERVER["REMOTE_ADDR"];
-$_SESSION["referer_page"]  = isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]:'';
-$_SESSION["request_page"]  = $_SERVER["REQUEST_URI"];
-$_SESSION["user"] = $_SERVER["PHP_AUTH_USER"];
-$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
-$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
-//$_SESSION[""] 
+//for debugging
 
-//print_r($_SESSION);
-//die();
+//switch($debug){
+
+//case 'linux':
+	
+	$_SESSION["os"] = $debug;
+	$_SESSION["browsername"] = $browser;
+	
+	if ($browser == 'Firefox'){
+		$_SESSION["browsernversion"] = 3;
+	}elseif  ($browser == 'Chrome'){
+		$_SESSION["browsernversion"] = 13.0;
+	}elseif  ($browser == 'IE'){
+		$_SESSION["browsernversion"] = 6;
+	}elseif  ($browser == 'Opera'){
+		$_SESSION["browsernversion"] = 9;
+	}elseif  ($browser == 'Safari'){
+		$_SESSION["browsernversion"] = 5.0;
+	}
+	
+	$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
+	$_SESSION["ip_address"]  = $_SERVER["REMOTE_ADDR"];
+	$_SESSION["referer_page"]  = isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]: 'none';
+	$_SESSION["request_page"]  = $_SERVER["REQUEST_URI"];
+	$_SESSION["user"] = isset($_SERVER["PHP_AUTH_USER"])?$_SERVER["PHP_AUTH_USER"]: 'none';
+	$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
+	$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
+	
+	//break;
+
+/*default:
+	$_SESSION["browsername"] = $browsername;
+	$_SESSION["browsernversion"] = $browsernversion;
+	$_SESSION["os"] = $os;
+	$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
+	$_SESSION["ip_address"]  = $_SERVER["REMOTE_ADDR"];
+	$_SESSION["referer_page"]  = isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]:'';
+	$_SESSION["request_page"]  = $_SERVER["REQUEST_URI"];
+	$_SESSION["user"] = isset($_SERVER["PHP_AUTH_USER"])?$_SERVER["PHP_AUTH_USER"]:
+	$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
+	$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
+	
+	break;*/
+
+//}
+
+$visitor = new visitor;
+$visitor ->get_visitor_details($_SESSION["os"], $_SESSION["browsername"], $_SESSION["browsernversion"],
+				$_SESSION["domainname"] , $_SESSION["ip_address"] ,
+				$_SESSION["referer_page"], $_SESSION["request_page"], 
+				$_SESSION["user"], $_SESSION["filename"], $_SESSION["php_self"]);
+
+
 
 $domainmanes = array('christine.ycyrffgroupie.co.uk',
 		'dev.ycyrffgroupie.co.uk',
@@ -54,103 +137,87 @@ $domainmanes = array('christine.ycyrffgroupie.co.uk',
 <?php
 if (!in_array($_SESSION["domainname"],$domainmanes)){
 ?>
-<br>
-	<script type="text/javascript"><!--
-	google_ad_client = "ca-pub-1700322885253994";
-	/* Ad 1 */
-	google_ad_slot = "4964110045";
-	google_ad_width = 468;
-	google_ad_height = 60;
-	//-->
-	</script>
-	<script type="text/javascript"
-	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-	</script>
+	<br />
+		<script type="text/javascript"><!--
+		google_ad_client = "ca-pub-1700322885253994";
+		/* Ad 1 */
+		google_ad_slot = "4964110045";
+		google_ad_width = 468;
+		google_ad_height = 60;
+		//-->
+		</script>
+		<script type="text/javascript"
+		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+		</script>
 
-	<a href="http://tracking.opienetwork.com/aff_c?offer_id=20&aff_id=5600&file_id=313" target="_blank"><img src="http://media.go2speed.org/brand/files/opienetwork/20/hp-88x31-green.gif" width="88" height="31" border="0" /></a><img src="http://tracking.opienetwork.com/aff_i?offer_id=20&aff_id=5600&file_id=313" width="1" height="1">
+		<a href="http://tracking.opienetwork.com/aff_c?offer_id=20&aff_id=5600&file_id=313" target="_blank"><img src="http://media.go2speed.org/brand/files/opienetwork/20/hp-88x31-green.gif" width="88" height="31" border="0" /></a><img src="http://tracking.opienetwork.com/aff_i?offer_id=20&aff_id=5600&file_id=313" width="1" height="1">
 <?php
 }
 ?>
 
-</div>
+	</div>
 
-<div class="footerRight">
-	<form accept-charset="UTF-8" action="http://www.jrank.org/api/search/v2" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /></div>
-	<fieldset style="border: 1px solid rgb(175, 175, 175); display: inline;">
-	<legend><a href="http://www.jrank.org/" style="font-size: 10pt; font-family: Arial, sans-serif;">Site Search</a></legend>
-	<a href="http://www.jrank.org/"><img alt="Site Search" src="http://www.jrank.org/images/jrank_88_31-fs8.png" style="border: none; vertical-align: middle;" title="Site Search" /></a>
-	<input id="key" name="key" type="hidden" value="827b2c24d923ca553b508bc1160538c4c164a2c4" />
-	<input name="ie_utf8_fix" type="hidden" value="☠" />
-	<input id="q" name="q" style="display: inline; vertical-align: middle;" type="text" value="" />
-	<input name="commit" style="display: inline; vertical-align: middle;" type="submit" value="Search" />
-	</fieldset>
-	</form>
+	<div class="footerRight">
+		<form accept-charset="UTF-8" action="http://www.jrank.org/api/search/v2" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /></div>
+			<fieldset style="border: 1px solid rgb(175, 175, 175); display: inline;">
+				<legend>
+					<a href="http://www.jrank.org/" style="font-size: 10pt; font-family: Arial, sans-serif;">
+						Site Search
+					</a>
+				</legend>
+				<a href="http://www.jrank.org/">
+					<img alt="Site Search" 
+					src="http://www.jrank.org/images/jrank_88_31-fs8.png" 
+					style="border: none; vertical-align: middle;" title="Site Search" />
+				</a>
+				<input id="key" name="key" type="hidden" value="827b2c24d923ca553b508bc1160538c4c164a2c4" />
+				<input name="ie_utf8_fix" type="hidden" value="☠" />
+				<input id="q" name="q" style="display: inline; vertical-align: middle;" type="text" value="" />
+				<input name="commit" style="display: inline; vertical-align: middle;" type="submit" value="Search" />
+			</fieldset>
+		</form>
+	
+	</div>
 
-</div>
-
-<div style="clear:both;">
+	<div style="clear:both;"></div>
 
 
 <?php
+
+$visitor ->os_check();
+
 if (in_array($_SESSION["domainname"],$domainmanes)){
 
 	if ($_SESSION["ip_address"]  == '188.223.77.182'){
-		echo "
+		$message = "
 <p>Welcome ".$_SESSION["user"].", this is not live. 
-<br>
-Script Name ".$_SESSION["filename"]."
-<br>
-Php_self: ".$_SESSION["php_self"]."
-<br>
-Your Os: ".$_SESSION["os"]." and you are using: ".$_SESSION["browsername"]." ".$_SESSION["browsernversion"].". 
-<br>
-Your ISP is: ".$_SESSION["ip_address"] .". 
-<br>
-You have come from: ".$_SESSION["referer_page"].".
-<br>
-This 
-footer is for your information.</p>";
+<br>";
 
 	}else{
 	
-	echo "<p>Welcome ".$_SESSION["user"].", this is not live. 
-<br>
-Script Name ".$_SESSION["filename"]."
-<br>
-Php_self: ".$_SESSION["php_self"]."
-<br>
-Your Os: ".$_SESSION["os"] ." and you are using: ".$_SESSION["browsername"]." ".$_SESSION["browsernversion"].". 
-<br>
-Your ISP is: ".$_SESSION["ip_address"].". 
-<br>
-You have come from: ".$_SESSION["referer_page"].".
-<br>
-This 
-footer is for your information.</p>";
+	$message = "<p>Welcome ".$_SESSION["user"].", this is not live. 
+<br>";
 	}
 
-}
-else{
+}else{
 	if ($_SESSION["ip_address"] == '188.223.77.182'){
-	echo "<p>Welcome ".$_SESSION["ip_address"].", please remember that this is live. So please don't fuck it up. 
+	$message = "<p>Welcome ".$_SESSION["ip_address"].", please remember that this is live. So please don't fuck it up. 
 	<br>Script Name ".$_SESSION["filename"]."
-<br>
-Php_self: ".$_SESSION["php_self"]."
-<br>
-Your Os: ".$_SESSION["os"]." and you are using: ".$_SESSION["browsername"]." ".$_SESSION["browsernversion"].". 
-<br>
-Your ISP is: ".$_SESSION["ip_address"].". 
-<br>
-You have come from: ".$_SESSION["referer_page"].".
-<br>
-This 
-footer is for your information.</p>";	
+<br>";
 	}
+	
+	
+}
+
+if ($message){
+	$visitor ->visitor_display($message);
 }
 ?>
 </footer>
 
-<?php if ($_SESSION["browsername"] == "Chrome"){
+<?php
+
+/*if ($_SESSION["browsername"] == "Chrome"){
 	//echo "your are using chrome";
 	if  ($_SESSION["browsernversion"] == 0){
 		$to = 'ycyrffgroupie@gmail.com';
@@ -187,444 +254,9 @@ footer is for your information.</p>";
 		$headers .= 'Content-Type: text/html; charset=\"utf-8\"'. "\r\n";
 		$headers .='From:  "Webmistress" <webmistress@ycyrffgroupie.co.uk>'. "\r\n";			
 		mail($to,$subject,$message, $headers);
-	}elseif ($browsernversion <= 15.0){
-		echo "<p>This site doesn't support your version of Chrome. Please update your browser</p>
-		<p>Nid we safle hwn yn cefnogi eich fersiwn o Chrome. Diweddarwch eich porwr.</p>";
-		if ($os == 'Windows Vista' || $os == 'Windows XP' || $os == 'Windows 7'){
-	?>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://windows.microsoft.com/en-GB/internet-explorer/products/ie/home" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-<?php	
-	}
-		if ($os == 'Windows 98' || $os =='Windows 95'  || $os== 'Windows 2000' || $os =='Windows ME'){
-		echo "<p>Chrome doesn't support Windows Me, Windows 2000, Windows 98, Windows 95.<!--If you need to use a version of Windows that pre-dates Windows Xp then chosse from the alternative browsers-->.</p>";
-		?>
-		<!--<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		</p>-->
-<?php
-		}
-		if($os == 'Linux' ){
-		?>
-		<p>Please check your distros lastest repository branch first.</p>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		If you must destroy a beautiful OS with I.E then -<a class="normal" href="" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-<?php
-		
-		}
-		if($os == 'Mac'){
-		?>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://windows.microsoft.com/en-GB/internet-explorer/products/ie/home" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-<?php
-		}
 	}
 		
-}
-
-if ($browsername == 'IE' || $browsername == "MSIE"){
-	//echo "your are using ie";
-	if ($browsernversion <= 7){
-		echo "<p>This site doen't support your version of Internet Explorer. Please update your browser</p>";
-		if ($os == 'Windows Vista' || $os == 'Windows XP' || $os == 'Windows 7'){
-	?>
-		<a class="normal" href="http://windows.microsoft.com/en-GB/internet-explorer/products/ie/home" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-		
-		<p>Please note: If you are using IE under Wine on a Linux - the script will detect Windows instead of Linux.</p>
-<?php	
-		}
-		if ($os == 'Windows 98' || $os =='Windows 95'  || $os== 'Windows 2000' || $os =='Windows ME'){
-		echo "<p>Internet Explorer doesn't support Windows Me, Windows 2000, Windows 98, Windows 95<!--If you need to use a version of Windows that pre-dates Windows Xp then chosse from the alternative browsers-->.</p>";
-		?>
-		<!--<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		</p>-->
-<?php	
-		}
-		if($os == 'Linux' ){
-		echo "<p>Microsoft has stop supporting IE on Linux. Please use alternative browsers.</p>";
-		
-	?>
-		<p>Please check your distros lastest repository branch first.</p>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-<?php	
-		}
-		if($os == 'Mac' ){
-		echo "<p>Microsoft has stop supporting IE on Mac. Please use alternative browsers.</p>";
-	?>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-
-<?php	
-		}
-	}
-		
-}
-
-if ($browsername == "Firefox"){
-	//echo "you are using Firefox";
-	if ($browsernversion <= 5){
-		echo "<p>This site doen't support your version of Firefox. Please update your browser</p>";
-		if ($os == 'Windows Vista' || $os == 'Windows XP' || $os == 'Windows 7'){
-	?>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://windows.microsoft.com/en-GB/internet-explorer/products/ie/home" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-
-<?php	
-		}		
-		if ($os == 'Windows 98' || $os =='Windows 95'  || $os== 'Windows 2000' || $os =='Windows ME'){
-		//echo "You are running Firefox on 98.";
-		echo "<p>Firefox doesn't support Windows Me, Windows 2000, Windows 98, Windows 95.<!--If you need to use a version of Windows that pre-dates Windows Xp then chosse from the alternative browsers-->.</p>";
-		?>
-		<!--<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		</p>-->
-<?php		
-		}
-		if($os == 'Linux' ){
-	?>
-		<p>Please check your distros lastest repository branch first.</p>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<p>Alternative Browsers  / Porwyr arall</p>
-		<p>
-		If you must destroy a beautiful OS with I.E then - <a class="normal" href="" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-<?php	
-		}
-		if($os == 'Mac' ){
-	?>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://windows.microsoft.com/en-GB/internet-explorer/products/ie/home" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-
-<?php	
-		}
-	}
-}
-
-if ($browsername == "Opera"){
-	//echo "you are using Opera";
-	if ($browsernversion <= 10){
-		echo "<p>This site doen't support your version of Opera. Please update your browser</p>";
-		if ($os == 'Windows Vista' || $os == 'Windows XP' || $os == 'Windows 7'){
-	?>
-		
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://windows.microsoft.com/en-GB/internet-explorer/products/ie/home" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-<?php	
-		}
-		if ($os == 'Windows 98' || $os =='Windows 95'  || $os== 'Windows 2000' || $os =='Windows ME'){
-		echo "<p>Chrome doesn't support Windows Me, Windows 2000, Windows 98, Windows 95. <!--If you need to use a version of Windows that pre-dates Windows Xp then chosse from the alternative browsers-->.</p>";
-		?>
-		<!--<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		</p>-->
-<?php		
-		}
-		if($os == 'Linux' ){
-	?>
-		<p>Please check your distros lastest repository branch first.</p>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		If you must destroy a beautiful OS with I.E then - <a class="normal" href="http://windows.microsoft.com/en-GB/internet-explorer/products/ie/home" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a> 
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-<?php	
-		}
-		if($os == 'Mac' ){
-	?>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		</p>
-<?php	
-		}
-	}
-
-}
-
-if ($browsername =="Safari"){
-	if ($browsernversion <= 5.2){
-		echo "<p>This site doen't support your version of Safari. Please update your browser</p>";
-		if ($os == 'Windows Vista' || $os == 'Windows XP' || $os == 'Windows 7'){
-		?>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://windows.microsoft.com/en-GB/internet-explorer/products/ie/home" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		</p>
-<?php
-		}
-		if ($os == 'Windows 98' || $os =='Windows 95'  || $os== 'Windows 2000' || $os =='Windows ME'){
-		echo "<p>Apple doesn't support Windows Me, Windows 2000, Windows 98, Windows 95.<!--If you need to use a version of Windows that pre-dates Windows Xp then chosse from the alternative browsers-->.</p>";
-		?>
-		<!--<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="" target="">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		</p>-->
-<?php
-		}
-		if($os == 'Linux' ){
-		echo "<p>How did you get Safari on Linux? Apple doesn't support. I thought the saying is \"Can I get Linux run on this?\" 
-		not \"will Safari run on Linux? \" Seeing you are a smart arse I am not getting you the link for Safari for Linux.";
-		echo "</p>";
-		?>
-		<p>Please check your distros lastest repository branch first.</p>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a> 
-		<p>If you must destroy a beautiful OS with I.E then</p>
-		<a class="normal" href="" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/ie.gif" alt="Internet Explorer">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox"></a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera"></a>
-		</p>
-<?php
-		}
-		if($os == 'Mac'){
-		?>
-		<a class="normal" href="http://www.apple.com/safari/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/safari.gif" alt="Safari"> </a>
-		<p>Alternative Browsers / Porwyr arall</p>
-		<p>
-		<a class="normal" href="http://www.google.com/chrome/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/chrome.gif" alt="Chrome">
-		</a>
-		<a class="normal" href="http://www.mozilla.org/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/firefox.gif" alt="Firefox">
-		</a>
-		<a class="normal" href="http://www.opera.com/" target="_blank">
-		<img src="http://www.ycyrffgroupie.co.uk/Images/site/opera.gif" alt="Opera">
-		</a>
-		</p>
-<?php
-		}
-	}
-}
-
-
+}*.
 ?>
 
 
