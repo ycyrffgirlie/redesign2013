@@ -9,9 +9,10 @@ error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.2
-@todo: comment the rest of the rest of the code, set vars to default 
-values, sort out the url params, sort out the debug. 
+@Version:0.4
+@todo: comment the rest of the code, create functions debug and domainName_check, remove 
+debug, error, commented out code from this file. 
+Version 0.4 - sorted out the url params, sort out the debug set vars to default values.
 Version 0.3 - remove the css from this file. 
 Version 0.2 - added the visitor.
 Version 0.1 - added a footer to the site.
@@ -20,8 +21,9 @@ Version 0.1 - added a footer to the site.
 include 'class/visitor.class.php';
 
 //set debugging info
-$debug = isset($_GET["debug"])? $_GET["debug"] : '' ;
-$browser = isset($_GET["browser"])? $_GET["browser"] : '' ;
+$debug = isset($_GET["debug"])? $_GET["debug"] : 'false' ;
+$os = isset($_GET["os "])? $_GET["os "] : 'Linux' ;
+$browser = isset($_GET["browser"])? $_GET["browser"] : 'Firefox' ;
 
 //set variables
 $browserinfo = get_browser(NULL, true);
@@ -37,23 +39,32 @@ else{
 
 //for debugging
 
-//switch($debug){
-
-//case 'linux':
+switch($debug){
+  case 'true':
 	
-	$_SESSION["os"] = $debug;
-	$_SESSION["browsername"] = $browser;
-	
-	if ($browser == 'Firefox'){
-		$_SESSION["browsernversion"] = 3;
-	}elseif  ($browser == 'Chrome'){
-		$_SESSION["browsernversion"] = 13.0;
-	}elseif  ($browser == 'IE'){
-		$_SESSION["browsernversion"] = 6;
-	}elseif  ($browser == 'Opera'){
-		$_SESSION["browsernversion"] = 9;
-	}elseif  ($browser == 'Safari'){
-		$_SESSION["browsernversion"] = 5.0;
+	if ($os){
+		
+		$_SESSION["os"] = $os;
+		$_SESSION["browsername"] = $browser;
+		
+		if ($browser == 'Firefox'){
+			$_SESSION["browsernversion"] = 3;
+		}elseif  ($browser == 'Chrome'){
+			$_SESSION["browsernversion"] = 13.0;
+		}elseif  ($browser == 'IE'){
+			$_SESSION["browsernversion"] = 6;
+		}elseif  ($browser == 'Opera'){
+			$_SESSION["browsernversion"] = 9;
+		}elseif  ($browser == 'Safari'){
+			$_SESSION["browsernversion"] = 5.0;
+		}
+		
+	}else{
+		
+		$_SESSION["os"] = 'Linux';
+		$_SESSION["browsername"] = 'Firefox';
+		$_SESSION["browsernversion"] = 9;	
+		
 	}
 	
 	$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
@@ -64,23 +75,34 @@ else{
 	$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
 	$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
 	
-	//break;
+	break;
 
-/*default:
-	$_SESSION["browsername"] = $browsername;
-	$_SESSION["browsernversion"] = $browsernversion;
-	$_SESSION["os"] = $os;
-	$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
-	$_SESSION["ip_address"]  = $_SERVER["REMOTE_ADDR"];
-	$_SESSION["referer_page"]  = isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]:'';
-	$_SESSION["request_page"]  = $_SERVER["REQUEST_URI"];
-	$_SESSION["user"] = isset($_SERVER["PHP_AUTH_USER"])?$_SERVER["PHP_AUTH_USER"]:
-	$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
-	$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
+default:
+		
+	if ($os){
+		
+		$_SESSION["os"] = $os;
+		$_SESSION["browsername"] = $browsername;
+		$_SESSION["browsernversion"] = $browsernversion;
+		
+	}else{
+		
+		$_SESSION["os"] = 'Linux';
+		$_SESSION["browsername"] = 'Firefox';
+		$_SESSION["browsernversion"] = 9;
+		
+	}
+		$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
+		$_SESSION["ip_address"]  = $_SERVER["REMOTE_ADDR"];
+		$_SESSION["referer_page"]  = isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]:'';
+		$_SESSION["request_page"]  = $_SERVER["REQUEST_URI"];
+		$_SESSION["user"] = isset($_SERVER["PHP_AUTH_USER"])?$_SERVER["PHP_AUTH_USER"]:
+		$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
+		$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
 	
-	break;*/
+	break;
 
-//}
+}
 
 $visitor = new visitor;
 $visitor ->get_visitor_details($_SESSION["os"], $_SESSION["browsername"], $_SESSION["browsernversion"],
