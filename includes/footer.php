@@ -9,9 +9,12 @@ error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.4
-@todo: comment the rest of the code, create functions debug and domainName_check, remove 
-debug, error, commented out code from this file. 
+@Version:0.5
+@todo: comment the rest of the code, remove debug, domainName_check, error, 
+initialise_session_vars, ip_address_check , commented out code from this file., create this as a classm, test MSIe 
+and unknow, test . 
+
+Version 0.5 - create functions debug, domainName_check, error,, initialise_session_vars, ip_address_check.
 Version 0.4 - sorted out the url params, sort out the debug set vars to default values.
 Version 0.3 - remove the css from this file. 
 Version 0.2 - added the visitor.
@@ -19,6 +22,156 @@ Version 0.1 - added a footer to the site.
 */
 
 include 'class/visitor.class.php';
+
+/*For debugging*/
+function debug($debug, $os, $browser){
+	
+	switch($debug){
+	  case 'true':
+		
+		$sessionVars = initialise_session_vars($debug, $os, $browser);
+		
+		break;
+
+	  default:
+		
+		$sessionVars = initialise_session_vars($debug, $os, $browser);
+	
+		break;
+
+	}
+	
+	return $_SESSION["os"];
+	return $_SESSION["browsername"],;
+	return $_SESSION["browsernversion"]v 
+	return $_SESSION["domainname"],;
+	return $_SESSION["ip_address"].;
+	return $_SESSION["referer_page"],;
+	return $_SESSION["request_page"]
+	return $_SESSION["user"], 
+	return $_SESSION["filename"], 
+	return $_SESSION["php_self"];
+	
+}
+
+/**/
+function domainName_check($domainName){
+	
+	$domainmanes = array('christine.ycyrffgroupie.co.uk',
+		'dev.ycyrffgroupie.co.uk',
+		'llwybrllaethog.ycyrffgroupie.co.uk',
+		'admin.ycyrffgroupie.co.uk'
+		,'redesign2013.ycyrffgroupie.co.uk'
+		,'christine.linux.ycyrffgroupie.co.uk'
+		,'redesign2013.linux.ycyrffgroupie.co.uk'
+		);
+	
+	if 
+	(in_array($domainName)
+	//,$domainmanes)
+	)
+	{
+		
+		return true;
+		
+	}else{
+		
+		return false;
+		
+	}
+	
+}
+
+/**/
+function initialise_session_vars($debug, $os, $browser){
+
+	switch($debug){
+	  case 'true':
+	
+		if ($os){
+			
+			$_SESSION["os"] = $os;
+			$_SESSION["browsername"] = $browser;
+		
+			if ($browser == 'Firefox'){
+				$_SESSION["browsernversion"] = 3;
+			}elseif  ($browser == 'Chrome'){
+				$_SESSION["browsernversion"] = 13.0;
+			}elseif  ($browser == 'IE'){
+				$_SESSION["browsernversion"] = 6;
+			}elseif  ($browser == 'Opera'){
+				$_SESSION["browsernversion"] = 9;
+			}elseif  ($browser == 'Safari'){
+				$_SESSION["browsernversion"] = 5.0;
+			}
+		
+		}else{
+			
+			$_SESSION["os"] = 'Linux';
+			$_SESSION["browsername"] = 'Firefox';
+			$_SESSION["browsernversion"] = 9;	
+	
+		}
+	
+		break;
+
+	  default:
+		
+		if ($os){
+			
+			$_SESSION["os"] = $os;
+			$_SESSION["browsername"] = $browsername;
+			$_SESSION["browsernversion"] = $browsernversion;
+		
+		}else{
+		
+			$_SESSION["os"] = 'Linux';
+			$_SESSION["browsername"] = 'Firefox';
+			$_SESSION["browsernversion"] = 9;
+		
+		}
+
+		break;
+
+	}
+	
+	$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
+	$_SESSION["ip_address"]  = $_SERVER["REMOTE_ADDR"];
+	$_SESSION["referer_page"]  = isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]: 'none';
+	$_SESSION["request_page"]  = $_SERVER["REQUEST_URI"];
+	$_SESSION["user"] = isset($_SERVER["PHP_AUTH_USER"])?$_SERVER["PHP_AUTH_USER"]: 'none';
+	$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
+	$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
+	
+	return $_SESSION["os"];
+	return $_SESSION["browsername"],;
+	return $_SESSION["browsernversion"]v 
+	return $_SESSION["domainname"],;
+	return $_SESSION["ip_address"].;
+	return $_SESSION["referer_page"],;
+	return $_SESSION["request_page"]
+	return $_SESSION["user"], 
+	return $_SESSION["filename"], 
+	return $_SESSION["php_self"];
+	
+}
+
+/**/
+function ip_address_check($ipAddress){
+	
+	
+	if ($ipAddress  == '188.223.77.182'){
+		
+		return true;
+		
+	}else{
+		
+		return false;
+		
+	}
+	
+	
+}
 
 //set debugging info
 $debug = isset($_GET["debug"])? $_GET["debug"] : 'false' ;
@@ -37,97 +190,21 @@ else{
 	$os = $browserinfo["platform_description"];
 }
 
-//for debugging
 
-switch($debug){
-  case 'true':
-	
-	if ($os){
-		
-		$_SESSION["os"] = $os;
-		$_SESSION["browsername"] = $browser;
-		
-		if ($browser == 'Firefox'){
-			$_SESSION["browsernversion"] = 3;
-		}elseif  ($browser == 'Chrome'){
-			$_SESSION["browsernversion"] = 13.0;
-		}elseif  ($browser == 'IE'){
-			$_SESSION["browsernversion"] = 6;
-		}elseif  ($browser == 'Opera'){
-			$_SESSION["browsernversion"] = 9;
-		}elseif  ($browser == 'Safari'){
-			$_SESSION["browsernversion"] = 5.0;
-		}
-		
-	}else{
-		
-		$_SESSION["os"] = 'Linux';
-		$_SESSION["browsername"] = 'Firefox';
-		$_SESSION["browsernversion"] = 9;	
-		
-	}
-	
-	$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
-	$_SESSION["ip_address"]  = $_SERVER["REMOTE_ADDR"];
-	$_SESSION["referer_page"]  = isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]: 'none';
-	$_SESSION["request_page"]  = $_SERVER["REQUEST_URI"];
-	$_SESSION["user"] = isset($_SERVER["PHP_AUTH_USER"])?$_SERVER["PHP_AUTH_USER"]: 'none';
-	$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
-	$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
-	
-	break;
-
-default:
-		
-	if ($os){
-		
-		$_SESSION["os"] = $os;
-		$_SESSION["browsername"] = $browsername;
-		$_SESSION["browsernversion"] = $browsernversion;
-		
-	}else{
-		
-		$_SESSION["os"] = 'Linux';
-		$_SESSION["browsername"] = 'Firefox';
-		$_SESSION["browsernversion"] = 9;
-		
-	}
-		$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
-		$_SESSION["ip_address"]  = $_SERVER["REMOTE_ADDR"];
-		$_SESSION["referer_page"]  = isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]:'';
-		$_SESSION["request_page"]  = $_SERVER["REQUEST_URI"];
-		$_SESSION["user"] = isset($_SERVER["PHP_AUTH_USER"])?$_SERVER["PHP_AUTH_USER"]:
-		$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
-		$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
-	
-	break;
-
-}
+$debug = debug($debug, $os, $browser);
 
 $visitor = new visitor;
 $visitor ->get_visitor_details($_SESSION["os"], $_SESSION["browsername"], $_SESSION["browsernversion"],
 				$_SESSION["domainname"] , $_SESSION["ip_address"] ,
 				$_SESSION["referer_page"], $_SESSION["request_page"], 
 				$_SESSION["user"], $_SESSION["filename"], $_SESSION["php_self"]);
-
-
-
-$domainmanes = array('christine.ycyrffgroupie.co.uk',
-		'dev.ycyrffgroupie.co.uk',
-		'llwybrllaethog.ycyrffgroupie.co.uk',
-		'admin.ycyrffgroupie.co.uk'
-		,'redesign2013.ycyrffgroupie.co.uk'
-		,'christine.linux.ycyrffgroupie.co.uk'
-		,'redesign2013.linux.ycyrffgroupie.co.uk'
-		);
-	
 	?>
 
 
 		<a href="http://internetdefenseleague.org"><img src="http://internetdefenseleague.org/images/badges/final/footer_badge.png" alt="Member of The Internet Defense League" /></a>
 
 <?php
-if (!in_array($_SESSION["domainname"],$domainmanes)){
+if (domainName_check($_SESSION["domainname"] != true)){
 ?>
 	<br />
 		<script type="text/javascript"><!--
@@ -173,14 +250,13 @@ if (!in_array($_SESSION["domainname"],$domainmanes)){
 
 	<div style="clear:both;"></div>
 
-
 <?php
 
 $visitor ->os_check();
 
-if (in_array($_SESSION["domainname"],$domainmanes)){
+if (domainName_check($_SESSION["domainname"] == true)){
 
-	if ($_SESSION["ip_address"]  == '188.223.77.182'){
+	if (ip_address_check($_SESSION["ip_address"])  == true){
 		$message = "
 <p>Welcome ".$_SESSION["user"].", this is not live. 
 <br>";
@@ -192,10 +268,10 @@ if (in_array($_SESSION["domainname"],$domainmanes)){
 	}
 
 }else{
-	if ($_SESSION["ip_address"] == '188.223.77.182'){
-	$message = "<p>Welcome ".$_SESSION["ip_address"].", please remember that this is live. So please don't fuck it up. 
-	<br>Script Name ".$_SESSION["filename"]."
-<br>";
+	if (ip_address_check($_SESSION["ip_address"])  == true){
+		$message = "<p>Welcome ".$_SESSION["ip_address"].", please remember that this is live. So please don't fuck it up. 
+	<br>
+	";
 	}
 	
 	
@@ -209,7 +285,7 @@ if ($message){
 
 <?php
 
-/*if ($_SESSION["browsername"] == "Chrome"){
+/* if ($_SESSION["browsername"] == "Chrome"){
 	//echo "your are using chrome";
 	if  ($_SESSION["browsernversion"] == 0){
 		$to = 'ycyrffgroupie@gmail.com';
@@ -248,7 +324,7 @@ if ($message){
 		mail($to,$subject,$message, $headers);
 	}
 		
-}*.
+}*/
 ?>
 
 
