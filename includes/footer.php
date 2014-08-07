@@ -9,18 +9,20 @@ error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.5
-@todo: comment the rest of the code, remove debug, domainName_check, error, 
-initialise_session_vars, ip_address_check , commented out code from this file., create this as a classm, test MSIe 
+@Version:0.6
+@todo: , remove debug, domainName_check, error, 
+initialise_session_vars, ip_address_check , commented out code from this file., create this as a class, test MSIe 
 and unknow, test . 
 
-Version 0.5 - create functions debug, domainName_check, error,, initialise_session_vars, ip_address_check.
+Version 0.6 - comment the rest of the code
+Version 0.5 - created functions debug, domainName_check, error,, initialise_session_vars, ip_address_check.
 Version 0.4 - sorted out the url params, sort out the debug set vars to default values.
 Version 0.3 - remove the css from this file. 
 Version 0.2 - added the visitor.
 Version 0.1 - added a footer to the site.
 */
 
+/*the included files.*/
 include 'class/visitor.class.php';
 
 /*For debugging*/
@@ -42,22 +44,22 @@ function debug($debug, $os, $browser){
 	}
 	
 	return $_SESSION["os"];
-	return $_SESSION["browsername"],;
-	return $_SESSION["browsernversion"]v 
-	return $_SESSION["domainname"],;
-	return $_SESSION["ip_address"].;
-	return $_SESSION["referer_page"],;
-	return $_SESSION["request_page"]
-	return $_SESSION["user"], 
-	return $_SESSION["filename"], 
+	return $_SESSION["browsername"];
+	return $_SESSION["browsernversion"];
+	return $_SESSION["domainname"];
+	return $_SESSION["ip_address"];
+	return $_SESSION["referer_page"];
+	return $_SESSION["request_page"];
+	return $_SESSION["user"];
+	return $_SESSION["filename"]; 
 	return $_SESSION["php_self"];
 	
 }
 
-/**/
+/*Check if interal domain name  wheter or not it's live or development.*/
 function domainName_check($domainName){
 	
-	$domainmanes = array('christine.ycyrffgroupie.co.uk',
+	$domainnames = array('christine.ycyrffgroupie.co.uk',
 		'dev.ycyrffgroupie.co.uk',
 		'llwybrllaethog.ycyrffgroupie.co.uk',
 		'admin.ycyrffgroupie.co.uk'
@@ -66,11 +68,7 @@ function domainName_check($domainName){
 		,'redesign2013.linux.ycyrffgroupie.co.uk'
 		);
 	
-	if 
-	(in_array($domainName)
-	//,$domainmanes)
-	)
-	{
+	if (in_array($domainName, $domainnames)){
 		
 		return true;
 		
@@ -82,7 +80,7 @@ function domainName_check($domainName){
 	
 }
 
-/**/
+/*Set the session.*/
 function initialise_session_vars($debug, $os, $browser){
 
 	switch($debug){
@@ -143,20 +141,23 @@ function initialise_session_vars($debug, $os, $browser){
 	$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
 	$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
 	
+	//print_r($_SESSION);
+	//die();
+	
 	return $_SESSION["os"];
-	return $_SESSION["browsername"],;
-	return $_SESSION["browsernversion"]v 
-	return $_SESSION["domainname"],;
-	return $_SESSION["ip_address"].;
-	return $_SESSION["referer_page"],;
-	return $_SESSION["request_page"]
-	return $_SESSION["user"], 
-	return $_SESSION["filename"], 
+	return $_SESSION["browsername"];
+	return $_SESSION["browsernversion"]; 
+	return $_SESSION["domainname"];
+	return $_SESSION["ip_address"];
+	return $_SESSION["referer_page"];
+	return $_SESSION["request_page"];
+	return $_SESSION["user"];
+	return $_SESSION["filename"]; 
 	return $_SESSION["php_self"];
 	
 }
 
-/**/
+/*Check the IP address*/
 function ip_address_check($ipAddress){
 	
 	
@@ -183,6 +184,7 @@ $browserinfo = get_browser(NULL, true);
 $browsername = $browserinfo["browser"];
 $browsernversion = $browserinfo["version"];
 
+/*Sets the os as platform description is sometimes unknown.*/
 if ($browserinfo["platform_description"] == 'unknown'){
 	$os = $browserinfo["platform"];
 }
@@ -190,9 +192,10 @@ else{
 	$os = $browserinfo["platform_description"];
 }
 
-
+/*Get debug info.*/
 $debug = debug($debug, $os, $browser);
 
+/*Set a new visitor class.*/
 $visitor = new visitor;
 $visitor ->get_visitor_details($_SESSION["os"], $_SESSION["browsername"], $_SESSION["browsernversion"],
 				$_SESSION["domainname"] , $_SESSION["ip_address"] ,
@@ -204,6 +207,7 @@ $visitor ->get_visitor_details($_SESSION["os"], $_SESSION["browsername"], $_SESS
 		<a href="http://internetdefenseleague.org"><img src="http://internetdefenseleague.org/images/badges/final/footer_badge.png" alt="Member of The Internet Defense League" /></a>
 
 <?php
+/*Displays Google Ads if live.*/
 if (domainName_check($_SESSION["domainname"] != true)){
 ?>
 	<br />
@@ -252,8 +256,10 @@ if (domainName_check($_SESSION["domainname"] != true)){
 
 <?php
 
+/*Checks whether the browser is supported.*/
 $visitor ->os_check();
 
+/*Displays a message if it's a develomet site.*/
 if (domainName_check($_SESSION["domainname"] == true)){
 
 	if (ip_address_check($_SESSION["ip_address"])  == true){
