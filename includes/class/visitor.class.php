@@ -1,9 +1,11 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.1
+@Version:0.2
 @todo: add the get filename method, sort out the visitor_table method, add the e-mail class, 
 remove comment it out code, comment the rest of the rest of the code, set params to 
 default values.
+Version 0.2 - Added debug, domainName_check, error, initialise_session_vars, ip_address_check 
+methods.
 Version 0.1 - Added the visitor class to the footer*/
 
 
@@ -140,11 +142,66 @@ class visitor{
 		return $output ; 
 	}
 	
+	/*For debugging*/
+	function debug($debug, $os, $browser){
+	
+		switch($debug){
+		  case 'true':
+		
+			$sessionVars =$this ->initialise_session_vars($debug, $os, $browser);
+		
+			break;
+
+		  default:
+		
+			$sessionVars = $this ->initialise_session_vars($debug, $os, $browser);
+	
+			break;
+		
+		}
+	
+		return $_SESSION["os"];
+		return $_SESSION["browsername"];
+		return $_SESSION["browsernversion"];
+		return $_SESSION["domainname"];
+		return $_SESSION["ip_address"];
+		return $_SESSION["referer_page"];
+		return $_SESSION["request_page"];
+		return $_SESSION["user"];
+		return $_SESSION["filename"]; 
+		return $_SESSION["php_self"];
+	
+	}
+	
 	/**/
 	function display_message(){
 	
 		$output = $this ->get_os_message().$this -> alt_browser();
 		return $output ; 
+	}
+	
+	/*Check if interal domain name  wheter or not it's live or development.*/
+	function domainName_check($domainName){
+	
+		$domainnames = array('christine.ycyrffgroupie.co.uk',
+			'dev.ycyrffgroupie.co.uk',
+			'llwybrllaethog.ycyrffgroupie.co.uk',
+			'admin.ycyrffgroupie.co.uk'
+			,'redesign2013.ycyrffgroupie.co.uk'
+			,'christine.linux.ycyrffgroupie.co.uk'
+			,'redesign2013.linux.ycyrffgroupie.co.uk'
+			);
+	
+		if (in_array($domainName, $domainnames)){
+		
+			return true;
+		
+		}else{
+		
+			return false;
+		
+		}
+	
 	}
 	
 	/**/
@@ -274,6 +331,100 @@ class visitor{
 		}
 		
 		return $message;
+	}
+	
+	/*Set the session.*/
+	function initialise_session_vars($debug, $os, $browser){
+
+		switch($debug){
+		  case 'true':
+	
+			if ($os){
+			
+				$_SESSION["os"] = $os;
+				$_SESSION["browsername"] = $browser;
+		
+				if ($browser == 'Firefox'){
+					$_SESSION["browsernversion"] = 3;
+				}elseif  ($browser == 'Chrome'){
+					$_SESSION["browsernversion"] = 13.0;
+				}elseif  ($browser == 'IE'){
+					$_SESSION["browsernversion"] = 6;
+				}elseif  ($browser == 'Opera'){
+					$_SESSION["browsernversion"] = 9;
+				}elseif  ($browser == 'Safari'){
+					$_SESSION["browsernversion"] = 5.0;
+				}
+		
+			}else{
+			
+				$_SESSION["os"] = 'Linux';
+				$_SESSION["browsername"] = 'Firefox';
+				$_SESSION["browsernversion"] = 9;	
+		
+			}
+	
+			break;
+
+		  default:
+		
+			if ($os){
+			
+				$_SESSION["os"] = $os;
+				$_SESSION["browsername"] = $browsername;
+				$_SESSION["browsernversion"] = $browsernversion;
+		
+			}else{
+		
+				$_SESSION["os"] = 'Linux';
+				$_SESSION["browsername"] = 'Firefox';
+				$_SESSION["browsernversion"] = 9;
+		
+			}
+
+			break;
+
+		}
+	
+		$_SESSION["domainname"] = $_SERVER["HTTP_HOST"];
+		$_SESSION["ip_address"]  = $_SERVER["REMOTE_ADDR"];
+		$_SESSION["referer_page"]  = isset($_SERVER["HTTP_REFERER"])?$_SERVER["HTTP_REFERER"]: 'none';
+		$_SESSION["request_page"]  = $_SERVER["REQUEST_URI"];
+		$_SESSION["user"] = isset($_SERVER["PHP_AUTH_USER"])?$_SERVER["PHP_AUTH_USER"]: 'none';
+		$_SESSION["filename"] = $_SERVER["SCRIPT_FILENAME"];
+		$_SESSION["php_self"] = $_SERVER["PHP_SELF"];
+	
+		//print_r($_SESSION);
+		//die();
+	
+		return $_SESSION["os"];
+		return $_SESSION["browsername"];
+		return $_SESSION["browsernversion"]; 
+		return $_SESSION["domainname"];
+		return $_SESSION["ip_address"];
+		return $_SESSION["referer_page"];
+		return $_SESSION["request_page"];
+		return $_SESSION["user"];
+		return $_SESSION["filename"]; 
+		return $_SESSION["php_self"];
+	
+	}
+
+	/*Check the IP address*/
+	function ip_address_check($ipAddress){
+	
+	
+		if ($ipAddress  == '188.223.77.182'){
+		
+			return true;
+		
+		}else{
+		
+			return false;
+		
+		}
+	
+	
 	}
 	
 	/**/
