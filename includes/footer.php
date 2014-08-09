@@ -10,10 +10,11 @@ ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
 @Version:0.7
-@todo: , , commented out code from this file., create this as a class, test MSIe 
+@todo: commented out code from this file., create this as a class, test MSIe 
 and unknow, test . 
 
-Version 0.7 - Remove debug, domainName_check, error, initialise_session_vars, ip_address_check functions.
+Version 0.7 - Remove debug, domainName_check, error, initialise_session_vars, 
+ip_address_check functions.
 Version 0.6 - comment the rest of the code
 Version 0.5 - created functions debug, domainName_check, error,, initialise_session_vars, ip_address_check.
 Version 0.4 - sorted out the url params, sort out the debug set vars to default values.
