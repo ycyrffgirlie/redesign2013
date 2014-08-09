@@ -1,9 +1,10 @@
 <?php
 /*@Author; Christine A. Black
 @Version:0.2
-@todo: add the get filename method, sort out the visitor_table method, add the e-mail class, 
+@todo: add the get filename method, add the e-mail class, 
 remove comment it out code, comment the rest of the rest of the code, set params to 
 default values.
+Version 0.3 -sorted out the visitor_table method
 Version 0.2 - Added debug, domainName_check, error, initialise_session_vars, ip_address_check 
 methods.
 Version 0.1 - Added the visitor class to the footer*/
@@ -471,13 +472,15 @@ class visitor{
 		}elseif ($browserCheck  == 1){
 			
 			$output = $this -> display_message();
-			$output .= $this -> visitor_table();
+			$updateTable = $this -> visitor_table();
 			
 		}else{
-			$output = $this -> visitor_table();
+			$updateTable = $this -> visitor_table();
 		}
 		
-		echo $output ; 
+		if (isset($output)){
+			echo $output ; 
+		}
 	}
 	
 	/**/
@@ -497,25 +500,29 @@ class visitor{
 	/**/
 	function visitor_table(){
 	
-		$sql = '<p>';
-		$sql .= "INSERT INTO visitor(
+	require("/var/www/websites/redesign2013/includes/connection.php");
+
+		$sql = "INSERT INTO visitor(
 						os, browser_name, browser_version,
 						domainName, ipAddress, refererPage,
 						requestPage, user, filename,
 						phpSelf 
 						)
-		VALUES (".$this->os ." , ".$this->browserName." , ".$this->browserVersion."
-		, ".$this->domainName." ,  ".$this->ipAddress.", ".$this->refererPage." 
-		, ".$this->requestPage." ,  ".$this->user.", ".$this->filename." 
-		, ".$this->phpSelf 
-		.")";
+		VALUES ('".$this->os ."' , '".$this->browserName."' , '".$this->browserVersion."'
+		, '".$this->domainName."' ,  '".$this->ipAddress."', '".$this->refererPage."' 
+		, '".$this->requestPage."' ,  '".$this->user."', '".$this->filename."' 
+		, '".$this->phpSelf 
+		."');";
 		
-		$sql .= '</p>';
+		try{
 		
-		return $sql ;
+			$query = $database ->prepare($sql);
+			$query ->execute();
+		} catch(PDOException $error){
 		
-		/*$query = $database ->prepare($sql);
-		$query ->execute();*/
+			echo 'Error with query. '.$error->getMessage();
+		}
+		//return $sql ;
 	}
 	
 	/**/
