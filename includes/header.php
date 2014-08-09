@@ -8,16 +8,13 @@ if (file_exists('/includes/connection.php')){
 }
 
 require_once 'functions.php';
+/*the included files.*/
+include 'class/visitor.class.php';
 
-$filename = $_SERVER['SCRIPT_FILENAME'];
-$filename = preg_replace('%/home/ycyrf718/public_html%', '' , $filename);
-if (preg_match('%christine%', $filename)){
-	$filename = preg_replace('%/christine%','', $filename);
-}elseif(preg_match('%dev%',$filename)){
-	$filename = preg_replace('%/dev%','', $filename);
-}elseif (preg_match('%/redesign2013%', $filename)){
-	$filename = preg_replace('%/redesign2013%', '', $filename);
-}
+/*Set a new visitor class.*/
+$visitor = new visitor;
+$filename = $visitor ->get_filename();
+
 
 if ($filename == '/profiles/fanprofile.php'){
 	if (isset( $_GET['profileid']) && ($_GET['profileid'] != NULL && $_GET['profileid'] !='' )){
@@ -86,7 +83,7 @@ if ($fileinfo){
 <!--end need to know section-->
 <meta name="rating" content="General" />
 <link rel="shortcut icon" href="/images/icon/cyrff.ico">
-<link rel="stylesheet" type="text/css" href="/css/style.css?v0.2" /><!--IE couldn't get the style the other way. Don't know why.-->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v0.4" /><!--IE couldn't get the style the other way. Don't know why.-->
  <link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  <?php
@@ -130,7 +127,7 @@ echo $fileinfo["htmlcode"];
 <!--end need to know section-->
 <meta name="rating" content="General" />
 <link rel="shortcut icon" href="/images/icon/cyrff.ico" />
-<link rel="stylesheet" type="text/css" href="/css/style.css?v0.2" /><!--IE couldn't get the style the other way. Don't know why.-->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v0.4" /><!--IE couldn't get the style the other way. Don't know why.-->
 <link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
  <?php
