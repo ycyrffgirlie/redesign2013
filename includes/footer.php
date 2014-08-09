@@ -23,9 +23,6 @@ Version 0.2 - added the visitor.
 Version 0.1 - added a footer to the site.
 */
 
-/*the included files.*/
-include 'class/visitor.class.php';
-
 //set debugging info
 $debug = isset($_GET["debug"])? $_GET["debug"] : 'false' ;
 $os = isset($_GET["os "])? $_GET["os "] : 'Linux' ;
@@ -44,8 +41,7 @@ else{
 	$os = $browserinfo["platform_description"];
 }
 
-/*Set a new visitor class.*/
-$visitor = new visitor;
+
 /*Get debug info.*/
 $debug = $visitor ->debug($debug, $os, $browser);
 
