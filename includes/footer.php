@@ -9,10 +9,10 @@ error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.7
+@Version:0.8
 @todo: commented out code from this file., create this as a class, test MSIe 
 and unknow, test . 
-
+Version 0.8 - Initialise the class in another file.
 Version 0.7 - Remove debug, domainName_check, error, initialise_session_vars, 
 ip_address_check functions.
 Version 0.6 - comment the rest of the code
@@ -40,7 +40,6 @@ if ($browserinfo["platform_description"] == 'unknown'){
 else{
 	$os = $browserinfo["platform_description"];
 }
-
 
 /*Get debug info.*/
 $debug = $visitor ->debug($debug, $os, $browser);
