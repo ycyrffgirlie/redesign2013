@@ -1,10 +1,11 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.2
-@todo: add the get filename method, add the e-mail class, 
+@Version:0.4
+@todo: add the e-mail class, 
 remove comment it out code, comment the rest of the rest of the code, set params to 
 default values.
-Version 0.3 -sorted out the visitor_table method
+Version 0.4 - Added the get_filename method
+Version 0.3 - Sorted out the visitor_table method
 Version 0.2 - Added debug, domainName_check, error, initialise_session_vars, ip_address_check 
 methods.
 Version 0.1 - Added the visitor class to the footer*/
@@ -553,6 +554,33 @@ This
 footer is for your information.</p>";
 		
 		echo $output;
+		
+	}
+	
+	
+	/**/
+	function get_filename(){
+	
+		$filename = $_SERVER['SCRIPT_FILENAME'];
+		
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			$filename = preg_replace('%/var/www/websites/redesign2013%', '' , $filename);
+		
+		}else{
+			
+			$filename = preg_replace('%/home/ycyrf718/public_html%', '' , $filename);
+			
+			if (preg_match('%christine%', $filename)){
+				$filename = preg_replace('%/christine%','', $filename);
+			}elseif(preg_match('%dev%',$filename)){
+				$filename = preg_replace('%/dev%','', $filename);
+			}elseif (preg_match('%/redesign2013%', $filename)){
+				$filename = preg_replace('%/redesign2013%', '', $filename);
+			}
+		}
+		
+		return $filename;
 		
 	}
 	
