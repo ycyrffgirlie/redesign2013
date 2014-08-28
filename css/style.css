@@ -1,11 +1,12 @@
 /* @@Author: Chritine A. Black
-@Version:0.4 
+@Version:0.5 
 The main style sheet for the Cyrff site
 
+Version 0.5 - Added styling for verticalspace div.
 Version 0.4 - Fixed the footer.
 Version 0.3 - Added more footer styling.
 Version 0.2 - Added footer styling and the styling for for sale and submit profile pages
-Version 0. 1 - Create style sheet
+Version 0.1 - Create style sheet
 */
 
 htmk, body{
@@ -153,6 +154,12 @@ a.buttonlink{
 
 .clear{
 	clear:both;
+}
+
+.verticalspace{
+	width: 100%; 
+	padding: 1% 0%; 
+	margin: 1% 0%;
 }
 
 footer{
