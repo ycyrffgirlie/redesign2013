@@ -1,4 +1,6 @@
 <div class="clear"></div>
+<div style="width: 100%; padding: 1% 0%; margin: 1% 0%;">&nbsp;</div>
+<div class="clear"></div>
 
 <footer>
 	
@@ -9,9 +11,12 @@ error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.8
-@todo: commented out code from this file., create this as a class, test MSIe 
+@Version:0.9
+@todo: remove the css from this file, create this as a class, test MSIe 
 and unknow, test . 
+
+Version 0.9 - Removed commented out code from this file, Added some more css to this file, 
+Added a test to see if not debugging.
 Version 0.8 - Initialise the class in another file.
 Version 0.7 - Remove debug, domainName_check, error, initialise_session_vars, 
 ip_address_check functions.
@@ -25,20 +30,23 @@ Version 0.1 - added a footer to the site.
 
 //set debugging info
 $debug = isset($_GET["debug"])? $_GET["debug"] : 'false' ;
-$os = isset($_GET["os "])? $_GET["os "] : 'Linux' ;
+$os = isset($_GET["os"])? $_GET["os"] : 'Linux' ;
 $browser = isset($_GET["browser"])? $_GET["browser"] : 'Firefox' ;
 
-//set variables
-$browserinfo = get_browser(NULL, true);
-$browsername = $browserinfo["browser"];
-$browsernversion = $browserinfo["version"];
 
-/*Sets the os as platform description is sometimes unknown.*/
-if ($browserinfo["platform_description"] == 'unknown'){
-	$os = $browserinfo["platform"];
-}
-else{
-	$os = $browserinfo["platform_description"];
+if ($debug == 'false'){
+	//set variables
+	$browserinfo = get_browser(NULL, true);
+	$browsername = $browserinfo["browser"];
+	$browsernversion = $browserinfo["version"];
+
+	/*Sets the os as platform description is sometimes unknown.*/
+	if ($browserinfo["platform_description"] == 'unknown'){
+		$os = $browserinfo["platform"];
+	}
+	else{
+		$os = $browserinfo["platform_description"];
+	}
 }
 
 /*Get debug info.*/
@@ -135,52 +143,5 @@ if ($message){
 }
 ?>
 </footer>
-
-<?php
-
-/* if ($_SESSION["browsername"] == "Chrome"){
-	//echo "your are using chrome";
-	if  ($_SESSION["browsernversion"] == 0){
-		$to = 'ycyrffgroupie@gmail.com';
-		$subject = 'Update browsercap';
-		$message = '<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">
-<html>
-	<head></head>
-	<body style="background-image:url(\'http://www.ycyrffgroupie.co.uk/images/background5.jpg\'); background-color: #800080; width:100%;" link="ffd700" alink="ffd700" >
-		<table>
-			<tr>
-				<td style="width:5%">&nbsp;</td>
-				<td style="width:93%">
-					<p><font color="ffd700">Site\'s broken. You need to update browsercap.</font></p>
-					<p><font color="ffd700">'.$_SERVER["REMOTE_ADDR"].' has just requested 
-					<a style="color: #ffd700;" href="'.$_SERVER["HTTP_HOST"].'/'.$_SERVER["REQUEST_URI"].'">
-					this page</a> using '.$browsername.'. The script couldn\'t detect the browser version.';
-			if ($_SERVER["HTTP_REFERER"] != NULL && $_SERVER["HTTP_REFERER"] != ' '){
-			
-		$message .= 'The refering url is: 
-					<a style="color: #ffd700;" href="' .$_SERVER["HTTP_REFERER"].'">'.$_SERVER["HTTP_REFERER"].'</a></font></p>';
-			}
-		
-		$message .='
-					<br>
-					<br>
-					<p><font color="ffd700">Thanks,
-					<br>
-					One nutty fan.</font></p>
-				</td>
-			</tr>
-		</table>
-	</body>';
-		$headers ='MIME-Version: 1.0'."\r\n";
-		$headers .= 'Content-Type: text/html; charset=\"utf-8\"'. "\r\n";
-		$headers .='From:  "Webmistress" <webmistress@ycyrffgroupie.co.uk>'. "\r\n";			
-		mail($to,$subject,$message, $headers);
-	}
-		
-}*/
-?>
-
-
-
 
 </div>
