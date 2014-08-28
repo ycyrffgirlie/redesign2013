@@ -5,7 +5,7 @@
 remove comment it out code, comment the rest of the rest of the code, set params to 
 default values.
 
-Version 0.5 - added the e-mail methods.
+Version 0.5 - Added the e-mail methods.
 Version 0.4 - Added the get_filename method
 Version 0.3 - Sorted out the visitor_table method
 Version 0.2 - Added debug, domainName_check, error, initialise_session_vars, ip_address_check 
