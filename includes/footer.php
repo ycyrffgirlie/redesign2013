@@ -1,5 +1,5 @@
 <div class="clear"></div>
-<div style="width: 100%; padding: 1% 0%; margin: 1% 0%;">&nbsp;</div>
+<div class="verticalspace">&nbsp;</div>
 <div class="clear"></div>
 
 <footer>
@@ -11,10 +11,10 @@ error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.9
-@todo: remove the css from this file, create this as a class, test MSIe 
-and unknow, test . 
+@Version:0.10
+@todo: create this as a class, test MSIe and unknow, test . 
 
+Version 0.10 - Removed the css from this file
 Version 0.9 - Removed commented out code from this file, Added some more css to this file, 
 Added a test to see if not debugging.
 Version 0.8 - Initialise the class in another file.
