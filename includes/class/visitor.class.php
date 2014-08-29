@@ -1,10 +1,11 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.5
+@Version:0.6
 @todo: add the e-mail class, 
 remove comment it out code, comment the rest of the rest of the code, set params to 
 default values.
 
+Version 0.6 - Debug
 Version 0.5 - Added the e-mail methods.
 Version 0.4 - Added the get_filename method
 Version 0.3 - Sorted out the visitor_table method
@@ -240,7 +241,15 @@ class visitor{
 				$message = '<p>Microsoft has stop supporting '.$this->browserName.' 
 				on '.$this->os.'. 
 				<br />
-				Please use alternative browsers.</p>';
+				Please use alternative browsers.</p>
+				
+				<p>
+				Nid '.$this->browserName.' hwn yn cefnogi '.$this->os.'. 
+				<br />
+				Plis defnyddiwch porwr arall.
+				</p>
+				
+				';
 			}elseif ($this->browserName == 'Safari') {
 			
 				$message  = '<p>How did you get  '.$this->browserName.' to run on 
@@ -269,7 +278,16 @@ class visitor{
 				$message = '<p>Microsoft has stop supporting '.$this->browserName.' 
 				on '.$this->os.'. 
 				<br />
-				Please use alternative browsers.</p>';
+				Please use alternative browsers.
+				</p>
+				
+				<p>
+				Nid '.$this->browserName.' hwn yn cefnogi '.$this->os.'. 
+				<br />
+				Plis defnyddiwch porwr arall.
+				</p>
+				
+				';
 			}else{
 				$message =  '<p>This site doesn\'t support your version of '.$this->browserName.'. 
 				<br />
@@ -288,13 +306,22 @@ class visitor{
 		   case 'Windows 2000';
 		   case 'Windows ME';
 			 
-			$message =  '<p>This site doesn\'t support your version of Firefox. Please 
-			update your browser.</p>
+			$message =  '<p>This site doesn\'t support your version of '.$this->browserName.'.  
+			<br />
+			Please update your browser.</p>
 			<p> '.$this->browserName.'  doesn\'t support 
-		Windows Me, Windows 2000, Windows 98, Windows 95
+		Windows Me, Windows 2000, Windows 98, Windows 95.
 		<!--If you need to use a version of Windows 
-		that pre-dates Windows Xp then chosse from the alternative browsers-->.</p>
-				
+		that pre-dates Windows Xp then chosse from the alternative browsers.--></p>
+	<p>
+		Nid we safle hwn yn cefnogi eich fersiwn o '.$this->browserName.'. 
+		<br />
+		Diweddarwch eich porwr.
+	</p>
+	<p>
+		Nid '.$this->browserName.' hwn yn cefnogi 
+		Windows Me, Windows 2000, Windows 98, Windows 95.
+	</p>
 			';
 			
 		   break;
@@ -349,19 +376,30 @@ class visitor{
 				$_SESSION["browsername"] = $browser;
 		
 				if ($browser == 'Firefox'){
-					$_SESSION["browsernversion"] = 0;
+					
+					//$_SESSION["browsernversion"] = 0;
+					$_SESSION["browsernversion"] = 3;
+					
 				}elseif  ($browser == 'Chrome'){
-					$_SESSION["browsernversion"] = 0;
-					//13.0
-				}elseif  ($browser == 'IE'){
-					$_SESSION["browsernversion"] = 0;
-					//6
+					
+					//$_SESSION["browsernversion"] = 0;
+					$_SESSION["browsernversion"] = 13.0;
+					
+				}elseif  ($browser= 'IE'){
+				
+					//$_SESSION["browsernversion"] = 0;
+					$_SESSION["browsernversion"] = 6;
+					
 				}elseif  ($browser == 'Opera'){
-					$_SESSION["browsernversion"] = 0;
-					//9
+					
+					//$_SESSION["browsernversion"] = 0;
+					$_SESSION["browsernversion"] = 9;
+					
 				}elseif  ($browser == 'Safari'){
-					$_SESSION["browsernversion"] = 0;
-					//5.0
+					
+					//$_SESSION["browsernversion"] = 0;
+					$_SESSION["browsernversion"] = 5.0;
+					
 				}
 		
 			}else{
