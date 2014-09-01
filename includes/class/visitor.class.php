@@ -1,10 +1,11 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.6
+@Version:0.7
 @todo: add the e-mail class, 
 remove comment it out code, comment the rest of the rest of the code, set params to 
 default values.
 
+Version 0.7 - Re-alight code of output.
 Version 0.6 - Debug
 Version 0.5 - Added the e-mail methods.
 Version 0.4 - Added the get_filename method
@@ -581,18 +582,18 @@ class visitor{
 	function visitor_display($message){
 	
 		$output = $message."
-		Script Name: ".$this->filename."
-<br>
-Php_self: ".$this->phpSelf."
-<br>
-Your Os: ".$this->os  ." and you are using: ".$this->browserName ." ".$this->browserVersion.". 
-<br>
-Your ISP is: ".$this->ipAddress.". 
-<br>
-You have come from: ".$this->refererPage.".
-<br>
-This 
-footer is for your information.</p>";
+					Script Name: ".$this->filename."
+					<br />
+					Php_self: ".$this->phpSelf."
+					<br>
+					Your Os: ".$this->os  ." and you are using: ".$this->browserName ." ".$this->browserVersion.". 
+					<br />
+					Your ISP is: ".$this->ipAddress.". 
+					<br />
+					You have come from: ".$this->refererPage.".
+					<br />
+					This footer is for your information.
+				</p>";
 		
 		echo $output;
 		
