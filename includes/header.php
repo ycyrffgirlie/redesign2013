@@ -10,6 +10,7 @@ if (file_exists('/includes/connection.php')){
 require_once 'functions.php';
 /*the included files.*/
 include 'class/visitor.class.php';
+include 'class/footer.class.php';
 
 /*Set a new visitor class.*/
 $visitor = new visitor;
