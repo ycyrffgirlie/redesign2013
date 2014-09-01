@@ -1,19 +1,13 @@
-<div class="clear"></div>
-<div class="verticalspace">&nbsp;</div>
-<div class="clear"></div>
-
-<footer>
-	
-	<div class="footerLeft">
 <?php
 
 error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.10
-@todo: create this as a class, test MSIe and unknow, test . 
+@Version:0.11
+@todo:  test MSIe and unknow, test . 
 
+Version 0.11 - Created the footer class.
 Version 0.10 - Removed the css from this file
 Version 0.9 - Removed commented out code from this file, Added some more css to this file, 
 Added a test to see if not debugging.
@@ -27,6 +21,11 @@ Version 0.3 - remove the css from this file.
 Version 0.2 - added the visitor.
 Version 0.1 - added a footer to the site.
 */
+
+$footer = new footer;
+
+echo $footer -> spacing();
+echo $footer -> build_footer_top();
 
 //set debugging info
 $debug = isset($_GET["debug"])? $_GET["debug"] : 'false' ;
@@ -56,60 +55,17 @@ $visitor ->get_visitor_details($_SESSION["os"], $_SESSION["browsername"], $_SESS
 				$_SESSION["domainname"] , $_SESSION["ip_address"] ,
 				$_SESSION["referer_page"], $_SESSION["request_page"], 
 				$_SESSION["user"], $_SESSION["filename"], $_SESSION["php_self"]);
-	?>
-
-
-		<a href="http://internetdefenseleague.org"><img src="http://internetdefenseleague.org/images/badges/final/footer_badge.png" alt="Member of The Internet Defense League" /></a>
-
-<?php
-/*Displays Google Ads if live.*/
-if ($visitor ->domainName_check($_SESSION["domainname"] != true)){
-?>
-	<br />
-		<script type="text/javascript"><!--
-		google_ad_client = "ca-pub-1700322885253994";
-		/* Ad 1 */
-		google_ad_slot = "4964110045";
-		google_ad_width = 468;
-		google_ad_height = 60;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-
-		<a href="http://tracking.opienetwork.com/aff_c?offer_id=20&aff_id=5600&file_id=313" target="_blank"><img src="http://media.go2speed.org/brand/files/opienetwork/20/hp-88x31-green.gif" width="88" height="31" border="0" /></a><img src="http://tracking.opienetwork.com/aff_i?offer_id=20&aff_id=5600&file_id=313" width="1" height="1">
-<?php
-}
-?>
-
-	</div>
-
-	<div class="footerRight">
-		<form accept-charset="UTF-8" action="http://www.jrank.org/api/search/v2" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /></div>
-			<fieldset style="border: 1px solid rgb(175, 175, 175); display: inline;">
-				<legend>
-					<a href="http://www.jrank.org/" style="font-size: 10pt; font-family: Arial, sans-serif;">
-						Site Search
-					</a>
-				</legend>
-				<a href="http://www.jrank.org/">
-					<img alt="Site Search" 
-					src="http://www.jrank.org/images/jrank_88_31-fs8.png" 
-					style="border: none; vertical-align: middle;" title="Site Search" />
-				</a>
-				<input id="key" name="key" type="hidden" value="827b2c24d923ca553b508bc1160538c4c164a2c4" />
-				<input name="ie_utf8_fix" type="hidden" value="☠" />
-				<input id="q" name="q" style="display: inline; vertical-align: middle;" type="text" value="" />
-				<input name="commit" style="display: inline; vertical-align: middle;" type="submit" value="Search" />
-			</fieldset>
-		</form>
 	
-	</div>
+echo $footer ->member_badge();
 
-	<div style="clear:both;"></div>
+/*Displays Google Ads if live.*/
+//if ($visitor ->domainName_check($_SESSION["domainname"] != true)){
+	
+	echo $footer ->google_ads();
+	
+//}
 
-<?php
+echo $footer ->footer_right();
 
 /*Checks whether the browser is supported.*/
 $visitor ->os_check();
@@ -118,30 +74,23 @@ $visitor ->os_check();
 if ($visitor ->domainName_check($_SESSION["domainname"] == true)){
 
 	if ($visitor ->ip_address_check($_SESSION["ip_address"])  == true){
-		$message = "
-<p>Welcome ".$_SESSION["user"].", this is not live. 
-<br>";
+		$message =$footer ->not_live_message($_SESSION["user"]);
 
 	}else{
 	
-	$message = "<p>Welcome ".$_SESSION["user"].", this is not live. 
-<br>";
+	$message =$footer ->not_live_message($_SESSION["user"]);
 	}
 
 }else{
 	if (ip_address_check($_SESSION["ip_address"])  == true){
-		$message = "<p>Welcome ".$_SESSION["ip_address"].", please remember that this is live. So please don't fuck it up. 
-	<br>
-	";
+		$message = $footer ->live_message($_SESSION["ip_address"]);
 	}
-	
 	
 }
 
 if ($message){
 	$visitor ->visitor_display($message);
 }
-?>
-</footer>
 
-</div>
+echo $footer ->build_footer_bottom();
+?>
