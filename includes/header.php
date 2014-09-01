@@ -12,8 +12,10 @@ require_once 'functions.php';
 include 'class/visitor.class.php';
 include 'class/footer.class.php';
 
-/*Set a new visitor class.*/
+/*Set a new visitor class and sets a new footer class.*/
 $visitor = new visitor;
+$footer = new footer;
+
 $filename = $visitor ->get_filename();
 
 
