@@ -1,10 +1,11 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.7
+@Version:0.8
 @todo: add the e-mail class, 
 remove comment it out code, comment the rest of the rest of the code, set params to 
 default values.
 
+Version 0.8 - More debugging.
 Version 0.7 - Re-alight code of output.
 Version 0.6 - Debug
 Version 0.5 - Added the e-mail methods.
@@ -88,28 +89,32 @@ class visitor{
 		
 			foreach ($browsernames as $browsername){
 			
-				if ($this->browserName  != $browsername){
-			
-					if ($browsername  != 'MSIE'){
+				if ($this->browserName  != $browsername  //&&
+				//($this ->browserName != 'IE'  && $browsername !='MSIE') &&
 				
-					$output .= '<div class="supportedBrowser">
+				){
+			
+					if ($browsername != 'MSIE'){
+						//if ($browsername !='IE' &&$this ->browserName != 'MSIE' ){
+				
+						$output .= '<div class="supportedBrowser">
 					<div class="text">
 						<p>
 						
 						';
 				
-						if ($this->os == 'Linux' && $browsername == 'IE'){
+							if ($this->os == 'Linux' && $browsername == 'IE'){
 			
-							$output .= 'If you must destroy 
+								$output .= 'If you must destroy 
 							a beautiful OS with I.E then';
-						}
+							}
 					
-					$output .= '</p>
+						$output .= '</p>
 			</div>
 			
-			';
+				';
 					
-			$output .=  '<div class="image">
+				$output .=  '<div class="image">
 				<a href="'.$browser [$browsername]["link"].'" target="_blank">
 				<img src="/images/site/'.$browser [$browsername]["image"].'" 
 				width="'.$browser [$browsername]["width"].' px" height="'.$browser [$browsername]["height"].' px"
@@ -118,11 +123,12 @@ class visitor{
 				
 				';
 					
-			$output .= '</div>
+				$output .= '</div>
 			</div>
 			
 			';
 					
+						//}
 					}
 			
 				}
@@ -401,6 +407,12 @@ class visitor{
 					//$_SESSION["browsernversion"] = 0;
 					$_SESSION["browsernversion"] = 5.0;
 					
+				}else{
+				
+					$_SESSION["os"] = 'unknown';
+					$_SESSION["browsername"] = 'unknown';
+					$_SESSION["browsernversion"] = 0;	
+				
 				}
 		
 			}else{
@@ -479,25 +491,37 @@ class visitor{
 		/*switch($this->os){
 		   case 'linux';*/
 			
-			if ($this->browserName == 'Firefox'){
+			switch($this->browserName){
+			   case  'Firefox';
 				
 				$supportedBrowserVersion = 5;
+				break;
 				
-			}elseif ($this->browserName == 'Chrome'){
+			   case  'Chrome';
 				
 				$supportedBrowserVersion= 15.0;
+				break;
 				
-			}elseif ($this->browserName == 'IE'){
+			   case  'IE';
+			   case 'MSIE';
 				
 				$supportedBrowserVersion = 7;
+				break;
 				
-			}elseif ($this->browserName == 'Opera'){
+			   case  'Opera';
 				
 				$supportedBrowserVersion = 10;
+				break;
 				
-			}elseif ($this->browserName == 'Safari'){
+			   case  'Safari';
 				
 				$supportedBrowserVersion = 5.2;
+				break; 
+			 
+			 default:
+			
+				$supportedBrowserVersion = 0;
+				break; 
 				
 			}
 			
