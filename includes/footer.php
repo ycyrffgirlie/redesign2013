@@ -4,12 +4,14 @@ error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.11
-@todo:  test MSIe and unknow, test . 
+@Version:0.13
+@todo: test . 
 
+Version 0.13 -Tested MSIE and unknown.
+Version 0.12 - Commented rest of code.
 Version 0.11 - Created the footer class.
 Version 0.10 - Removed the css from this file
-Version 0.9 - Removed commented out code from this file, Added some more css to this file, 
+Version 0.9 - Remsoved commented out code from this file, Added some more css to this file, 
 Added a test to see if not debugging.
 Version 0.8 - Initialise the class in another file.
 Version 0.7 - Remove debug, domainName_check, error, initialise_session_vars, 
@@ -22,19 +24,18 @@ Version 0.2 - added the visitor.
 Version 0.1 - added a footer to the site.
 */
 
-$footer = new footer;
-
+/*Displays the spacing between rhe content and the footer, The footer top. */
 echo $footer -> spacing();
 echo $footer -> build_footer_top();
 
-//set debugging info
+/*Set debugging info.*/
 $debug = isset($_GET["debug"])? $_GET["debug"] : 'false' ;
 $os = isset($_GET["os"])? $_GET["os"] : 'Linux' ;
 $browser = isset($_GET["browser"])? $_GET["browser"] : 'Firefox' ;
 
-
+/*Check to see if the script is running in debug mode.*/
 if ($debug == 'false'){
-	//set variables
+	/*Sets variables*/
 	$browserinfo = get_browser(NULL, true);
 	$browsername = $browserinfo["browser"];
 	$browsernversion = $browserinfo["version"];
@@ -48,29 +49,32 @@ if ($debug == 'false'){
 	}
 }
 
-/*Get debug info.*/
+/*Gets debug info.*/
 $debug = $visitor ->debug($debug, $os, $browser);
 
+/*Gets visitors details.*/
 $visitor ->get_visitor_details($_SESSION["os"], $_SESSION["browsername"], $_SESSION["browsernversion"],
 				$_SESSION["domainname"] , $_SESSION["ip_address"] ,
 				$_SESSION["referer_page"], $_SESSION["request_page"], 
 				$_SESSION["user"], $_SESSION["filename"], $_SESSION["php_self"]);
-	
+
+/*Displays the Member of The Internet Defense League badge.*/
 echo $footer ->member_badge();
 
 /*Displays Google Ads if live.*/
-//if ($visitor ->domainName_check($_SESSION["domainname"] != true)){
+if ($visitor ->domainName_check($_SESSION["domainname"] != true)){
 	
 	echo $footer ->google_ads();
 	
-//}
+}
 
+/*Displays the footer right.*/
 echo $footer ->footer_right();
 
 /*Checks whether the browser is supported.*/
 $visitor ->os_check();
 
-/*Displays a message if it's a develomet site.*/
+/*Sets a message if it's a develomet site.*/
 if ($visitor ->domainName_check($_SESSION["domainname"] == true)){
 
 	if ($visitor ->ip_address_check($_SESSION["ip_address"])  == true){
@@ -88,9 +92,11 @@ if ($visitor ->domainName_check($_SESSION["domainname"] == true)){
 	
 }
 
+/*Displays a message if there is one.*/
 if ($message){
 	$visitor ->visitor_display($message);
 }
 
+/*Displays the footer bottom.*/
 echo $footer ->build_footer_bottom();
 ?>
