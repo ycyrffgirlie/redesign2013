@@ -1,10 +1,11 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.8
+@Version:0.9
 @todo: add the e-mail class, 
 remove comment it out code, comment the rest of the rest of the code, set params to 
 default values.
 
+Version 0.9 - Re-alight more code of output.
 Version 0.8 - More debugging.
 Version 0.7 - Re-alight code of output.
 Version 0.6 - Debug
@@ -53,26 +54,24 @@ class visitor{
 			
 				//if ($this->os != 'Linux' && $this->browserName != 'Safari'){
 				
-	$output  .=  '<div class="supportedBrowser">
-		<div class="text">
-			<p>
-			
-			</p>
-		</div>
+			$output  .=  '
+				<div class="supportedBrowser">
+					<div class="text">
+						<p>
+				
+						</p>
+					</div>
 		
+					<div class="image">
+						<a href="'.$browser [$browsername]["link"].'" target="_blank">
+							<img src="/images/site/'.$browser [$browsername]["image"].'" width="'.$browser [$browsername]["width"].' px" height="'.$browser [$browsername]["height"].'px" alt="'.$browsername.'" />
+						</a>
+					</div>
+					
+				</div>
 		
-		<div class="image">
-			<a href="'.$browser [$browsername]["link"].'" target="_blank">
-				<img src="/images/site/'.$browser [$browsername]["image"].'" 
-				width="'.$browser [$browsername]["width"].' px" height="'.$browser [$browsername]["height"].'px"
-				alt="'.$browsername.'" />
-			</a>
-		</div>
-	</div>
-	
-	<div class="clear"></div>
-	
-	';
+				<div class="clear"></div>
+			';
 				
 				//}
 			}
@@ -81,10 +80,10 @@ class visitor{
 		if ($this->os !=  'Windows 98' && $this->os != 'Windows 95'  && 
 		$this->os !=  'Windows 2000' && $this->os != 'Windows ME'){
 		
-		$output .= '<p>Alternative Browsers  / Porwyr arall:</p>
+		$output .= '
+				<p>Alternative Browsers  / Porwyr arall:</p>
 		
-		<div class="supportedBrowersContainer">
-		
+				<div class="supportedBrowersContainer">
 		';
 		
 			foreach ($browsernames as $browsername){
@@ -97,36 +96,35 @@ class visitor{
 					if ($browsername != 'MSIE'){
 						//if ($browsername !='IE' &&$this ->browserName != 'MSIE' ){
 				
-						$output .= '<div class="supportedBrowser">
-					<div class="text">
-						<p>
-						
+						$output .= '
+					<div class="supportedBrowser">
+						<div class="text">
+							<p>
 						';
 				
 							if ($this->os == 'Linux' && $browsername == 'IE'){
 			
-								$output .= 'If you must destroy 
-							a beautiful OS with I.E then';
+								$output .= '
+								If you must destroy 
+								a beautiful OS with I.E then
+								';
 							}
 					
-						$output .= '</p>
-			</div>
-			
+						$output .= '
+							</p>
+						</div>
 				';
 					
-				$output .=  '<div class="image">
-				<a href="'.$browser [$browsername]["link"].'" target="_blank">
-				<img src="/images/site/'.$browser [$browsername]["image"].'" 
-				width="'.$browser [$browsername]["width"].' px" height="'.$browser [$browsername]["height"].' px"
-				alt="'.$browsername.'" />
-				</a>
-				
-				';
+				$output .=  '
+						<div class="image">
+							<a href="'.$browser [$browsername]["link"].'" target="_blank">
+								<img src="/images/site/'.$browser [$browsername]["image"].'" width="'.$browser [$browsername]["width"].' px" height="'.$browser [$browsername]["height"].' px" alt="'.$browsername.'" />
+							</a>';
 					
-				$output .= '</div>
-			</div>
-			
-			';
+				$output .= '
+						</div>
+					</div>
+				';
 					
 						//}
 					}
@@ -136,8 +134,8 @@ class visitor{
 			
 			}
 		
-			$output .= '</div>
-			
+			$output .= '
+				</div>
 			';
 			
 			if (($this->os == 'Windows Vista' || $this->os == 'Windows XP' || 
@@ -245,35 +243,43 @@ class visitor{
 		  case 'Linux';
 			 
 			if ($this->browserName == 'IE'){
-				$message = '<p>Microsoft has stop supporting '.$this->browserName.' 
-				on '.$this->os.'. 
-				<br />
-				Please use alternative browsers.</p>
-				
+				$message = '
 				<p>
-				Nid '.$this->browserName.' hwn yn cefnogi '.$this->os.'. 
-				<br />
-				Plis defnyddiwch porwr arall.
+					Microsoft has stop supporting '.$this->browserName.' on '.$this->os.'. 
+					<br />
+					Please use alternative browsers.
 				</p>
 				
+				<p>
+					Nid '.$this->browserName.' hwn yn cefnogi '.$this->os.'. 
+					<br />
+					Plis defnyddiwch porwr arall.
+				</p>
 				';
 			}elseif ($this->browserName == 'Safari') {
 			
-				$message  = '<p>How did you get  '.$this->browserName.' to run on 
-				'.$this->os.'? Apple doesn\'t support. I thought the saying is "Can I get Linux 
-				run on this?" not "will Safari run on Linux? " Seeing you are a smart arse 
-				I am not getting you the link for Safari for Linux.</p>';
+				$message  = '
+				<p>
+					How did you get  '.$this->browserName.' to run on '.$this->os.'? Apple 
+					doesn\'t support. I thought the saying is "Can I get Linux run on this?" 
+					not "will Safari run on Linux? " Seeing you are a smart arse I am not 
+					getting you the link for Safari for Linux.
+				</p>
+				';
 			
 			}else{
-				$message =  '	<p>
-		This site doesn\'t support your version of '.$this->browserName.'. 
-		Please update your browser.
-		<br />
-		Please check your distros lastest repository branch first.</p>
-		<p>Nid we safle hwn yn cefnogi eich fersiwn o '.$this->browserName.'. 
-		<br />
-		Diweddarwch eich porwr.</p>
-				
+				$message =  '	
+				<p>
+					This site doesn\'t support your version of '.$this->browserName.'. 
+					Please update your browser.
+					<br />
+					Please check your distros lastest repository branch first.
+				</p>
+				<p>
+					Nid we safle hwn yn cefnogi eich fersiwn o '.$this->browserName.'. 
+					<br />
+					Diweddarwch eich porwr.
+				</p>
 				';
 			}
 			
@@ -282,27 +288,33 @@ class visitor{
 		   case 'Mac';
 			 
 			if ($this->browserName == 'IE'){
-				$message = '<p>Microsoft has stop supporting '.$this->browserName.' 
-				on '.$this->os.'. 
-				<br />
-				Please use alternative browsers.
+				$message = '
+				<p>
+					Microsoft has stop supporting '.$this->browserName.' on '.$this->os.'. 
+					<br />
+					Please use alternative browsers.
 				</p>
 				
 				<p>
-				Nid '.$this->browserName.' hwn yn cefnogi '.$this->os.'. 
-				<br />
-				Plis defnyddiwch porwr arall.
+					Nid '.$this->browserName.' hwn yn cefnogi '.$this->os.'. 
+					<br />
+					Plis defnyddiwch porwr arall.
 				</p>
 				
 				';
 			}else{
-				$message =  '<p>This site doesn\'t support your version of '.$this->browserName.'. 
-				<br />
-				Please update your browser.</p>
-				<p>Nid we safle hwn yn cefnogi eich fersiwn o '.$this->browserName.'. 
-				<br />
-				Diweddarwch eich porwr.</p>
+				$message =  '
+				<p>
+					This site doesn\'t support your version of '.$this->browserName.'. 
+					<br />
+					Please update your browser.
+				</p>
 				
+				<p>
+					Nid we safle hwn yn cefnogi eich fersiwn o '.$this->browserName.'. 
+					<br />
+					Diweddarwch eich porwr.
+				</p>
 				';
 			}
 			
@@ -313,22 +325,29 @@ class visitor{
 		   case 'Windows 2000';
 		   case 'Windows ME';
 			 
-			$message =  '<p>This site doesn\'t support your version of '.$this->browserName.'.  
-			<br />
-			Please update your browser.</p>
-			<p> '.$this->browserName.'  doesn\'t support 
-		Windows Me, Windows 2000, Windows 98, Windows 95.
-		<!--If you need to use a version of Windows 
-		that pre-dates Windows Xp then chosse from the alternative browsers.--></p>
-	<p>
-		Nid we safle hwn yn cefnogi eich fersiwn o '.$this->browserName.'. 
-		<br />
-		Diweddarwch eich porwr.
-	</p>
-	<p>
-		Nid '.$this->browserName.' hwn yn cefnogi 
-		Windows Me, Windows 2000, Windows 98, Windows 95.
-	</p>
+			$message =  '
+				<p>
+					This site doesn\'t support your version of '.$this->browserName.'.  
+					<br />
+					Please update your browser.
+				</p>
+			
+				<p> 
+					'.$this->browserName.'  doesn\'t support Windows Me, Windows 
+					2000, Windows 98, Windows 95. <!--If you need to use a version of 
+					Windows that pre-dates Windows Xp then chosse from the alternative browsers.-->
+				</p>
+				
+				<p>
+					Nid we safle hwn yn cefnogi eich fersiwn o '.$this->browserName.'. 
+					<br />
+					Diweddarwch eich porwr.
+				</p>
+				
+				<p>
+					Nid '.$this->browserName.' hwn yn cefnogi Windows Me, 
+					Windows 2000, Windows 98, Windows 95.
+				</p>
 			';
 			
 		   break;
@@ -337,19 +356,19 @@ class visitor{
 		    case 'Windows 7';
 		    case 'Windows XP';
 			 
-			$message =  '	<p>
-		This site doesn\'t support your version of '.$this->browserName.'. 
-		<br />
-		Please update your browser.
-	</p>
+			$message =  '
+				<p>
+					This site doesn\'t support your version of '.$this->browserName.'. 
+					<br />
+					Please update your browser.
+				</p>
 	
-	<p>
-		Nid we safle hwn yn cefnogi eich fersiwn o '.$this->browserName.'. 
-		<br />
-		Diweddarwch eich porwr.
-	</p>
-	
-		';
+				<p>
+					Nid we safle hwn yn cefnogi eich fersiwn o '.$this->browserName.'. 
+					<br />
+					Diweddarwch eich porwr.
+				</p>
+			';
 			
 		   break;
 		   
@@ -707,7 +726,7 @@ class visitor{
 			echo 'Line :'.$error->getLine().' - File:'.$error->getFile()."\n";
 		}
 		
-		//echo $message;
+		echo $message;
 		
 		return $output ;
 		
