@@ -1,10 +1,11 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.9
+@Version:0.10
 @todo: add the e-mail class, 
-remove comment it out code, comment the rest of the rest of the code, set params to 
+comment the rest of the rest of the code, set params to 
 default values.
 
+Version 0.10 - Removed commented out code and reordered the methods. 
 Version 0.9 - Re-alight more code of output.
 Version 0.8 - More debugging.
 Version 0.7 - Re-alight code of output.
@@ -51,10 +52,8 @@ class visitor{
 		foreach ($browsernames as $browsername){
 		
 			if ($this->browserName  == $browsername){
-			
-				//if ($this->os != 'Linux' && $this->browserName != 'Safari'){
 				
-			$output  .=  '
+				$output  .=  '
 				<div class="supportedBrowser">
 					<div class="text">
 						<p>
@@ -73,7 +72,6 @@ class visitor{
 				<div class="clear"></div>
 			';
 				
-				//}
 			}
 		}
 		
@@ -88,13 +86,12 @@ class visitor{
 		
 			foreach ($browsernames as $browsername){
 			
-				if ($this->browserName  != $browsername  //&&
-				//($this ->browserName != 'IE'  && $browsername !='MSIE') &&
+				if ($this->browserName  != $browsername 
+				
 				
 				){
 			
 					if ($browsername != 'MSIE'){
-						//if ($browsername !='IE' &&$this ->browserName != 'MSIE' ){
 				
 						$output .= '
 					<div class="supportedBrowser">
@@ -126,7 +123,6 @@ class visitor{
 					</div>
 				';
 					
-						//}
 					}
 			
 				}
@@ -150,6 +146,20 @@ class visitor{
 		}
 		
 		return $output ; 
+	}
+	
+	/**/
+	function  browser_check($supportedBrowserVersion){
+		
+		if ($this->browserVersion == 0){
+			$browserCheck = 0;
+		}elseif ($this->browserVersion <= $supportedBrowserVersion){
+			$browserCheck = 1;
+		}else{
+			$browserCheck = 2;
+		}
+		
+		return  $browserCheck;
 	}
 	
 	/*For debugging*/
@@ -221,19 +231,6 @@ class visitor{
 		$this->browserName =  $browserName;
 		$this->browserVersion = $browserVersion;
 		
-	}
-	
-	/**/
-	function get_visitor_info($domainName, $ipAddress, $refererPage, $requestPage, $user, 
-	$filename, $phpSelf ) {
-	
-		$this->domainName = $domainName;
-		$this->ipAddress = $ipAddress;
-		$this->refererPage = $refererPage;
-		$this->requestPage = $requestPage;
-		$this->user = $user;
-		$this->filename = $filename;
-		$this->phpSelf = $phpSelf;
 	}
 	
 	/**/
@@ -390,6 +387,29 @@ class visitor{
 		return $message;
 	}
 	
+	/**/
+	function get_visitor_details($os, $browserName, $browserVersion,
+	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf ){
+	
+		$browserInfo = $this -> get_browser_info($os, $browserName, $browserVersion);
+		$visitorInfo = $this -> get_visitor_info($domainName, $ipAddress, $refererPage, 
+		$requestPage, $user, $filename, $phpSelf);
+		
+	}
+	
+	/**/
+	function get_visitor_info($domainName, $ipAddress, $refererPage, $requestPage, $user, 
+	$filename, $phpSelf ) {
+	
+		$this->domainName = $domainName;
+		$this->ipAddress = $ipAddress;
+		$this->refererPage = $refererPage;
+		$this->requestPage = $requestPage;
+		$this->user = $user;
+		$this->filename = $filename;
+		$this->phpSelf = $phpSelf;
+	}
+	
 	/*Set the session.*/
 	function initialise_session_vars($debug, $os, $browser){
 
@@ -505,8 +525,6 @@ class visitor{
 	/**/
 	function os_check() {
 		
-		//$output = '<p>'.$browserInfo.'</p>';
-		
 		/*switch($this->os){
 		   case 'linux';*/
 			
@@ -570,19 +588,26 @@ class visitor{
 	}
 	
 	/**/
-	function  browser_check($supportedBrowserVersion){
+	function visitor_display($message){
+	
+		$output = $message."
+					Script Name: ".$this->filename."
+					<br />
+					Php_self: ".$this->phpSelf."
+					<br>
+					Your Os: ".$this->os  ." and you are using: ".$this->browserName ." ".$this->browserVersion.". 
+					<br />
+					Your ISP is: ".$this->ipAddress.". 
+					<br />
+					You have come from: ".$this->refererPage.".
+					<br />
+					This footer is for your information.
+				</p>";
 		
-		if ($this->browserVersion == 0){
-			$browserCheck = 0;
-		}elseif ($this->browserVersion <= $supportedBrowserVersion){
-			$browserCheck = 1;
-		}else{
-			$browserCheck = 2;
-		}
+		echo $output;
 		
-		return  $browserCheck;
 	}
-		
+	
 	/**/
 	function visitor_table(){
 	
@@ -608,40 +633,7 @@ class visitor{
 		
 			echo 'Error with query. '.$error->getMessage();
 		}
-		//return $sql ;
 	}
-	
-	/**/
-	function get_visitor_details($os, $browserName, $browserVersion,
-	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf ){
-	
-		$browserInfo = $this -> get_browser_info($os, $browserName, $browserVersion);
-		$visitorInfo = $this -> get_visitor_info($domainName, $ipAddress, $refererPage, 
-		$requestPage, $user, $filename, $phpSelf);
-		
-	}
-	
-	/**/
-	function visitor_display($message){
-	
-		$output = $message."
-					Script Name: ".$this->filename."
-					<br />
-					Php_self: ".$this->phpSelf."
-					<br>
-					Your Os: ".$this->os  ." and you are using: ".$this->browserName ." ".$this->browserVersion.". 
-					<br />
-					Your ISP is: ".$this->ipAddress.". 
-					<br />
-					You have come from: ".$this->refererPage.".
-					<br />
-					This footer is for your information.
-				</p>";
-		
-		echo $output;
-		
-	}
-	
 	
 	/**/
 	function get_filename(){
@@ -666,6 +658,219 @@ class visitor{
 		}
 		
 		return $filename;
+		
+	}
+	
+	/**/
+	function build_email_html(){
+		
+		$output  =  '';
+		$output  .= $this ->build_email_html_top();
+		$output  .= '
+					<table style="padding: 15px 0px;">
+						<tr>
+							<td>
+								<font color="ffd700">Visitors that script can\'t dectect browser versions report:</font>
+							</td>
+						</tr>
+					</table>';
+		$output  .= $this ->get_list_of_visitor_browsercap_html();
+		$output  .= '
+					<table style="padding: 15px 0px;">
+						<tr>
+							<td>
+								<font color="ffd700">Visitors that are using out of date browsers report:</font>
+							</td>
+						</tr>
+					</table>';
+		$output  .= $this ->get_list_of_visitor_unsupported_browsers_html();
+		$output  .= '
+					<table style="padding: 15px 0px;">
+						<tr>
+							<td>
+								<font color="ffd700">All visitors report:</font>
+							</td>
+						</tr>
+					</table>';
+		$output  .= $this ->get_list_of_visitor_html();
+		$output  .= $this ->build_email_html_bottom();
+		
+		return $output;
+		
+	}
+	
+	/**/
+	function build_email_txt(){
+		
+		$output  =  '';
+		$output  .= 'Visitors that script can\'t dectect browser versions report:'."\n\n";
+		$output  .= $this ->get_list_of_visitor_browsercap_txt();
+		$output  .= 'Visitors that are using out of date browsers report:'."\n\n";
+		$output  .= $this ->get_list_of_visitor_unsupported_browsers_txt();
+		$output  .= 'All visitors report:'."\n\n";
+		$output  .= $this ->get_list_of_visitor_txt();
+		$output  .= $this ->build_email_txt_bottom();
+		
+		return $output;
+		
+	}
+	
+	/**/
+	function build_email_txt_bottom(){
+		
+		$output  =  '';
+		
+		$output  .= 'Thanks,'."\n".
+				'One nutty fan.';
+		
+		return $output;
+		
+	}
+	
+	/**/
+	function build_email_html_bottom(){
+		
+		$output  =  '';
+		
+		$output  .= '
+					<br>
+					<br>
+					<p><font color="ffd700">Thanks,
+					<br>
+					One nutty fan.</font></p>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>';
+		
+		return $output;
+		
+	}
+	
+	/**/
+	function build_email_html_top(){
+		
+		$output  =  '';
+		
+		$output  .= '<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">
+<html>
+	<head></head>
+	<body style="background-image:url(\'http://www.ycyrffgroupie.co.uk/images/background5.jpg\');  background-repeat: no-repeat; background-size: cover; background-color: #800080; width:99%;" link="ffd700" alink="ffd700" >
+		<table style="width:100%;">
+			<tr>
+				<td style="width:5%">&nbsp;</td>
+				<td style="width:94%">';
+				
+		return $output ;
+		
+	}
+	
+	/**/
+	function build_html_table_bottom(){
+		
+		$output  =  '';
+		
+		$output  .= '
+					</table>';
+		
+		return $output;
+		
+	}
+	
+	/**/
+	function build_html_table_top(){
+		
+		$output  =  '';
+		
+		$output  .= '
+					<table style="border: 1px solid #FFFFFF; width:100%; table-layout: fixed;">
+						<tr>
+							<th style="border: 1px solid #FFFFFF; width: 11%;"><font color="ffd700">Date Visited</font></th>
+							<th style="border: 1px solid #FFFFFF; width: 11%;"><font color="ffd700">IP Address</font></th>
+							<th style="border: 1px solid #FFFFFF; width: 7%;"><font color="ffd700">OS</font></th>
+							<th style="border: 1px solid #FFFFFF; width: 7%;"><font color="ffd700">Browser Name</font></th>
+							<th style="border: 1px solid #FFFFFF; width: 8%;"><font color="ffd700">Browser Version</font></th>
+							<th style="border: 1px solid #FFFFFF; width: 15%;"><font color="ffd700">Referer Page</font></th>
+							<th style="border: 1px solid #FFFFFF; width: 15%;"><font color="ffd700">Request Page</font></th>
+						</tr>';
+						
+		return $output;
+		
+	}
+	
+	/**/
+	function build_visitor_table_row_html($dateVisited,$os, $browserName, $browserVersion,
+	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf ){
+		
+		$output  =  '';
+		
+		$output  .='
+						<tr>
+							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
+								<font color="ffd700">'.date('d/m/y H:i:s', strtotime($dateVisited)).'</font>
+							</td>
+							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
+								<font color="ffd700">'.$ipAddress.'</font>
+							</td>  
+							<td  style="border: 1px solid #FFFFFF; width: 7%; text-align: center;">
+								<font color="ffd700">'.$os.'</font>
+							</td> 
+							<td style="border: 1px solid #FFFFFF; width: 7%; text-align: center;">
+								<font color="ffd700">'.$browserName.'</font>
+							</td> 
+							<td style="border: 1px solid #FFFFFF; width: 8%; text-align: center;">
+								<font color="ffd700">'.$browserVersion.'</font>
+							</td>
+							<td style="border: 1px solid #FFFFFF; width: 15%; word-wrap: break-word; text-align: center;">
+								'.($refererPage != 'none' ? '<a style="color: #ffd700;" href="'.$refererPage.'">'.$refererPage.'</a>' :'<font color="ffd700">'.$refererPage.'</font>').'
+							</td> 
+							<td style="border: 1px solid #FFFFFF; width: 15%; word-wrap: break-word; text-align: center;">
+								<a style="color: #ffd700;" href="http://'.$domainName.$requestPage.'">'.$domainName.$requestPage.'</a>
+							</td> 
+						</tr>';
+		
+		return $output ;
+		
+	}
+	
+	/**/
+	function build_visitor_table_row_txt($dateVisited, $os, $browserName, $browserVersion,
+	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf){
+		
+		$output  =  '';
+		
+		$output  .= 'Date Visited: '.date('d/m/y H:i:s', strtotime($dateVisited))."\n"
+		.'IP Address: '.$ipAddress."\n"
+		.'OS: '.$os."\n"
+		.'Browser Name: '.$browserName."\n"
+		.'Browser Version: '.$browserVersion."\n"
+		.'Referer Page: '.$refererPage."\n"
+		.'Request Page: http://'.$domainName.$requestPage."\n"."\n";
+		
+		return $output ;
+		
+		
+	}
+	
+	/**/
+	function cleanVisitorTable(){
+		
+		require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		$sql = "TRUNCATE TABLE visitor"; 
+		
+		try{
+			
+			$query = $database->exec($sql);
+			
+			echo 'Succesfully ran rhe clean up operation.';
+			
+		} catch(PDOException $error){
+		
+			echo 'Error with query. '.$error->getMessage();
+		
+		}
 		
 	}
 	
@@ -750,8 +955,6 @@ class visitor{
 			
 			while($visitorsDetails = $query ->fetch()){
 		
-				//print_r($visitorsDetails);
-				
 				$output  .= $this ->build_visitor_table_row_html($visitorsDetails["dateVisited"],
 				$visitorsDetails["os"], $visitorsDetails["browser_name"],
 				$visitorsDetails["browser_version"], $visitorsDetails["domainName"],
@@ -762,156 +965,10 @@ class visitor{
 			
 			$output  .= $this ->build_html_table_bottom();
 			
-			//die();
 		} catch(PDOException $error){
 		
 			echo 'Error with query. '.$error->getMessage();
 		}
-		
-		return $output;
-		
-	}
-	
-	/**/
-	function build_visitor_table_row_html($dateVisited,$os, $browserName, $browserVersion,
-	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf ){
-		
-		$output  =  '';
-		
-		$output  .='
-						<tr>
-							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
-								<font color="ffd700">'.date('d/m/y H:i:s', strtotime($dateVisited)).'</font>
-							</td>
-							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
-								<font color="ffd700">'.$ipAddress.'</font>
-							</td>  
-							<td  style="border: 1px solid #FFFFFF; width: 7%; text-align: center;">
-								<font color="ffd700">'.$os.'</font>
-							</td> 
-							<td style="border: 1px solid #FFFFFF; width: 7%; text-align: center;">
-								<font color="ffd700">'.$browserName.'</font>
-							</td> 
-							<td style="border: 1px solid #FFFFFF; width: 8%; text-align: center;">
-								<font color="ffd700">'.$browserVersion.'</font>
-							</td>
-							<td style="border: 1px solid #FFFFFF; width: 15%; word-wrap: break-word; text-align: center;">
-								'.($refererPage != 'none' ? '<a style="color: #ffd700;" href="'.$refererPage.'">'.$refererPage.'</a>' :'<font color="ffd700">'.$refererPage.'</font>').'
-							</td> 
-							<td style="border: 1px solid #FFFFFF; width: 15%; word-wrap: break-word; text-align: center;">
-								<a style="color: #ffd700;" href="http://'.$domainName.$requestPage.'">'.$domainName.$requestPage.'</a>
-							</td> 
-						</tr>';
-		
-		return $output ;
-		
-	}
-	
-	/**/
-	function build_email_html_top(){
-		
-		$output  =  '';
-		
-		$output  .= '<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">
-<html>
-	<head></head>
-	<body style="background-image:url(\'http://www.ycyrffgroupie.co.uk/images/background5.jpg\');  background-repeat: no-repeat; background-size: cover; background-color: #800080; width:99%;" link="ffd700" alink="ffd700" >
-		<table style="width:100%;">
-			<tr>
-				<td style="width:5%">&nbsp;</td>
-				<td style="width:94%">';
-				
-		return $output ;
-		
-	}
-	
-	/**/
-	function build_html_table_top(){
-		
-		$output  =  '';
-		
-		$output  .= '
-					<table style="border: 1px solid #FFFFFF; width:100%; table-layout: fixed;">
-						<tr>
-							<th style="border: 1px solid #FFFFFF; width: 11%;"><font color="ffd700">Date Visited</font></th>
-							<th style="border: 1px solid #FFFFFF; width: 11%;"><font color="ffd700">IP Address</font></th>
-							<th style="border: 1px solid #FFFFFF; width: 7%;"><font color="ffd700">OS</font></th>
-							<th style="border: 1px solid #FFFFFF; width: 7%;"><font color="ffd700">Browser Name</font></th>
-							<th style="border: 1px solid #FFFFFF; width: 8%;"><font color="ffd700">Browser Version</font></th>
-							<th style="border: 1px solid #FFFFFF; width: 15%;"><font color="ffd700">Referer Page</font></th>
-							<th style="border: 1px solid #FFFFFF; width: 15%;"><font color="ffd700">Request Page</font></th>
-						</tr>';
-						
-		return $output;
-		
-	}
-	
-	/**/
-	function build_html_table_bottom(){
-		
-		$output  =  '';
-		
-		$output  .= '
-					</table>';
-		
-		return $output;
-		
-	}
-	
-	/**/
-	function build_email_html_bottom(){
-		
-		$output  =  '';
-		
-		$output  .= '
-					<br>
-					<br>
-					<p><font color="ffd700">Thanks,
-					<br>
-					One nutty fan.</font></p>
-				</td>
-			</tr>
-		</table>
-	</body>
-</html>';
-		
-		return $output;
-		
-	}
-	
-	/**/
-	function build_email_html(){
-		
-		$output  =  '';
-		$output  .= $this ->build_email_html_top();
-		$output  .= '
-					<table style="padding: 15px 0px;">
-						<tr>
-							<td>
-								<font color="ffd700">Visitors that script can\'t dectect browser versions report:</font>
-							</td>
-						</tr>
-					</table>';
-		$output  .= $this ->get_list_of_visitor_browsercap_html();
-		$output  .= '
-					<table style="padding: 15px 0px;">
-						<tr>
-							<td>
-								<font color="ffd700">Visitors that are using out of date browsers report:</font>
-							</td>
-						</tr>
-					</table>';
-		$output  .= $this ->get_list_of_visitor_unsupported_browsers_html();
-		$output  .= '
-					<table style="padding: 15px 0px;">
-						<tr>
-							<td>
-								<font color="ffd700">All visitors report:</font>
-							</td>
-						</tr>
-					</table>';
-		$output  .= $this ->get_list_of_visitor_html();
-		$output  .= $this ->build_email_html_bottom();
 		
 		return $output;
 		
@@ -951,141 +1008,6 @@ class visitor{
 	}
 	
 	/**/
-	/*function build_visitor_table_row_txt($os, $browserName, $browserVersion,
-	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf){
-		
-		$output  =  '';
-		
-		$output  .= "\n"
-		.'|'."\t".$ipAddress."\t".'|'
-		.$this ->word_wrap_txt($os, 7).'|'
-		."\t".$browserName."\t".'|'
-		."\t".$browserVersion."\t".'|'
-		.$this ->word_wrap_txt($refererPage, 25)
-		.$this ->word_wrap_txt('http://'.$domainName.$requestPage, 25);
-		
-		return $output ;
-		
-		
-	}*/
-	
-	/*Coming back to this later*/
-	function word_wrap_txt($string, $length){
-		
-		$line = '';
-		$i = 0;
-		
-		$outputStringArray = str_split($string, $length);
-		
-		$noOFLines = count($outputStringArray) + 1;
-		
-		if (count($outputStringArray) == 1){
-			
-			$line .= "\t".$outputStringArray[0]."\t";
-			
-			$i++;
-			
-		}else{
-			
-			foreach ($outputStringArray as $outputString){
-				//,"/t |"
-				if ($noOFLines == $i){
-					
-					$line .= '|'."\t".$outputString."\t".'|';
-					$line .= $i;
-					
-					$i++;
-					
-				}else{
-					
-					if ($i != 0){
-						$line .= "\t".'          '."\t".'|';
-					
-					}
-					
-					$line .= '|'."\t".$outputString."\t".'|'."\n";
-					//$line .= $i;
-					
-					$i++;
-				}
-				
-			}
-			
-		}
-		
-		return $line;
-		
-	}
-	
-	function build_visitor_table_row_txt($dateVisited, $os, $browserName, $browserVersion,
-	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf){
-		
-		$output  =  '';
-		
-		$output  .= 'Date Visited: '.date('d/m/y H:i:s', strtotime($dateVisited))."\n"
-		.'IP Address: '.$ipAddress."\n"
-		.'OS: '.$os."\n"
-		.'Browser Name: '.$browserName."\n"
-		.'Browser Version: '.$browserVersion."\n"
-		.'Referer Page: '.$refererPage."\n"
-		.'Request Page: http://'.$domainName.$requestPage."\n"."\n";
-		
-		return $output ;
-		
-		
-	}
-	
-	/**/
-	function build_email_txt_bottom(){
-		
-		$output  =  '';
-		
-		$output  .= 'Thanks,'."\n".
-				'One nutty fan.';
-		
-		return $output;
-		
-	}
-	
-	/**/
-	function build_email_txt(){
-		
-		$output  =  '';
-		$output  .= 'Visitors that script can\'t dectect browser versions report:'."\n\n";
-		$output  .= $this ->get_list_of_visitor_browsercap_txt();
-		$output  .= 'Visitors that are using out of date browsers report:'."\n\n";
-		$output  .= $this ->get_list_of_visitor_unsupported_browsers_txt();
-		$output  .= 'All visitors report:'."\n\n";
-		$output  .= $this ->get_list_of_visitor_txt();
-		$output  .= $this ->build_email_txt_bottom();
-		
-		return $output;
-		
-	}
-	
-	/**/
-	function cleanVisitorTable(){
-		
-		require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		$sql = "TRUNCATE TABLE visitor"; 
-		
-		try{
-			
-			$query = $database->exec($sql);
-			
-			echo 'Succesfully ran rhe clean up operation.';
-			
-		} catch(PDOException $error){
-		
-			echo 'Error with query. '.$error->getMessage();
-		
-		}
-		
-	}
-	
-	
-	/**/
 	function get_list_of_visitor_browsercap_html(){
 	
 		require("/var/www/websites/redesign2013/includes/connection.php");
@@ -1093,48 +1015,6 @@ class visitor{
 		$output  =  '';
 		
 		$sql ="SELECT * FROM visitor WHERE browser_version = 0";
-		 
-		try{
-			$query = $database->prepare($sql);
-			$query ->execute();
-			
-			$output  .= $this ->build_html_table_top();
-			
-			while($visitorsDetails = $query ->fetch()){
-				
-				$output  .= $this ->build_visitor_table_row_html($visitorsDetails["dateVisited"],
-				$visitorsDetails["os"], $visitorsDetails["browser_name"],
-				$visitorsDetails["browser_version"], $visitorsDetails["domainName"],
-				$visitorsDetails["ipAddress"], $visitorsDetails["refererPage"],
-				$visitorsDetails["requestPage"], $visitorsDetails["user"],
-				$visitorsDetails["filename"], $visitorsDetails["phpSelf"]);
-			}
-			
-			$output  .= $this ->build_html_table_bottom();
-			
-		} catch(PDOException $error){
-		
-			echo 'Error with query. '.$error->getMessage();
-		}
-		
-		return $output;
-		
-	}
-	
-	/**/
-	function get_list_of_visitor_unsupported_browsers_html(){
-	
-		require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		$output  =  '';
-		
-		$sql ="SELECT * FROM visitor WHERE 
-		browser_name = 'Firefox' AND browser_version BETWEEN  1 AND 4
-		OR browser_name = 'Chrome' AND browser_version BETWEEN  1 AND 14
-		OR browser_name = 'IE' AND browser_version BETWEEN  1 AND 6
-		OR browser_name = 'Opera' AND browser_version BETWEEN  1 AND 9
-		OR browser_name = 'Safari' AND browser_version BETWEEN  1 AND 5.1
-		ORDER BY dateVisited";
 		 
 		try{
 			$query = $database->prepare($sql);
@@ -1197,6 +1077,48 @@ class visitor{
 	}
 	
 	/**/
+	function get_list_of_visitor_unsupported_browsers_html(){
+	
+		require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		$output  =  '';
+		
+		$sql ="SELECT * FROM visitor WHERE 
+		browser_name = 'Firefox' AND browser_version BETWEEN  1 AND 4
+		OR browser_name = 'Chrome' AND browser_version BETWEEN  1 AND 14
+		OR browser_name = 'IE' AND browser_version BETWEEN  1 AND 6
+		OR browser_name = 'Opera' AND browser_version BETWEEN  1 AND 9
+		OR browser_name = 'Safari' AND browser_version BETWEEN  1 AND 5.1
+		ORDER BY dateVisited";
+		 
+		try{
+			$query = $database->prepare($sql);
+			$query ->execute();
+			
+			$output  .= $this ->build_html_table_top();
+			
+			while($visitorsDetails = $query ->fetch()){
+				
+				$output  .= $this ->build_visitor_table_row_html($visitorsDetails["dateVisited"],
+				$visitorsDetails["os"], $visitorsDetails["browser_name"],
+				$visitorsDetails["browser_version"], $visitorsDetails["domainName"],
+				$visitorsDetails["ipAddress"], $visitorsDetails["refererPage"],
+				$visitorsDetails["requestPage"], $visitorsDetails["user"],
+				$visitorsDetails["filename"], $visitorsDetails["phpSelf"]);
+			}
+			
+			$output  .= $this ->build_html_table_bottom();
+			
+		} catch(PDOException $error){
+		
+			echo 'Error with query. '.$error->getMessage();
+		}
+		
+		return $output;
+		
+	}
+	
+	/**/
 	function get_list_of_visitor_unsupported_browsers_txt(){
 		
 		require("/var/www/websites/redesign2013/includes/connection.php");
@@ -1234,6 +1156,73 @@ class visitor{
 		return $output;
 		
 	}
+	
+	/*Coming back to this later*/
+	function word_wrap_txt($string, $length){
+		
+		$line = '';
+		$i = 0;
+		
+		$outputStringArray = str_split($string, $length);
+		
+		$noOFLines = count($outputStringArray) + 1;
+		
+		if (count($outputStringArray) == 1){
+			
+			$line .= "\t".$outputStringArray[0]."\t";
+			
+			$i++;
+			
+		}else{
+			
+			foreach ($outputStringArray as $outputString){
+				//,"/t |"
+				if ($noOFLines == $i){
+					
+					$line .= '|'."\t".$outputString."\t".'|';
+					$line .= $i;
+					
+					$i++;
+					
+				}else{
+					
+					if ($i != 0){
+						$line .= "\t".'          '."\t".'|';
+					
+					}
+					
+					$line .= '|'."\t".$outputString."\t".'|'."\n";
+					//$line .= $i;
+					
+					$i++;
+				}
+				
+			}
+			
+		}
+		
+		return $line;
+		
+	}
+	
+	/**/
+	/*function build_visitor_table_row_txt($os, $browserName, $browserVersion,
+	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf){
+		
+		$output  =  '';
+		
+		$output  .= "\n"
+		.'|'."\t".$ipAddress."\t".'|'
+		.$this ->word_wrap_txt($os, 7).'|'
+		."\t".$browserName."\t".'|'
+		."\t".$browserVersion."\t".'|'
+		.$this ->word_wrap_txt($refererPage, 25)
+		.$this ->word_wrap_txt('http://'.$domainName.$requestPage, 25);
+		
+		return $output ;
+		
+		
+	}*/
 	
 	/**/
 	/*function (){
