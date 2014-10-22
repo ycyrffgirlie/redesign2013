@@ -1,9 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.11
-@todo: add the e-mail class, 
-set params to default values.
+@Version:0.12
+@todo: add the e-mail class, add the header class.
 
+Version 0.12 - Set params to default values.
 Version 0.11 -  Commented the rest of the code.
 Version 0.10 - Removed commented out code and reordered the methods. 
 Version 0.9 - Re-alight more code of output.
@@ -148,7 +148,7 @@ class visitor{
 	}
 	
 	/*Checks to see if user's browser is supportd.*/
-	function  browser_check($supportedBrowserVersion){
+	function  browser_check($supportedBrowserVersion = 0){
 		
 		if ($this->browserVersion == 0){
 			$browserCheck = 0;
@@ -162,7 +162,7 @@ class visitor{
 	}
 	
 	/*For debugging*/
-	function debug($debug, $os, $browser){
+	function debug($debug = false, $os = "Linux", $browser = "Firefox"){
 	
 		switch($debug){
 		  case 'true':
@@ -200,7 +200,7 @@ class visitor{
 	}
 	
 	/*Check if interal domain name  wheter or not it's live or development.*/
-	function domainName_check($domainName){
+	function domainName_check($domainName = "ycyrffgroupie.co.uk"){
 	
 		$domainnames = array('christine.ycyrffgroupie.co.uk',
 			'dev.ycyrffgroupie.co.uk',
@@ -224,7 +224,7 @@ class visitor{
 	}
 	
 	/*Sets the information about the platform.*/
-	function get_browser_info($os, $browserName, $browserVersion) {
+	function get_browser_info($os = "Linux", $browserName = "Firefox", $browserVersion = 5) {
 	
 		$this->os = $os;
 		$this->browserName =  $browserName;
@@ -387,18 +387,20 @@ class visitor{
 	}
 	
 	/*Sets the details about the  visitor.*/
-	function get_visitor_details($os, $browserName, $browserVersion,
-	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf ){
+	function get_visitor_details($os = "Linux", $browserName = "Firefox", $browserVersion = 5,
+	$domainName = "ycyrffgroupie.co.uk", $ipAddress = "127.0.0.1", $refererPage = "none", 
+	$requestPage = "none", $user = "none", $filename = "none", $phpSelf  = "none"){
 	
-		$browserInfo = $this -> get_browser_info($os, $browserName, $browserVersion);
+		$browserInfo = $this -> get_browser_info($os, $browserName , $browserVersion);
 		$visitorInfo = $this -> get_visitor_info($domainName, $ipAddress, $refererPage, 
 		$requestPage, $user, $filename, $phpSelf);
 		
 	}
 	
 	/*Sets the information about the  visitor.*/
-	function get_visitor_info($domainName, $ipAddress, $refererPage, $requestPage, $user, 
-	$filename, $phpSelf ) {
+	function get_visitor_info($domainName = "ycyrffgroupie.co.uk", $ipAddress = "127.0.0.1", 
+	$refererPage = "none", $requestPage = "none", $user = "none", $filename = "none", 
+	$phpSelf  = "none") {
 	
 		$this->domainName = $domainName;
 		$this->ipAddress = $ipAddress;
@@ -410,7 +412,7 @@ class visitor{
 	}
 	
 	/*Set the session.*/
-	function initialise_session_vars($debug, $os, $browser){
+	function initialise_session_vars($debug = false, $os = "Linux", $browser = "Firefox"){
 
 		switch($debug){
 		  case 'true':
@@ -505,7 +507,7 @@ class visitor{
 	}
 
 	/*Checks the IP address*/
-	function ip_address_check($ipAddress){
+	function ip_address_check($ipAddress = "127.0.0.1"){
 	
 	
 		if ($ipAddress  == '188.223.77.182'){
@@ -589,7 +591,7 @@ class visitor{
 	}
 	
 	/*Displays the visitor's details.*/
-	function visitor_display($message){
+	function visitor_display($message = ""){
 	
 		$output = $message."
 					Script Name: ".$this->filename."
@@ -803,8 +805,10 @@ class visitor{
 	}
 	
 	/*Builds the html version  a row of the table.*/
-	function build_visitor_table_row_html($dateVisited,$os, $browserName, $browserVersion,
-	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf ){
+	function build_visitor_table_row_html($dateVisited = "22/10/14 20:58:56", $os = "Linux", 
+	$browserName = "Firefox", $browserVersion = 5,$domainName = "ycyrffgroupie.co.uk", 
+	$ipAddress = "127.0.0.1", $refererPage = "none", $requestPage = "none", $user = "none", 
+	$filename = "none", $phpSelf  = "none"){
 		
 		$output  =  '';
 		
@@ -838,8 +842,10 @@ class visitor{
 	}
 	
 	/*Builds the text version  a row of the table.*/
-	function build_visitor_table_row_txt($dateVisited, $os, $browserName, $browserVersion,
-	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf){
+	function build_visitor_table_row_txt($dateVisited =  "22/10/14 20:58:56", $os = "Linux", 
+	$browserName = "Firefox", $browserVersion = 5, $domainName = "ycyrffgroupie.co.uk", 
+	$ipAddress = "127.0.0.1", $refererPage = "none", $requestPage = "none", $user = "none", 
+	$filename = "none", $phpSelf = "none"){
 		
 		$output  =  '';
 		
