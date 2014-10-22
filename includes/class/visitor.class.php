@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.12
-@todo: add the header class.
+@Version:0.14
+@todo: 
 
+Version 0.14 - Added the header class.
 Version 0.13 - Added the visitor e-mail class.
 Version 0.12 - Set params to default values.
 Version 0.11 -  Commented the rest of the code.
@@ -637,33 +638,6 @@ class visitor{
 		
 			echo 'Error with query. '.$error->getMessage();
 		}
-	}
-	
-	//header
-	/*Sets the filename.*/
-	function get_filename(){
-	
-		$filename = $_SERVER['SCRIPT_FILENAME'];
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			$filename = preg_replace('%/var/www/websites/redesign2013%', '' , $filename);
-		
-		}else{
-			
-			$filename = preg_replace('%/home/ycyrf718/public_html%', '' , $filename);
-			
-			if (preg_match('%christine%', $filename)){
-				$filename = preg_replace('%/christine%','', $filename);
-			}elseif(preg_match('%dev%',$filename)){
-				$filename = preg_replace('%/dev%','', $filename);
-			}elseif (preg_match('%/redesign2013%', $filename)){
-				$filename = preg_replace('%/redesign2013%', '', $filename);
-			}
-		}
-		
-		return $filename;
-		
 	}
 	
 	/**/
