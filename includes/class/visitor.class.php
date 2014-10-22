@@ -1,10 +1,10 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.10
+@Version:0.11
 @todo: add the e-mail class, 
-comment the rest of the rest of the code, set params to 
-default values.
+set params to default values.
 
+Version 0.11 -  Commented the rest of the code.
 Version 0.10 - Removed commented out code and reordered the methods. 
 Version 0.9 - Re-alight more code of output.
 Version 0.8 - More debugging.
@@ -17,7 +17,6 @@ Version 0.2 - Added debug, domainName_check, error, initialise_session_vars, ip_
 methods.
 Version 0.1 - Added the visitor class to the footer*/
 
-
 class visitor{
 	
 	//protected 
@@ -25,7 +24,7 @@ class visitor{
 	$ipAddress, $refererPage, $requestPage, $user, $filename,
 	$phpSelf;
 
-	/**/
+	/*Displays the current browser and alternative browsers div.*/
 	function alt_browser(){
 		$output  =  '';
 		
@@ -148,7 +147,7 @@ class visitor{
 		return $output ; 
 	}
 	
-	/**/
+	/*Checks to see if user's browser is supportd.*/
 	function  browser_check($supportedBrowserVersion){
 		
 		if ($this->browserVersion == 0){
@@ -193,7 +192,7 @@ class visitor{
 	
 	}
 	
-	/**/
+	/*Displays the unsupported message, the current browser and alternative browsers div.*/
 	function display_message(){
 	
 		$output = $this ->get_os_message().$this -> alt_browser();
@@ -224,7 +223,7 @@ class visitor{
 	
 	}
 	
-	/**/
+	/*Sets the information about the platform.*/
 	function get_browser_info($os, $browserName, $browserVersion) {
 	
 		$this->os = $os;
@@ -233,7 +232,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Displays the unsupported message.*/
 	function get_os_message(){
 	
 		switch($this->os){
@@ -387,7 +386,7 @@ class visitor{
 		return $message;
 	}
 	
-	/**/
+	/*Sets the details about the  visitor.*/
 	function get_visitor_details($os, $browserName, $browserVersion,
 	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf ){
 	
@@ -397,7 +396,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Sets the information about the  visitor.*/
 	function get_visitor_info($domainName, $ipAddress, $refererPage, $requestPage, $user, 
 	$filename, $phpSelf ) {
 	
@@ -505,7 +504,7 @@ class visitor{
 	
 	}
 
-	/*Check the IP address*/
+	/*Checks the IP address*/
 	function ip_address_check($ipAddress){
 	
 	
@@ -522,7 +521,9 @@ class visitor{
 	
 	}
 	
-	/**/
+	/*Sets the browser version that the site supported.  Checks to see if user's browser 
+	is supported. Updates the visitor's table. Displays the unsupported message is browser is 
+	not supported.*/
 	function os_check() {
 		
 		/*switch($this->os){
@@ -572,7 +573,7 @@ class visitor{
 		}*/
 		
 		if ($browserCheck  == 0){
-			$output = $this -> visitor_table();
+			$updateTable  = $this -> visitor_table();
 		}elseif ($browserCheck  == 1){
 			
 			$output = $this -> display_message();
@@ -587,7 +588,7 @@ class visitor{
 		}
 	}
 	
-	/**/
+	/*Displays the visitor's details.*/
 	function visitor_display($message){
 	
 		$output = $message."
@@ -608,7 +609,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Inserts visitor's details into the visitor's table.*/
 	function visitor_table(){
 	
 	require("/var/www/websites/redesign2013/includes/connection.php");
@@ -635,7 +636,8 @@ class visitor{
 		}
 	}
 	
-	/**/
+	//header
+	/*Sets the filename.*/
 	function get_filename(){
 	
 		$filename = $_SERVER['SCRIPT_FILENAME'];
@@ -661,7 +663,8 @@ class visitor{
 		
 	}
 	
-	/**/
+	//email
+	/*Builds the html version of the email.*/
 	function build_email_html(){
 		
 		$output  =  '';
@@ -699,7 +702,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Builds the text version of the email.*/
 	function build_email_txt(){
 		
 		$output  =  '';
@@ -715,7 +718,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Builds the text version of the bottom of the email.*/
 	function build_email_txt_bottom(){
 		
 		$output  =  '';
@@ -727,7 +730,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Builds the html version of the bottom of the email.*/
 	function build_email_html_bottom(){
 		
 		$output  =  '';
@@ -748,7 +751,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Builds the html version of the top of the email.*/
 	function build_email_html_top(){
 		
 		$output  =  '';
@@ -766,7 +769,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Builds the html version of the bottom of the table.*/
 	function build_html_table_bottom(){
 		
 		$output  =  '';
@@ -778,7 +781,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Builds the html version of the top of the table.*/
 	function build_html_table_top(){
 		
 		$output  =  '';
@@ -799,7 +802,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Builds the html version  a row of the table.*/
 	function build_visitor_table_row_html($dateVisited,$os, $browserName, $browserVersion,
 	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf ){
 		
@@ -834,7 +837,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Builds the text version  a row of the table.*/
 	function build_visitor_table_row_txt($dateVisited, $os, $browserName, $browserVersion,
 	$domainName, $ipAddress, $refererPage, $requestPage, $user, $filename, $phpSelf){
 		
@@ -853,7 +856,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Deletes all the data in the visitor table.*/
 	function cleanVisitorTable(){
 		
 		require("/var/www/websites/redesign2013/includes/connection.php");
@@ -874,7 +877,8 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Builds the headers of the email. Cleans the visitor table. Builds the body of the emails. 
+	Sends the email. Logs the email for debugging  purposes. */
 	function email(){
 	
 		$to = 'ycyrffgroupie@gmail.com';
@@ -938,7 +942,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Gets a html version list of all visitors.*/
 	function get_list_of_visitor_html(){
 	
 		require("/var/www/websites/redesign2013/includes/connection.php");
@@ -974,7 +978,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Gets a text version list of sll visitors.*/
 	function get_list_of_visitor_txt(){
 		
 		require("/var/www/websites/redesign2013/includes/connection.php");
@@ -1007,7 +1011,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Gets a html version list of visitors that using browser script couldn't dectect version.*/
 	function get_list_of_visitor_browsercap_html(){
 	
 		require("/var/www/websites/redesign2013/includes/connection.php");
@@ -1043,7 +1047,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Gets a text version list of visitors that using browser script couldn't dectect version.*/
 	function get_list_of_visitor_browsercap_txt(){
 		
 		require("/var/www/websites/redesign2013/includes/connection.php");
@@ -1076,7 +1080,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Gets a html version list of visitors that are using unsupported browsers.*/
 	function get_list_of_visitor_unsupported_browsers_html(){
 	
 		require("/var/www/websites/redesign2013/includes/connection.php");
@@ -1118,7 +1122,7 @@ class visitor{
 		
 	}
 	
-	/**/
+	/*Gets a text version list of visitors that are using unsupported browsers.*/
 	function get_list_of_visitor_unsupported_browsers_txt(){
 		
 		require("/var/www/websites/redesign2013/includes/connection.php");
