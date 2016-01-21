@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.1
-@todo: Finish the word_wrap method.
+@Version:0.2
+@todo: Finish the word_wrap method. sdd csv to the email.
 
+Version 0.2 - Fixed for live site.
 Version 0.1 - Added the visitor e-mail class to the site. */
 
 class visitorEmail{
