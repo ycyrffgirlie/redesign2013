@@ -38,7 +38,7 @@ chwarae bas oddi wrth Barry.</p>
 hannog i ganu yn y Gymraeg. Yn ddiweddarach Toni oedd i gymryd cyfrifoldeb am archebu eu 
 gigs gyda Cymdeithas Yr Iaith Cymreig ac mae eu gig cyntaf.</p>
 
-<p>Y Cyrff gigged ar draws Gogledd Cymru. Yr oedd yn un o'r gigiau hyn yn 1984 eu bod yn 
+<p>Roedd Y Cyrff yn chwarae gigiau ar dros Gogledd Cymru. Yr oedd yn un o'r gigiau hyn yn 1984 eu bod yn 
 cwrdd Rhys Mwyn (bas o Yr Anhrefn) a gwahoddwyd hwy i recordio ddau drac ar gyfer y 
 casgliad \"Cam O'r Tywyllwch\" (rhyddhau ar cwmni record o Rhys 'Recordiau Anhrefn'). Y Cyrff 
 wedi recordio 'Tic Toc' a 'Lebanon' ar ei gyfer. Nid oedd yn hir cyn Y Cyrff rhyddhau dwy sengl 
