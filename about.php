@@ -14,20 +14,22 @@ include 'includes/lang/'.$lang.'.about.php';
 	width: 150px;
 }
 </style>
-<body>
-<div class="container">
+	<body>
+		<div class="container">
 <?php
 switch($lang){
 	case 'cy':
-		echo '<div class="lang">
-<a class="normal" href="/about.html">'.ENGLISH.'</a>  | '.WELSH.' 
-		</div>';
+		echo '			<div class="lang">
+				<a class="normal" href="/about.html">'.ENGLISH.'</a>  | '.WELSH.' 
+			</div>
+		';
 	break;
 	case 'en':
 	default:
-		echo '<div class="lang">
-'.ENGLISH.'  | <a class="normal" href="/am.html">'.WELSH.' </a>
-		</div>';
+		echo '			<div class="lang">
+				'.ENGLISH.'  | <a class="normal" href="/am.html">'.WELSH.' </a>
+			</div>
+		';
 	break;
 
 }
@@ -35,14 +37,14 @@ switch($lang){
 ?>
 </div>
 
-<div class="clear"></div>
+		<div class="clear"></div>
 
-<div class="container">
-<div id="menu">
-	<ul class="menu">
-		<?php include 'includes/menu.html';?>
-	</ul>
-</div>
+		<div class="container">
+			<div id="menu">
+				<ul class="menu">
+					<?php include 'includes/menu.html';?>
+				</ul>
+			</div>
 
 <?php 
 switch($page){
@@ -70,10 +72,10 @@ switch($page){
 
 <?php include 'includes/footer.php'; ?>
 
-</div>
+		</div>
 
 
 
-</body>
+	</body>
 
 </html>
