@@ -103,7 +103,7 @@ class visitorEmail{
 		$output  .= '<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">
 <html>
 	<head></head>
-	<body style="background-image:url(\'http://www.ycyrffgroupie.co.uk/images/background5.jpg\');  background-repeat: no-repeat; background-size: cover; background-color: #800080; width:99%;" link="ffd700" alink="ffd700" >
+	<body style="background-color: #800080; width:99%;" link="ffd700" alink="ffd700" >
 		<table style="width:100%;">
 			<tr>
 				<td style="width:5%">&nbsp;</td>
@@ -207,7 +207,14 @@ class visitorEmail{
 	/*Deletes all the data in the visitor table.*/
 	function cleanVisitorTable(){
 		
-		require("/var/www/websites/redesign2013/includes/connection.php");
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}	
 		
 		$sql = "TRUNCATE TABLE visitor"; 
 		
@@ -251,15 +258,15 @@ class visitorEmail{
 		"Content-Transfer-Encoding: 7bit\r\n\r\n" .
 		$htmlEmail."\r\n";
 		
-		//if (mail($to,$subject,$message, $headers)){
+		if (mail($to,$subject,$message, $headers)){
 			
-			//$output = 'Email was sent.';
+			$output = 'Email was sent.';
 			
-		//}else{
+		}else{
 			
 			$output = "Email wasn't sent.";
 			
-		//}
+		}
 		
 		
 		$filename = 'visitorsEmail.txt';
@@ -293,7 +300,14 @@ class visitorEmail{
 	/*Gets a html version list of all visitors.*/
 	function get_list_of_visitor_html(){
 	
-		require("/var/www/websites/redesign2013/includes/connection.php");
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}	
 		
 		$output  =  '';
 		
@@ -329,7 +343,14 @@ class visitorEmail{
 	/*Gets a text version list of sll visitors.*/
 	function get_list_of_visitor_txt(){
 		
-		require("/var/www/websites/redesign2013/includes/connection.php");
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}	
 		
 		$output  =  '';
 		
@@ -362,8 +383,15 @@ class visitorEmail{
 	/*Gets a html version list of visitors that using browser script couldn't dectect version.*/
 	function get_list_of_visitor_browsercap_html(){
 	
-		require("/var/www/websites/redesign2013/includes/connection.php");
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
 		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}	
+		 
 		$output  =  '';
 		
 		$sql ="SELECT * FROM visitor WHERE browser_version = 0";
@@ -398,7 +426,14 @@ class visitorEmail{
 	/*Gets a text version list of visitors that using browser script couldn't dectect version.*/
 	function get_list_of_visitor_browsercap_txt(){
 		
-		require("/var/www/websites/redesign2013/includes/connection.php");
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}	
 		
 		$output  =  '';
 		
@@ -431,7 +466,14 @@ class visitorEmail{
 	/*Gets a html version list of visitors that are using unsupported browsers.*/
 	function get_list_of_visitor_unsupported_browsers_html(){
 	
-		require("/var/www/websites/redesign2013/includes/connection.php");
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}	
 		
 		$output  =  '';
 		
@@ -473,7 +515,14 @@ class visitorEmail{
 	/*Gets a text version list of visitors that are using unsupported browsers.*/
 	function get_list_of_visitor_unsupported_browsers_txt(){
 		
-		require("/var/www/websites/redesign2013/includes/connection.php");
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}	
 		
 		$output  =  '';
 		
