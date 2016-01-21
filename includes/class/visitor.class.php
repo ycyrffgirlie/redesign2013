@@ -616,7 +616,14 @@ class visitor{
 	/*Inserts visitor's details into the visitor's table.*/
 	function visitor_table(){
 	
-	require("/var/www/websites/redesign2013/includes/connection.php");
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		};
 
 		$sql = "INSERT INTO visitor(
 						os, browser_name, browser_version,
