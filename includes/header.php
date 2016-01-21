@@ -30,11 +30,13 @@ require_once 'functions.php';
 include 'class/visitor.class.php';
 include 'class/footer.class.php';
 include 'class/header.class.php';
+include 'class/menu.class.php';
 
 /*Set a new visitor class , sets a new footer class and sets the header class.*/
 $visitor = new visitor;
 $footer = new footer;
 $header = new header;
+$menu = new menu;
 
 /*Sets variables.////*/
 $filename = $header  ->get_filename();
