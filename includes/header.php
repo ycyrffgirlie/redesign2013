@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.14
-@todo: Add menu and fan profile class.
+@Version:0.15
+@todo:  Add fan profile class.
 
+Version 0.15 - Added menu class.
 Version 0.14 - Added display_header and get_profile_id methods to the header class.
 Version 0.13 - Added the header class to the site.
 Version 0.12 - Started a new footer class.
