@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.14
+@Version:0.15
 @todo: 
 
+Version 0.15 - Fixed for live site.
 Version 0.14 - Added the header class.
 Version 0.13 - Added the visitor e-mail class.
 Version 0.12 - Set params to default values.
