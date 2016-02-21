@@ -1,7 +1,8 @@
 /* @@Author: Chritine A. Black
-@Version:0.6 
+@Version:0.7
 The main style sheet for the Cyrff site
 
+Version 0.7 - Added styling for lyrics pages
 Version 0.6 - Fixed images and change the colour of back button
 Version 0.5 - Added styling for verticalspace div.
 Version 0.4 - Fixed the footer.
@@ -33,7 +34,7 @@ body{
 	/*Background-position: center;
 	background-attachment:fixed;
 	/*background-size: cover;*/
-	/*background-color: #800080;*/
+	background-color: #800080;
 	margin:0px;
 	color: #ffd700; 
 	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
@@ -284,4 +285,16 @@ footer a{
 
 img{
 	display: inline-block;
+}
+
+.lyrics, .translation{
+	width: 49%;
+}
+
+.lyrics{
+	float:  left;
+}
+
+.translation{
+	float: right;
 }
