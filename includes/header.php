@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.15
-@todo:  Add fan profile class.
+@Version:0.16
+@todo:  
 
+Version 0.15 - Added fan profile class to the site.
 Version 0.15 - Added menu class.
 Version 0.14 - Added display_header and get_profile_id methods to the header class.
 Version 0.13 - Added the header class to the site.
@@ -32,16 +33,18 @@ include 'class/visitor.class.php';
 include 'class/footer.class.php';
 include 'class/header.class.php';
 include 'class/menu.class.php';
+include 'class/fanProfile.class.php';
 
 /*Set a new visitor class , sets a new footer class and sets the header class.*/
 $visitor = new visitor;
 $footer = new footer;
 $header = new header;
 $menu = new menu;
+$fanProfile= new fanProfile;
 
 /*Sets variables.////*/
 $filename = $header  ->get_filename();
-$profile_id = $header  ->get_profile_id();
+$profile_id = $fanProfile   ->get_profile_id();
 
 /*Displays the header.*/
 echo $header  ->display_header();
