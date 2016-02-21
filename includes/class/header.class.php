@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.4
+@Version:0.5
 @todo:  set uptwitter cards.
 
+Version 0.5 - Changed the version number of the main styke sheet
 Version 0.4 - Added fan profile class to the site.
 Version 0.3 - Fixed php error, Added twitter card, fixed favicon, fixed it for about psge. 
 Version 0.2 - Added built_header, default_header, default_query, get_filename, profile_query, start_session
@@ -51,7 +52,7 @@ class header{
 		<meta name="rating" content="General" />
 		<link rel="shortcut icon" href="/images/icon/cyrff.ico" type="image/x-icon" />
 		<link rel="icon" href="/images/icon/cyrff.png" type="image/png" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.5" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
+		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.7" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
 		<link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />';
 		
 			if (preg_match('.linux.',$_SERVER["HTTP_HOST"])){
@@ -223,7 +224,7 @@ class header{
 		<meta name="rating" content="General" />
 		<link rel="shortcut icon" href="/images/icon/cyrff.ico"  type="image/x-icon" />
 		<link rel="icon" href="/images/icon/cyrff.png" type="image/png" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.5" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
+		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.7" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
 		<link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />';
 		
 		if (preg_match('.linux.',$_SERVER["HTTP_HOST"])){
