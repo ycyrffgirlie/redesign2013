@@ -9,7 +9,7 @@ include '../includes/header.php'; ?>
 	</ul>
 </div>
 
-<?php echo getprofile($profile_id,$fileinfo["title"]);?>
+<?php echo $fanProfile ->get_profile($profile_id,$fileinfo["title"]);?>
 
 <?php echo backButton($filename ); ?>
 
