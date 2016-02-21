@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.15
+@Version:0.16
 @todo: 
 
+Version 0.16 - Fixed a php error.
 Version 0.15 - Fixed for live site.
 Version 0.14 - Added the header class.
 Version 0.13 - Added the visitor e-mail class.
@@ -165,18 +166,18 @@ class visitor{
 	}
 	
 	/*For debugging*/
-	function debug($debug = false, $os = "Linux", $browser = "Firefox"){
+	function debug($debug = false, $os = "Linux", $browser = "Firefox", $browserversion = "0"){
 	
 		switch($debug){
 		  case 'true':
 		
-			$sessionVars =$this ->initialise_session_vars($debug, $os, $browser);
+			$sessionVars =$this ->initialise_session_vars($debug, $os, $browser,$browserversion);
 			
 			break;
 
 		  default:
 		
-			$sessionVars = $this ->initialise_session_vars($debug, $os, $browser);
+			$sessionVars = $this ->initialise_session_vars($debug, $os, $browser,$browserversion);
 	
 			break;
 		
@@ -415,7 +416,7 @@ class visitor{
 	}
 	
 	/*Set the session.*/
-	function initialise_session_vars($debug = false, $os = "Linux", $browser = "Firefox"){
+	function initialise_session_vars($debug = false, $os = "Linux", $browser = "Firefox", $browserversion = "0"){
 
 		switch($debug){
 		  case 'true':
@@ -473,8 +474,8 @@ class visitor{
 			if ($os){
 			
 				$_SESSION["os"] = $os;
-				$_SESSION["browsername"] = $browsername;
-				$_SESSION["browsernversion"] = $browsernversion;
+				$_SESSION["browsername"] = $browser;
+				$_SESSION["browsernversion"] = $browserversion;
 		
 			}else{
 		
