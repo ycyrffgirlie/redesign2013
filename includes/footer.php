@@ -4,10 +4,11 @@ error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.13
+@Version:0.14
 @todo: test . 
 
-Version 0.13 -Tested MSIE and unknown.
+Version 0.14 - Fixed a php error.
+Version 0.13 - Tested MSIE and unknown.
 Version 0.12 - Commented rest of code.
 Version 0.11 - Created the footer class.
 Version 0.10 - Removed the css from this file
@@ -31,14 +32,15 @@ echo $footer -> build_footer_top();
 /*Set debugging info.*/
 $debug = isset($_GET["debug"])? $_GET["debug"] : 'false' ;
 $os = isset($_GET["os"])? $_GET["os"] : 'Linux' ;
-$browser = isset($_GET["browser"])? $_GET["browser"] : 'Firefox' ;
+$browsername = isset($_GET["browser"])? $_GET["browser"] : 'Firefox' ;
+$browserversion = isset($_GET["version"])? $_GET["version"] : '0';
 
 /*Check to see if the script is running in debug mode.*/
 if ($debug == 'false'){
 	/*Sets variables*/
 	$browserinfo = get_browser(NULL, true);
 	$browsername = $browserinfo["browser"];
-	$browsernversion = $browserinfo["version"];
+	$browserversion = $browserinfo["version"];
 
 	/*Sets the os as platform description is sometimes unknown.*/
 	if ($browserinfo["platform_description"] == 'unknown'){
@@ -50,7 +52,7 @@ if ($debug == 'false'){
 }
 
 /*Gets debug info.*/
-$debug = $visitor ->debug($debug, $os, $browser);
+$debug = $visitor ->debug($debug, $os, $browsername, $browserversion);
 
 /*Gets visitors details.*/
 $visitor ->get_visitor_details($_SESSION["os"], $_SESSION["browsername"], $_SESSION["browsernversion"],
