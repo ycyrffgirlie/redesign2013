@@ -11,33 +11,58 @@ Version 0.2 - Added footer styling and the styling for for sale and submit profi
 Version 0.1 - Create style sheet
 */
 
+@media only screen and (max-device-width: 480px), only screen and (max-width: 480px) {
+	body{
+		background-color: #800080;
+		background-image: none;
+	}
+	
+}
+
+@media only screen and (min-device-width: 1024px){
+	body{
+		background-image:url('../background5.jpg');
+		background-repeat: no-repeat;
+		background-attachment:fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+}
+
 html, body{
 	height: 100%;
 }
 
 html{
 	/*width: 100%;*/
-	background-image:url('../background5.jpg');
+	/*background-image:url('../background5.jpg');
 	background-repeat: no-repeat;
 	background-attachment:fixed;
 	 -webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
-	background-size: cover;
+	background-size: cover;*/
 	
 }
 
 body{
 	/*background: -webkit-gradient(linear, left top, left bottom, from(#800080), to(#d200ee)) fixed;*/
-	/*background-image:url('background5.jpg');
+	/*background-image:url('../background5.jpg');
 	background-repeat: no-repeat;
-	/*Background-position: center;
 	background-attachment:fixed;
-	/*background-size: cover;*/
-	background-color: #800080;
+	 -webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;*/
+	background-size: cover;
+	/*Background-position: center;*/
+	/*background-color: #800080;*/
 	margin:0px;
 	color: #ffd700; 
 	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
+    font-size: 1em;
+	line-height: 1.2em;
 }
 
 .container{
@@ -49,16 +74,18 @@ body{
 p{
 	color: #ffd700; 
 	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
+	font-size: 1em;
+	line-height: 1.2em;
 }
 
  .smaller{
-	font-size: 12px;
+	font-size: 0.750em;
 	margin-top: 0;
 	padding-top: 0;
 }
 
 p.smaller. span.smaller{
-	font-size: 12px;
+	font-size: 0.750em;
 	margin-top: 0;
 	padding-top: 0;
 }
@@ -66,6 +93,7 @@ p.smaller. span.smaller{
 h1, h2, h3{
 	color: #ffd700; 
 	font-family: Tahoma, Verdana, Ubuntu, Helvetica, sans-serif;
+	line-height: 1.24em;
 }
 
 a.normal{
@@ -103,6 +131,7 @@ hr {
 	box-shadow: -5px -5px 5px #9C4100;
 	font-family: verdana;
 	font-size: 14px;
+	color: #800080;
 }
 
 .button:hover{
@@ -118,6 +147,7 @@ hr {
 	-webkit-box-shadow: :-5px -5px 5px #003400;
 	box-shadow: -5px -5px 5px #003400;
 	cursor: pointer;
+	color: #ffd700; 
 }
 .back{
 	width:115px; 
