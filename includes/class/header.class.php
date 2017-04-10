@@ -1,3 +1,4 @@
+
 <?php
 /*@Author; Christine A. Black
 @Version:0.5
@@ -31,6 +32,7 @@ class header{
 		<meta charset="UTF-8" />
 		<meta name="keywords" content="'.$keywords.'" />
 		<meta name="description" content="'.$descriptionEn.' / '.$descriptionCymraeg.'" />
+		<meta name="viewpoint" content="width=device-width, height=device-height, initial-scale=1" />
 		<link rel="canonical"  href="http://www.ycyrffgroupie.co.uk'.$filename.'" />
 		<!--For facebook-->
 		<meta property="og:title" content="'.$facebookTitle.'" />
@@ -105,7 +107,8 @@ class header{
 		<title>Y Cyrff</title>
 		<meta charset="UTF-8" />
 		<meta name="keywords" content="Y Cyrff" />
-		<meta name="description" content="One of the only website about Y Cyrff. / Un o\'r unig we safle am Y Cyrff." />';
+		<meta name="description" content="One of the only website about Y Cyrff. / Un o\'r unig we safle am Y Cyrff." />
+		<meta name="viewpoint" content="width=device-width, height=device-height, initial-scale=1" />';
 		
 		if ($filename == '/about.php'){
 		
