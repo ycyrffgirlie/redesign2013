@@ -250,17 +250,9 @@ tbody tr:hover, tbody > tr:hover{
 				$countEdits ++;
 			}
 			
-			
-			//print_r($_POST);
-			
-			//echo $sql.'
-			//'.$countEdits;
-			
 			if ($countEdits != 0){
 				$sql = rtrim($sql,',');
 			}
-			
-			//echo $sql;
 			
 			?>
 			
@@ -490,8 +482,6 @@ while ($fileinfo = $query ->fetch()){
 			\'editFileinfo.php?action=edit&file='.$fileinfo[filename].'\'"
 			value="Edit"/></td>
 		</tr>';
-	
-	//print_r($fileinfo);
 
 }
 
