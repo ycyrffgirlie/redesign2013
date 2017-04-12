@@ -1,0 +1,792 @@
+<?php
+/*@Author; Christine A. Black
+@Version:0.1
+@todo:  Make it work with about.php and fanprofile.php..
+
+Version 0.1 - Added the fileinfo class to the site. */
+
+class fileInfo {
+
+	public $filesDetails, $updatedFiles, $addedFiles;
+	
+	/**/
+	function added_files_table_html(){
+		
+		$output  =  '';
+		$output  .= $this ->build_html_table_top();
+		
+		$addedFiles = $this ->addedFiles;
+		
+		$i  =0;
+		
+		while ($i < count($addedFiles)){
+			
+			$output  .= $this ->build_table_row_html($addedFiles[$i]["name"],$addedFiles[$i]["title"],$addedFiles[$i]["datelastmodified"]);
+			
+			$i ++;
+			
+			
+		}
+		
+		$output  .= $this ->build_html_table_bottom();
+		
+		return $output;
+		
+	}
+	
+	function added_files_table_txt(){
+		
+		$output  =  '';
+		
+		$addedFiles = $this ->addedFiles;
+		
+		$i  =0;
+		
+		while ($i < count($addedFiles)){
+			$output .= $this ->build_table_row_txt($addedFiles[$i]["name"],$addedFiles[$i]["title"],$addedFiles[$i]["datelastmodified"]);
+			$i ++;
+		}
+		
+		return $output;
+		
+	}
+	
+	/*Builds the html version of the email.*/
+	function build_email_html(){
+
+		$output  =  '';
+		$output  .= $this ->build_email_html_top();
+		$output  .= $this -> fileInfo_table();
+		
+		if (count($this ->updatedFiles)>1){
+		
+			$output .= '
+					<table style="padding: 15px 0px;">
+						<tr>
+							<td>
+								<font color="ffd700">Pages that have been updated:</font>
+							</td>
+						</tr>
+					</table>';
+			$output .= $this ->updated_files_table_html();
+		}
+		
+		if (count($this ->addedFiles)>1){
+			$output .= '
+					<table style="padding: 15px 0px;">
+						<tr>
+							<td>
+								<font color="ffd700">Pages that have been added:</font>
+							</td>
+						</tr>
+					</table>';
+			$output .= $this ->added_files_table_html();
+		}
+		
+		$output  .= $this ->build_email_html_bottom();
+		
+		return $output;
+		
+		
+	}
+	
+	/*Builds the text version of the bottom of the email.*/
+	function build_email_txt_bottom(){
+		
+		$output  =  '';
+		
+		$output  .= 'Thanks,'."\n".
+				'One nutty fan.';
+		
+		return $output;
+		
+	}
+	
+	/*Builds the html version of the bottom of the email.*/
+	function build_email_html_bottom(){
+		
+		$output  =  '';
+		
+		$output  .= '	
+				<table style="padding: 15px 0px;">
+						<tr>
+							<td>
+							<br>
+							<br>
+							<p><font color="ffd700">Thanks,
+							<br>
+							One nutty fan.</font></p>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>';
+		
+		return $output;
+		
+	}
+	
+	/*Builds the html version of the top of the email.*/
+	function build_email_html_top(){
+		
+		$output  =  '';
+		
+		$output  .= '<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">
+<html>
+	<head></head>
+	<body style="background-color: #800080; width:99%;" link="ffd700" alink="ffd700" >
+		<table style="width:100%;">
+			<tr>
+				<td style="width:5%">&nbsp;</td>
+				<td style="width:94%">';
+				
+		return $output ;
+		
+	}
+	
+	/*Builds the html version of the top of the table.*/
+	function build_html_table_top(){
+		
+		$output  =  '';
+		
+		$output  .= '
+					<table style="border: 1px solid #FFFFFF; width:100%; table-layout: fixed;">
+						<tr>
+							<th style="border: 1px solid #FFFFFF; width: 11%;"><font color="ffd700">File name</font></th>
+							<th style="border: 1px solid #FFFFFF; width: 11%;"><font color="ffd700">Page Title</font></th>
+							<th style="border: 1px solid #FFFFFF; width: 7%;"><font color="ffd700">Date Last Modified</font></th>
+						</tr>';
+						
+		return $output;
+		
+	}
+	
+	/*Builds the html version of the bottom of the table.*/
+	function build_html_table_bottom(){
+		
+		$output  =  '';
+		
+		$output  .= '
+					</table>';
+		
+		return $output;
+		
+	}
+	
+	/*Builds the html version  a row of the table.*/
+	function build_updated_table_row_html($name, $datelastmodified){
+	
+		$output  =  '';
+		
+		$output  .='
+						<tr>
+							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
+								<font color="ffd700">'.$name.'</font>
+							</td>
+							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
+								<font color="ffd700">'.$datelastmodified.'</font>
+							</td>
+						</tr>';
+						
+		return $output;
+	}
+	
+	/*Builds the html version of the top of the table.*/
+	function build_html_updated_table_top(){
+		
+		$output  =  '';
+		
+		$output  .= '
+					<table style="border: 1px solid #FFFFFF; width:100%; table-layout: fixed;">
+						<tr>
+							<th style="border: 1px solid #FFFFFF; width: 11%;"><font color="ffd700">File name</font></th>
+							<th style="border: 1px solid #FFFFFF; width: 7%;"><font color="ffd700">Date Last Modified</font></th>
+						</tr>';
+						
+		return $output;
+		
+	}
+	
+	/*Builds the html version  a row of the table.*/
+	function build_table_row_html($name, $title, $datelastmodified){
+	
+		$output  =  '';
+		
+		$output  .='
+						<tr>
+							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
+								<font color="ffd700">'.$name.'</font>
+							</td>
+							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
+								<font color="ffd700">'.$title.'</font>
+							</td>
+							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
+								<font color="ffd700">'.$datelastmodified.'</font>
+							</td>
+						</tr>';
+						
+		return $output;
+	}
+	
+	/*Builds the tetxt version  a row of the table.*/
+	function build_table_row_txt($name, $title, $datelastmodified){
+	
+		$output  =  '';
+		
+		$output  .='
+Name: '.$name."\n"
+.'Title: '.$title."\n"
+.'Date Last Modified: '.$datelastmodified."\n"."\n";
+		
+		return $output;
+	
+	
+	}
+	
+	/**/
+	function build_updared_table_row_txt($name,$datelastmodified){
+	
+	$output  =  '';
+		
+		$output  .='
+Name: '.$name."\n"
+.'Date Last Modified: '.$datelastmodified."\n"."\n";
+		
+		return $output;
+	
+	}
+	
+	/*Builds the text version of the email.*/
+	function build_email_txt(){
+	
+		$output  =  '';
+		$output = $this ->fileInfo_table_txt();
+		if (count($this ->updatedFiles)>1){
+			$output .= 'Pages that have been updated:'."\n\n";
+			$output .= $this ->updated_files_table_txt();
+		}
+		
+		if (count($this ->addedFiles)>1){
+		
+			$output .= 'Pages that have been added:'."\n\n";
+			$output .= $this ->added_files_table_txt();
+		}
+		
+		$output .= $this ->build_email_txt_bottom();
+		
+		
+		return $output;
+	
+	}
+	
+	/**/
+	function email(){
+		
+		$filesDetails = $this ->getfilesinfo();
+		$this ->update_datebase();
+		
+		$to = 'ycyrffgroupie@gmail.com';
+		$subject = 'Reports';
+		$semi_rand = md5(time()); 
+		$mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
+		$headers ='MIME-Version: 1.0'."\r\n";
+		$headers .= 'Content-Type: multipart/alternative; boundary='.$mime_boundary. "\r\n";
+		$headers .='From:  "Webmistress" <webmistress@ycyrffgroupie.co.uk>'. "\r\n";	
+		
+		$htmlEmail = $this ->build_email_html();
+		$txtEmail = $this ->build_email_txt();
+		
+		$message = "This is a multi-part message in MIME format.\r\n\r\n" .
+		'--'.$mime_boundary."\r\n".
+		'Content-Type: text/plain; charset="utf-8"'."\r\n".
+		'Content-Transfer-Encoding:7-bit'."\r\n\r\n".$txtEmail."\r\n".
+		"--{$mime_boundary}\r\n" .
+		"Content-Type:text/html; charset=\"utf-8\"\r\n" .
+		"Content-Transfer-Encoding: 7bit\r\n\r\n" .
+		$htmlEmail."\r\n";
+		
+		if (mail($to,$subject,$message, $headers)){
+			
+			$output = 'Email was sent.';
+			
+		}else{
+			
+			$output = "Email wasn't sent.";
+			
+		}
+		
+		$filename = 'fileInfoEmail.txt';
+		
+		try {
+			$file = fopen('/var/www/websites/redesign2013/logs/'.$filename,'c');
+	
+			if ($file){
+				fwrite($file, $message);
+			}else{
+				
+				throw new Exception("Couldn't open file.");
+				
+			}
+	
+		}catch(Exception $error){
+			
+			echo 'Error: '.$error ->getMessage(),"\n";
+			print_r($error->getTrace());
+			echo 'Exception Code:'.$error->getCode()."\n";
+			echo 'Line :'.$error->getLine().' - File:'.$error->getFile()."\n";
+		}
+		
+		echo $message;
+		return $output;
+		
+	}
+	
+	/**/
+	function fileInfo_table(){
+		
+		$output  =  '';
+		$output  .= $this ->build_html_table_top();
+		
+		$filesDetails = $this ->filesDetails;
+		
+		$i  =0;
+		
+		while ($i < count($filesDetails)){
+			
+			$output  .= $this ->build_table_row_html($filesDetails[$i]["name"],$filesDetails[$i]["title"],$filesDetails[$i]["datelastmodified"]);
+			//print_r($filesDetails[$i]);
+			$i ++;
+			
+			
+		}
+		
+		$output  .= $this ->build_html_table_bottom();
+		
+		return $output;
+		
+	}
+	
+	function file_exist_test($filename){
+	
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}
+		
+		$numofrows = 0;
+		
+		$sql = 'SELECT count(*) FROM `pages` WHERE `filename` = "'.$filename.'"';
+		$query = $database ->prepare($sql );
+		$query ->execute();
+		//echo '<p>'.$sql.'</p>'."\n";
+
+		$numofrows = $query ->fetchColumn();
+		//echo '<p>'.$numofrows.'</p>'."\n";
+		//print_r($numofrows );
+		return $numofrows;
+	
+	}
+	
+	function fileInfo_table_txt(){
+		
+		$output  =  '';
+		
+		$filesDetails = $this ->filesDetails;
+		
+		$i  =0;
+		
+		while ($i < count($filesDetails)){
+			$output .= $this ->build_table_row_txt($filesDetails[$i]["name"],$filesDetails[$i]["title"],$filesDetails[$i]["datelastmodified"]);
+			//print_r($filesDetails[$i]);
+			$i ++;
+		}
+		
+		return $output;
+		
+	}
+	
+	/**/
+	function getfiles(){
+		
+		if ($_SERVER["TERM"] == 'xterm'){
+	
+			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
+			
+				$pattern = "/var/www/websites/redesign2013/*";
+			
+			}else{
+		
+				$pattern = "/home/ycyrf718/public_html/redesign2013/*";
+		
+			}
+	
+		}else{
+
+			if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+			
+				$pattern = "/var/www/websites/redesign2013/*";
+			
+			}else{
+			
+				$pattern = "/home/ycyrf718/public_html/redesign2013/*";
+			
+			}
+
+		}
+		
+		$files = glob($pattern);
+		$i = 0;
+		$counter = 0;
+
+		$skipped_dirs = array('admin'
+						, 'bugs'
+						, 'cgi-bin'
+						,'christine'
+						,'clone'
+						,'css'
+						,'dev'
+						,'forum'
+						,'images'
+						,'includes'
+						,'llwybrllaethog'
+						,'other'
+						,'phplinks'
+						,'redesign20'
+						,'seo'
+						,'uploads'
+						,'log'
+						,'scripts'
+					);
+
+		$skipped_dir = implode("|", $skipped_dirs);
+		$skipped_dir = '('.$skipped_dir.')';
+		//echo $skipped_dir; 
+		$skipped_files =array('.shtml'
+					,'.xml'
+					,'about'
+					,'1.html'
+					,'.txt'
+					,'.htc'
+					,'Sqh40j'
+					,'dcc24'
+					,'.ico'
+					,'4048'
+					,'2.html'
+					,'monotypic'
+					,'.jpg'
+					,'new_guestbook'
+					,'test'
+					,'menu'
+					,'update_me'
+					,'.md'
+					,'template'
+					,'phpinfo'
+					,'.ajax.php'
+				);
+
+		$skipped_file = implode("|", $skipped_files);
+		$skipped_file = '('.$skipped_file.')';
+		$allowed_dirs = array ('Images'
+					,'games'
+					,'interviews'
+					,'lyrics'
+					,'news'
+					,'profiles'
+					,'reviews'
+					,'sound_clips'
+				);
+				
+
+		$allowed_dir = implode("|",$allowed_dirs);
+		$allowed_dir  = '('.$allowed_dir .')';
+
+		foreach ($files as $file){
+	
+
+			if (preg_match('/'.$allowed_dir.'/',$file)&&
+			!preg_match('/'.$skipped_file.'/',$file)){
+				
+			
+				$dir[$counter] =$file;
+				$counter++;
+				
+			}elseif(preg_match('/.html|.php|.htm/', $file) &&
+			!preg_match('/'.$skipped_file.'/',$file)){
+			
+						$cleanerfilespath[$i] = $file;
+						$i++;
+
+			}
+		}
+
+
+		$i = 0;
+
+		foreach($dir as $directory){
+	
+			$pattern = $directory;
+
+			if (is_dir($pattern)){
+				if ($dirhandler = opendir($pattern)){
+					while (($file = readdir($dirhandler)) !== false){
+						if ($file != "." && $file != "..") {
+							$files[$i] = $pattern.'/'.$file;
+							$i++;
+						}
+					}
+		
+				closedir($dirhandler);
+		
+				}
+			}
+	
+		}
+
+		$i = 0;
+		$counter = 0;
+
+		foreach ($files as $file){
+			if (preg_match('/.html|.php|.htm/', $file)  && !preg_match('/contact.php/', $file)  && !preg_match('/fanprofile.php/', $file)
+			 && !preg_match('/ajax.php/', $file)
+			){
+					$cleanerfiles1[$i] = $file;
+					$i++;
+			}
+		}
+
+		$filepaths = array_merge($cleanerfilespath, $cleanerfiles1);
+		
+		return $filepaths;
+	}
+	
+	/**/
+	function getfilesinfo(){
+
+		$files = $this  ->getfiles();
+		
+		
+	
+		$i = 0;
+
+			while ($i < count($files)){
+				$file = $files[$i];
+				$buffers[$i] = file($file);
+		
+				$counter = 0;
+				
+				$filesinfo[$i]["name"] = "";
+				$filesinfo[$i]["title"] = '';
+				$filesinfo[$i]["datelastmodified"]  = "";
+				
+				if (preg_match( '%/var/www/websites/redesign2013%', $file)){
+				
+					$filesinfo[$i]["name"] = preg_replace('%/var/www/websites/redesign2013%', '', $file);
+				
+				}else{
+					
+					$filesinfo[$i]["name"] = preg_replace('%/home\/ycyrf718\/public_html%', '', $file);
+				
+				}
+		
+				while ($counter < count($buffers[$i])){
+					$buffer = $buffers[$i][$counter];
+			
+					if (preg_match('/<H1>/i',$buffer)){
+						
+						$filesinfo[$i]["title"] = trim(strip_tags($buffer), "\n");
+				
+					}/*else{
+					
+						$filesinfo[$i]["title"] = '';
+					
+					}*/
+			
+				
+					$counter++;
+			
+				}
+		
+			$filesinfo[$i]["datelastmodified"] = date('Y-m-d H:i:s',filemtime($file));
+
+			$i++;
+		}
+		
+		$this ->filesDetails = $filesinfo;
+		return $filesinfo;
+	}
+	
+	function update_datebase(){
+	
+		$filesDetails = $this ->filesDetails;
+		//print_r($filesDetails);
+		$i = 0;
+		$countUpdated = 0;
+		$CountAdded = 0;
+		$updatedFiles = '';
+		$addedFiles = '';
+		
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}
+	
+		while ($i < count($filesDetails)){
+			$numofrows = $this ->file_exist_test($filesDetails[$i]["name"]);
+			//echo '<p>'.$numofrows.'</p>';
+			$numofrows2 = 0;
+			$numofrows2 = $this ->update_test($filesDetails[$i]["name"], $filesDetails[$i]["datelastmodified"]);
+			
+			if ($numofrows >= 1){
+			
+				if ($numofrows2 == 0){
+					
+					$sql = 'UPDATE pages SET datelastmodified = "'.$filesDetails[$i]["datelastmodified"].'" where filename ="'.$filesDetails[$i]["name"].'"';
+					//echo '<p>'.$sql.'</p>'."\n";
+					
+					try{
+		
+						$query = $database ->prepare($sql);
+						$query ->execute();
+					} catch(PDOException $error){
+		
+						echo 'Error with query. '.$error->getMessage();
+						}
+					
+					$updatedFiles[$countUpdated]["name"] = $filesDetails[$i]["name"];
+					$updatedFiles[$countUpdated]["datelastmodified"] = $filesDetails[$i]["datelastmodified"];
+					$countUpdated ++;
+				}
+			
+			}else{
+			
+				$sql = "INSERT INTO pages(filename, title, facebooktitle, datelastmodified )
+					VALUES('".$filesDetails[$i]["name"]."','".$filesDetails[$i]["title"]."','".$filesDetails[$i]["title"]
+					."','".$filesDetails[$i]["datelastmodified"]."')";
+				
+				//echo '<p>'.$sql.'</p>'."\n";
+				
+				try{
+		
+					$query = $database ->prepare($sql);
+					$query ->execute();
+				} catch(PDOException $error){
+		
+					echo 'Error with query. '.$error->getMessage();
+				}
+				
+				$addedFiles[$CountAdded]["name"] = $filesDetails[$i]["name"];
+				$addedFiles[$CountAdded]["title"] = $filesDetails[$i]["title"];
+				$addedFiles[$CountAdded]["datelastmodified"] = $filesDetails[$i]["datelastmodified"];
+				$CountAdded ++;
+				
+			}
+			
+			
+			$i ++;
+	
+		}
+		
+		//echo $countUpdated ;
+		//print_r($updatedFiles);
+		//echo $CountAdded;
+		//print_r($addedFiles);
+		
+		$this ->updatedFiles = $updatedFiles;
+		$this ->addedFiles = $addedFiles;
+		
+		
+		
+	}	
+	
+	/**/
+	function update_test($filename, $datelastmodified){
+		
+		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+			require("/var/www/websites/redesign2013/includes/connection.php");
+		
+		}else{
+			
+			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		}
+		
+		$numofrows  = 0;
+		$sql = 'SELECT count(*) FROM pages WHERE filename ="'.$filename.'" AND datelastmodified = "'.$datelastmodified.'"';
+		$query  =$database ->prepare($sql);
+		$query ->execute();
+		
+		$numofrows = $query ->fetchColumn();
+		//echo $numofrows."\n";
+		
+		return $numofrows;
+		
+	
+	}
+	
+	function updated_files_table_txt(){
+		
+		$output  =  '';
+		
+		//print_r($this);
+		
+		$updatedFiles= $this ->updatedFiles;
+		//print_r($updatedFiles);
+		
+		$i  =0;
+		
+		while ($i < count($updatedFiles)){
+			$output .= $this ->build_updared_table_row_txt($updatedFiles[$i]["name"],$updatedFiles[$i]["datelastmodified"]);
+			
+			//print_r($updatedFiles[$i]);
+			$i ++;
+		}
+		
+		return $output;
+		
+	}
+	
+	/**/
+	function updated_files_table_html(){
+		
+		$output  =  '';
+		$output  .= $this ->build_html_updated_table_top();
+		
+		$updatedFiles= $this ->updatedFiles;
+		
+		$i  =0;
+		
+		while ($i < count($updatedFiles)){
+			
+			$output  .= $this ->build_updated_table_row_html($updatedFiles[$i]["name"],$updatedFiles[$i]["datelastmodified"]);
+			//print_r($filesDetails[$i]);
+			$i ++;
+			
+			
+		}
+		
+		$output  .= $this ->build_html_table_bottom();
+		
+		return $output;
+		
+	}
+	
+	/*function (){
+		
+		
+		
+	}*/	
+	
+}
+
+?>
