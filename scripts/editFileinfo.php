@@ -1,7 +1,8 @@
 <?php 
 /*@Author; Christine A. Black
-@Version:0.1
+@Version:0.2
 
+Version 0.1 -  Fixed php warning errors.
 Version 0.1 - Added editFileInfo.php to site.*/
 include '../includes/header.php'; 
 $action = isset($_GET["action"])? $_GET["action"]: '';
@@ -473,13 +474,13 @@ $query ->execute();
 while ($fileinfo = $query ->fetch()){
 	echo '
 		<tr>
-			<td class="">'.$fileinfo[filename].'</td>
-			<td>'.$fileinfo [title].'</td>
-			<td>'.$fileinfo[descriptionen].'</td>
-			<td>'.$fileinfo[descriptioncymraeg].'</td>
+			<td class="">'.$fileinfo["filename"].'</td>
+			<td>'.$fileinfo ["title"].'</td>
+			<td>'.$fileinfo["descriptionen"].'</td>
+			<td>'.$fileinfo["descriptioncymraeg"].'</td>
 			<td><input type="button" 
 			onclick="location.href=
-			\'editFileinfo.php?action=edit&file='.$fileinfo[filename].'\'"
+			\'editFileinfo.php?action=edit&file='.$fileinfo["filename"].'\'"
 			value="Edit"/></td>
 		</tr>';
 
