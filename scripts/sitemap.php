@@ -1,63 +1,96 @@
 <?php
 /**@@author:Christine Black
-This generates the sitemap.
-**/
+@Version:0.1
+@todo: 
 
-echo 'Starting....'."\n";
+Version 0.1 - Added the sitemap script.**/
 
+/*Setting location for files*/
+$filename = 'sitemap.xml';
+$sitemapFilename = 'sitemapLog.txt';
+
+if ($_SERVER["TERM"] == 'xterm'){
+
+	if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"]) || $_SERVER["HOME"] == "/home/christine"){
+	
+		require("/var/www/websites/redesign2013/includes/connection.php");
+		$sitemapLocation = '/var/www/websites/redesign2013/logs/'.$filename;
+		$sitemapLogLocation = '/var/www/websites/redesign2013/logs/'.$sitemapFilename;
+	
+	}else{
+	
+		require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		$sitemapLocation = '/home/ycyrf718/public_html/'.$filename;
+		$sitemapLogLocation = '/home/ycyrf718/redesign2013/logs/'.$sitemapFilename;
+	
+	}
+
+}else{
+
+	if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+	
+		require("/var/www/websites/redesign2013/includes/connection.php");
+		$sitemapLocation = '/var/www/websites/redesign2013/logs/'.$filename;
+		$sitemapLogLocation = '/var/www/websites/redesign2013/logs/'.$sitemapFilename;
+	
+	}else{
+	
+		require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		$sitemapLocation = '/home/ycyrf718/public_html/'.$filename;
+		$sitemapLogLocation = '/home/ycyrf718/redesign2013/logs/'.$sitemapFilename;
+		
+	}
+
+}
+
+$output = "\n".'Starting script...'."\n";
+$output .= 'Script started at: '.date('H:i:s d/m/y', time()).'.'."\n";
+
+/*Strating to create content for sitemap.*/
 $sitemap ='<?xml version="1.0" encoding="UTF-8"?>'." \n";
 $sitemap .='<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'." \n";
 
-if (file_exists('/home/ycyrf718/public_html/redesign2013/includes/connection.php')){
-	require('/home/ycyrf718/public_html/redesign2013/includes/connection.php');
-}else{
-	require("connection.php");
-}
-
-$sql = "SELECT filename, datelastmodified FROM pages WHERE filename NOT LIKE '%/images%'
-	AND filename NOT LIKE '%/band.html%'
-	AND filename NOT LIKE '%/contact.php%'
-	AND filename NOT LIKE '%/me.html%'
-	AND filename NOT LIKE '%/profiles/submitprofile.php%'
-	AND filename NOT LIKE '%/includes/header.php%'";
-
-//global $database;
-
+$sql = "SELECT filename, datelastmodified, includedinsitemap FROM pages WHERE filename NOT LIKE '%/images%'
+	";
+/*Get details of files that needs to be included.*/
 try {
-	if ($database ){
-		$query = $database ->prepare($sql);
-		$query ->execute();
-	}else{
-		echo 'database is not set. database is: '.$database .'. '."\n";
-	}
+	$query = $database ->prepare($sql);
+	$query ->execute();
 	
-} catch (Exception $error) {
-	
-	echo $error ->getMessage();
+} catch(PDOException $error){
+		
+	echo 'Error with query. '.$error->getMessage();
 }
 
 if( $query){
 	while ($fileinfo = $query ->fetch()){
-			$sitemap .= '		<url>
-			<loc>http://www.ycyrffgroupie.co.uk'.$fileinfo['filename'].'</loc>
-			<lastmod>'.substr($fileinfo['datelastmodified'],0,-9).'</lastmod>
-			</url>'." \n";
+			
+			if($fileinfo["includedinsitemap"] == 1){
+			
+				$sitemap .= '		
+	<url>
+		<loc>http://www.ycyrffgroupie.co.uk'.$fileinfo['filename'].'</loc>
+		<lastmod>'.substr($fileinfo['datelastmodified'],0,-9).'</lastmod>
+	</url>'." \n";
+			
+			}
 	}
 }
 
 $sitemap .= '</urlset>';
 
-unlink('/home/ycyrf718/public_html/sitemap.xml');
+/*Delete the ol file*/
+unlink($sitemapLocation);
 
-echo 'Creating file'."\n";
+$output .= 'Creating file.'."\n";
 
-$filename = 'sitemap.xml';
-$file = fopen('/home/ycyrf718/public_html/'.$filename,'c');
+/*Writes content  to files and create emails  contents*/
+$file = fopen($sitemapLocation,'c');
 
 if ($file){
 	fwrite($file, $sitemap);
 	
-	$content = chunk_split(base64_encode(file_get_contents('/home/ycyrf718/public_html/'.$filename)));
+	$content = chunk_split(base64_encode(file_get_contents($sitemapLocation)));
 	
 	fclose($file);
 	$html = '<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">
@@ -81,7 +114,10 @@ if ($file){
 	</body>
 </html>';
 
-$txt = 'Google sitemap created. It is here: http://www.ycyrffgroupie.co.uk/sitemap.xml .';
+$txt = 'Google sitemap created. It is here: http://www.ycyrffgroupie.co.uk/sitemap.xml .
+Thanks,
+
+One nutty fan.';
 }else{
 	$html = '<!DOCTYPE HTML PUBLIC\"-//W3C//DTD HTML 4.01 Transitional//EN\"\"http://www.w3.org/TR/html4/loose.dtd\">
 <html>
@@ -107,7 +143,7 @@ $txt = 'Google sitemap created. It is here: http://www.ycyrffgroupie.co.uk/sitem
 $txt = strip_tags($html );
 }
 
-$txt = strip_tags($html );
+
 
 $semi_rand = md5(time()); 
 $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
@@ -147,6 +183,44 @@ if ($content){
 		$html."\r\n";
 }
 
-mail($to,$subject,$message, $headers);
+/*Sends the email*/
+if (mail($to,$subject,$message, $headers)){
+	$output .= 'Email was sent.'."\n";
+			
+}else{
+			
+	$output .= "Email wasn't sent."."\n";
+			
+}
+
+$output .= 'Script finished at: '.date('H:i:s d/m/y', time()).'.'."\n";
+
+/*Outputs the output variable.*/
+echo $output."\n";
+
+/*Writes the output to a log.*/
+try {
+	$file = fopen($sitemapLogLocation,'a+');
+	
+	if ($file){
+		
+		fwrite($file, $output);
+		fclose($file);
+		
+		}else{
+		
+		throw new Exception("Couldn't open file.");
+		
+	}
+	
+}catch(Exception $error){
+	
+	echo 'Error: '.$error ->getMessage(),"\n";
+	print_r($error->getTrace());
+	echo 'Exception Code:'.$error->getCode()."\n";
+	echo 'Line :'.$error->getLine().' - File:'.$error->getFile()."\n";
+	
+}
+
 ?>
-</body>
+
