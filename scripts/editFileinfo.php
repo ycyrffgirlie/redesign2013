@@ -1,8 +1,9 @@
 <?php 
 /*@Author; Christine A. Black
-@Version:0.2
+@Version:0.3
 
-Version 0.1 -  Fixed php warning errors.
+Version 0.3 -  Added the sitemap field and corrected the mysql query.
+Version 0.2 -  Fixed php warning errors.
 Version 0.1 - Added editFileInfo.php to site.*/
 include '../includes/header.php'; 
 $action = isset($_GET["action"])? $_GET["action"]: '';
@@ -169,6 +170,11 @@ tbody tr:hover, tbody > tr:hover{
 					<div class="field"><p>'.$_POST["newsortorder"].'</p></div>
 				</div>
 				<div class="fieldline">
+					<div class="fieldname"><p>Included in sitemap.xml?</p></div>
+					<div class="field"><p> ' .($_POST["includedinsitemap"] == 1?'Yes':'No').'</p></div>
+				</div>
+				<div class="clear"></div>
+				<div class="fieldline">
 					<div class="fieldname"><p>html5?</p></div>
 					<div class="field"><p> ' .($_POST["html5"] == 1?'Yes':'No').'</p></div>
 				</div>
@@ -246,6 +252,11 @@ tbody tr:hover, tbody > tr:hover{
 				$countEdits ++;
 			}
 			
+			if ($_POST["includedinsitemapH"] != $_POST["includedinsitemap"]){
+				$sql .= '`includedinsitemap` = "'.$_POST["includedinsitemap"].'",';
+				$countEdits ++;
+			}
+			
 			if ($_POST["htmlcodeH"] != $_POST["htmlcode"]){
 				$sql .= '`htmlcode` = "'.$_POST["htmlcode"].'",';
 				$countEdits ++;
@@ -253,6 +264,7 @@ tbody tr:hover, tbody > tr:hover{
 			
 			if ($countEdits != 0){
 				$sql = rtrim($sql,',');
+				$sql .= 'WHERE `filename` = "'.$file.'"';
 			}
 			
 			?>
@@ -409,6 +421,19 @@ tbody tr:hover, tbody > tr:hover{
 						</p>
 					</div>
 				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Included in sitemap.xml?</p></div>
+					<div class="field">
+						<p>
+							<input type="hidden" name="includedinsitemapH" value = "'.$fileInfo["includedinsitemap"].'" />
+							<select name="includedinsitemap">
+								<option value="1" ' .($fileInfo["includedinsitemap"] == 1?'selected':'').'>Yes</option>
+								<option value="0" ' .($fileInfo["includedinsitemap"] == 0?'selected':'').'>No</option>
+							</select>
+						</p>
+					</div>
+				</div>
+				<div class="clear"></div>
 				<div class="fieldline">
 					<div class="fieldname"><p>html5?</p></div>
 					<div class="field">
