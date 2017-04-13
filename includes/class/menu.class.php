@@ -39,18 +39,9 @@ class menu{
 		$output .= '					<li>Fans / FFanau
 						<ul>
 							<li><a href="/games/index.html">Games / <span lang="cy">Gemau</span></a></li>
-							<li><a href="/profiles/index.html">Profiles/ <span lang="cy">Proffeil</span></a></li>';
-	
-		if ($class == 'menu'){
-		
-			$output .= '							<li><a target="_blank" href="http://pub9.bravenet.com/chat/show.php/745618418" rel="nofollow">Chat Room / <span lang="cy">Ystafell Sgwrs</span></a></li>
-							<li><a target="_blank" href="http://pub9.bravenet.com/forum/static/show.php?usernum=745618418&amp;frmid=2532&amp;msgid=0" rel="nofollow">Forum / <span lang="cy">FForwn</span></a></li>
-							<li><a target="_blank" href="http://pub9.bravenet.com/vote/vote.php?usernum=745618418&amp;cpv=1" rel="nofollow">Vote / <span lang="cy">Pleidlesio</span></a></li>';
-		
-		}
-	
-		$output .= "						</ul>
-					</li>";
+							<li><a href="/profiles/index.html">Profiles/ <span lang="cy">Proffeil</span></a></li>
+						</ul>
+					</li>';
 		
 		return $output;
 		
