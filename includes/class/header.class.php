@@ -1,9 +1,11 @@
 
 <?php
 /*@Author; Christine A. Black
-@Version:0.5
-@todo:  set uptwitter cards.
+@Version:0.7
+@todo: 
 
+Version 0.7 - Added  twitter cards.
+Version 0.6 -  Added a viewpoint.
 Version 0.5 - Changed the version number of the main styke sheet
 Version 0.4 - Added fan profile class to the site.
 Version 0.3 - Fixed php error, Added twitter card, fixed favicon, fixed it for about psge. 
@@ -18,7 +20,8 @@ class header{
 	$descriptionEn = "One of the only website about Y Cyrff.", 
 	$descriptionCymraeg = "Un o'r unig we safle am Y Cyrff.", $facebookTitle = "Y Cyrff", 
 	$facebookDescription = "One of the only website about Y Cyrff. / Un o'r unig we safle am Y Cyrff.", 
-	$htmlCode = ""){
+	$twittercard = "summary", $twittersite ="@y_cyrff_girlie", $twittertitle ="", $twitterdescription ="", 
+	$twitterimage ="", $htmlCode = ""){
 		
 		$output = '<!DOCTYPE HTML>
 
@@ -41,11 +44,11 @@ class header{
 		<meta property="og:description" content="'.$facebookDescription.'" />
 		<!--end facebook-->
 		<!--For twitter-->
-		<meta name= "twitter:card" content=""> 
-		<meta name= "twitter:site" content=""> 
-		<meta name= "twitter:title" content="">
-		<meta name= "twitter:description" content="'.$facebookDescription.'"> 
-		<meta name= "twitter:image" content="http://www.ycyrffrgroupie.co.uk/images/title.JPG">
+		<meta name= "twitter:card" content="'.$twittercard.'"> 
+		<meta name= "twitter:site" content="'.$twittersite.'"> 
+		<meta name= "twitter:title" content="'.(isset($twittertitle)?$twittertitle:$facebookTitle).'">
+		<meta name= "twitter:description" content="'.(isset($twitterdescription)?$twitterdescription:$facebookDescription).'"> 
+		<meta name= "twitter:image" content="'.(isset($twitterimage)?$twitterimage:'http://www.ycyrffrgroupie.co.uk/images/title.JPG').'">
 		<!--end twitter-->
 		<!--If your really need to know-->
 		<meta name="author" content="Christine Black" />
@@ -214,9 +217,9 @@ class header{
 		<meta property="og:description" content="One of the only website about Y Cyrff. / Un o\'r unig we safle am Y Cyrff." />
 		<!--end facebook-->
 		<!--For twitter-->
-		<meta name= "twitter:card" content=""> 
-		<meta name= "twitter:site" content=""> 
-		<meta name= "twitter:title" content="">
+		<meta name= "twitter:card" content="summary"> 
+		<meta name= "twitter:site" content="@y_cyrff_girlie"> 
+		<meta name= "twitter:title" content="Y Cyrff">
 		<meta name= "twitter:description" content="One of the only website about Y Cyrff. / Un o\'r unig we safle am Y Cyrff."> 
 		<meta name= "twitter:image" content="http://www.ycyrffrgroupie.co.uk/images/title.JPG">
 		<!--end twitter-->
@@ -272,7 +275,8 @@ class header{
 			}
 			  
 			$sql = "SELECT filename,title, keywords,descriptionen, descriptioncymraeg, 
-			facebooktitle, facebookdescription, facebookimage , facebookurl, html5, htmlcode 
+			facebooktitle, facebookdescription, facebookimage , facebookurl, twittercard, 
+			twittersite, twittertitle, twitterdescription, twitterimage, html5, htmlcode 
 			FROM pages 
 			WHERE filename ='".$page."'";
 			
@@ -280,7 +284,8 @@ class header{
 		}else{
 		
 			$sql = "SELECT filename,title, keywords,descriptionen, descriptioncymraeg, 
-			facebooktitle, facebookdescription, facebookimage , facebookurl, html5, htmlcode 
+			facebooktitle, facebookdescription, facebookimage , facebookurl, twittercard,
+			twittersite, twittertitle, twitterdescription, twitterimage, html5, htmlcode 
 			FROM pages 
 			WHERE filename ='".$filename."'";
 		
@@ -326,6 +331,7 @@ class header{
 	
 		}
 		
+		
 		$query = $database->prepare($sql);
 		$query ->execute();
 
@@ -340,7 +346,9 @@ class header{
 			
 			$output = $this -> built_header($fileinfo['filename'], $fileinfo["title"], 
 			$fileinfo["keywords"], $fileinfo["descriptionen"], $fileinfo["descriptioncymraeg"], 
-			$fileinfo["facebooktitle"],$fileinfo["facebookdescription"], $fileinfo["htmlcode"]);
+			$fileinfo["facebooktitle"],$fileinfo["facebookdescription"], $fileinfo["twittercard"], 
+			$fileinfo["twittersite"],$fileinfo["twittertitle"], $fileinfo["twitterdescription"], 
+			$fileinfo["twitterimage"], $fileinfo["htmlcode"]);
 			
 		}else{
 			
@@ -396,7 +404,8 @@ class header{
 		
 		$sql = 'SELECT pages.filename,title, keywords,descriptionen, 
 		descriptioncymraeg, facebooktitle, facebookdescription, facebookimage , 
-		facebookurl, html5, htmlcode
+		facebookurl, twittercard, twittersite, twittertitle, twitterdescription, 
+		twitterimage, html5, htmlcode
 		FROM pages, fan_profile
 		WHERE pages.filename = fan_profile.filename
 		AND fan_profile.profileid ='.$profileId;
