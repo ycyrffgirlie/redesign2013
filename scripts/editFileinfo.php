@@ -1,12 +1,16 @@
 <?php 
 /*@Author; Christine A. Black
-@Version:0.3
+@Version:0.4
 
+Version 0.3 -  Added twiter fields.
 Version 0.3 -  Added the sitemap field and corrected the mysql query.
 Version 0.2 -  Fixed php warning errors.
 Version 0.1 - Added editFileInfo.php to site.*/
-include '../includes/header.php'; 
+/*Get the action from the url*/
 $action = isset($_GET["action"])? $_GET["action"]: '';
+
+/*Includes the header class files and database connections*/
+include '../includes/header.php'; 
 
 if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
 		
@@ -17,6 +21,7 @@ if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
 			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
 		}
 
+/*A function to convert html into plain text*/
 function converthtmlToPlain($code){
 	
 	$output = htmlentities($code);
@@ -88,13 +93,17 @@ tbody tr:hover, tbody > tr:hover{
 
 <div id="content">
 	<?php 
+	/*Display differnt pages base on acyopn variable*/
 	switch($action){	
 		case 'update':
+			/*This is the page that updates the database*/
 			
+			/*Gets data from previous page*/
 			$sql = isset($_POST["sql"])?$_POST["sql"]:'';
 			$countEdits = isset($_POST["countEdit"])?$_POST["countEdit"]:0;
 			
 			
+			/*Updages the database if there has been a change*/
 			if ($countEdits != 0){
 				
 				$query = $database ->prepare($sql);
@@ -102,15 +111,19 @@ tbody tr:hover, tbody > tr:hover{
 			
 			}
 			
+			/*Displays a message*/
 			echo '<p>Page has been sucessfully updated.</p>
 			<input type="button" onclick="location.href=\'editFileinfo.php\'"
 			value="Contine"/>';
 		
 		break;
 		case 'save':
+			/*This page confirms if the user wants to makes change(s)*/
 			
+			/*Gets the file from url*/
 			$file = isset($_GET["file"])?$_GET["file"] : '';
 			
+			/*Displays the data from the inputs from previous page*/
 			echo '
 				<div class="fieldline">
 					<div class="fieldname"><p>File name:</p></div>
@@ -153,6 +166,28 @@ tbody tr:hover, tbody > tr:hover{
 					<div class="field"><p>'.$_POST["facebookurl"].'</p></div>
 				</div>
 				<div class="fieldline">
+					<div class="fieldname"><p>Twitter card type:</p></div>
+					<div class="field"><p>'.$_POST["twittercard"].'</p></div>
+				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Twitter site:</p></div>
+					<div class="field"><p>'.$_POST["twittersite"].'</p></div>
+				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Twitter title:</p></div>
+					<div class="field">
+						<p>'.$_POST["twittertitle"].'</p>
+					</div>
+				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Twitter description:</p></div>
+					<div class="field"><p>'.$_POST["twitterdescription"].'</p></div>
+				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Twitteri mage:</p></div>
+					<div class="field"><p>'.$_POST["twitterimage"].'</p></div>
+				</div>
+				<div class="fieldline">
 					<div class="fieldname"><p>What\'s new (English):</p></div>
 					<div class="field"><p>'.$_POST["whatnewenglish"].'</p></div>
 				</div>
@@ -184,6 +219,7 @@ tbody tr:hover, tbody > tr:hover{
 				</div>
 				<div class="clear"></div>';
 			
+			/*Creates the query base on yhe foelds that have been change*/
 			$sql = "UPDATE `pages` SET";
 			$countEdits = 0;
 			
@@ -227,6 +263,31 @@ tbody tr:hover, tbody > tr:hover{
 				$countEdits ++;
 			}
 			
+			if ( $_POST["twittercardH"]  !=  $_POST["twittercard"]){
+				$sql .= '`twittercard` = "'.$_POST["twittercard"].'",';
+				$countEdits ++;
+			}
+			
+			if ( $_POST["twittersiteH"]  !=  $_POST[""]){
+				$sql .= '`twittersite` = "'.$_POST["twittersite"].'",';
+				$countEdits ++;
+			}
+			
+			if ( $_POST["twittertitleH"]  !=  $_POST["twittertitle"]){
+				$sql .= '`twittertitle` = "'.$_POST["twittertitle"].'",';
+				$countEdits ++;
+			}
+			
+			if ( $_POST["twitterdescriptionH"]  !=  $_POST["twitterdescription"]){
+				$sql .= '`twitterdescription` = "'.$_POST["twitterdescription"].'",';
+				$countEdits ++;
+			}
+			
+			if ( $_POST["twitterimageH"]  !=  $_POST["twitterimage"]){
+				$sql .= '`twitterimage` = "'.$_POST["twitterimage"].'",';
+				$countEdits ++;
+			}
+			
 			if ($_POST["whatnewenglishH"] != $_POST["whatnewenglish"]){
 				$sql .= '`whatnewenglish` = "'.$_POST["whatnewenglish"].'",';
 				$countEdits ++;
@@ -267,6 +328,7 @@ tbody tr:hover, tbody > tr:hover{
 				$sql .= 'WHERE `filename` = "'.$file.'"';
 			}
 			
+			/*Passes data to the next page*/
 			?>
 			
 			<form action="editFileinfo.php?action=update&file=<?php echo $file?>" method="post">
@@ -282,7 +344,9 @@ tbody tr:hover, tbody > tr:hover{
 		<?php
 		break;
 		case 'edit':
-		
+			/*This diplay the edit page*/
+			
+			/*Gets file from url*/
 			$file = isset($_GET["file"])?$_GET["file"] : '';
 		?>
 		
@@ -292,13 +356,14 @@ tbody tr:hover, tbody > tr:hover{
 		<?php
 			
 			
-			
+			/*Gets detaols from the database*/
 			$sql = 'SELECT * FROM `pages` WHERE `filename`= "'.$file.'"';
 			$query = $database ->prepare($sql );
 			$query ->execute();
 			
 			$fileInfo = $query ->fetch();
 			
+			/*Display the form*/
 			echo '
 				<div class="fieldline">
 					<div class="fieldname"><p>File name:</p></div>
@@ -377,6 +442,55 @@ tbody tr:hover, tbody > tr:hover{
 						<p>
 							<input type="hidden" name="facebookurlH" value = "'.$fileInfo["facebookurl"].'" />
 							<input type="url" name="facebookurl" value = "'.$fileInfo["facebookurl"].'" />
+						</p>
+					</div>
+				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Twitter card type:</p></div>
+					<div class="field">
+						<p>
+							<input type="hidden" name="twittercardH" value = "'.$fileInfo["twittercard"].'" />
+							<select name="twittercard">
+								<option value="summary" ' .($fileInfo["twittercard"] == "summary"?'selected':'').'>Summary</option>
+								<option value="summary_large_image" ' .($fileInfo["twittercard"] == "summary_large_image"?'selected':'').'>Summary with Large Image</option>
+								<option value="app" ' .($fileInfo["twittercard"] == "app"?'selected':'').'>App</option>
+							</select>
+						</p>
+					</div>
+				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Twitter site:</p></div>
+					<div class="field">
+						<p>
+							<input type="hidden" name="twittersiteH" value = "'.$fileInfo["twittersite"].'" />
+							<input type="text" name="twittersite" value = "'.$fileInfo["twittersite"].'" />
+						</p>
+					</div>
+				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Twitter title:</p></div>
+					<div class="field">
+						<p>
+							<input type="hidden" name="twittertitleH" value = "'.$fileInfo["twittertitle"].'" />
+							<input type="text" name="twittertitle" value = "'.$fileInfo["twittertitle"].'" />
+						</p>
+					</div>
+				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Twitter description:</p></div>
+					<div class="field">
+						<p>
+							<input type="hidden" name="twitterdescriptionH" value = "'.$fileInfo["twitterdescription"].'" />
+							<input type="text" name="twitterdescription" value = "'.$fileInfo["twitterdescription"].'" />
+						</p>
+					</div>
+				</div>
+				<div class="fieldline">
+					<div class="fieldname"><p>Twitteri mage:</p></div>
+					<div class="field">
+						<p>
+							<input type="hidden" name="twitterimageH" value = "'.$fileInfo["twitterimage"].'" />
+							<input type="url" name="twitterimage" value = "'.$fileInfo["twitterimage"].'" />
 						</p>
 					</div>
 				</div>
@@ -473,6 +587,7 @@ tbody tr:hover, tbody > tr:hover{
 		
 		break;
 		default:
+		/*This page displays a table listing files and their keywords and their description*/
 	?>
 	
 	<form action="editFileinfo.php" method="">
@@ -490,12 +605,13 @@ tbody tr:hover, tbody > tr:hover{
 <?php
 
 
-
+/*Gets data from the database*/ 
 $sql = 'SELECT * FROM `pages` ';
 
 $query = $database ->prepare($sql );
 $query ->execute();
 
+/*Builds the table rows with the data from the database*/
 while ($fileinfo = $query ->fetch()){
 	echo '
 		<tr>
@@ -522,7 +638,9 @@ while ($fileinfo = $query ->fetch()){
 
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php 
+/*Includes the footer*/
+include '../includes/footer.php'; ?>
 
 </div>
 
