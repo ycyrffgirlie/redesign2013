@@ -1,15 +1,16 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.1
-@todo:  Make it work with about.php and fanprofile.php..
+@Version:0.2
+@todo:  
 
+Version 0.2 - Make it work with about.php and fanprofile.php. abd added comments and tidy up the file.
 Version 0.1 - Added the fileinfo class to the site. */
 
 class fileInfo {
 
 	public $filesDetails, $updatedFiles, $addedFiles;
 	
-	/**/
+	/*Creates the html version of added  files table*/
 	function added_files_table_html(){
 		
 		$output  =  '';
@@ -34,6 +35,7 @@ class fileInfo {
 		
 	}
 	
+	/*Creates the text version of added  files table*/
 	function added_files_table_txt(){
 		
 		$output  =  '';
@@ -89,19 +91,7 @@ class fileInfo {
 		
 		
 	}
-	
-	/*Builds the text version of the bottom of the email.*/
-	function build_email_txt_bottom(){
 		
-		$output  =  '';
-		
-		$output  .= 'Thanks,'."\n".
-				'One nutty fan.';
-		
-		return $output;
-		
-	}
-	
 	/*Builds the html version of the bottom of the email.*/
 	function build_email_html_bottom(){
 		
@@ -147,6 +137,53 @@ class fileInfo {
 		
 	}
 	
+	/*Builds the text version of the email.*/
+	function build_email_txt(){
+	
+		$output  =  '';
+		$output = $this ->fileInfo_table_txt();
+		if (count($this ->updatedFiles)>1){
+			$output .= 'Pages that have been updated:'."\n\n";
+			$output .= $this ->updated_files_table_txt();
+		}
+		
+		if (count($this ->addedFiles)>1){
+		
+			$output .= 'Pages that have been added:'."\n\n";
+			$output .= $this ->added_files_table_txt();
+		}
+		
+		$output .= $this ->build_email_txt_bottom();
+		
+		
+		return $output;
+	
+	}
+	
+	/*Builds the text version of the bottom of the email.*/
+	function build_email_txt_bottom(){
+		
+		$output  =  '';
+		
+		$output  .= 'Thanks,'."\n".
+				'One nutty fan.';
+		
+		return $output;
+		
+	}
+	
+	/*Builds the html version of the bottom of the table.*/
+	function build_html_table_bottom(){
+		
+		$output  =  '';
+		
+		$output  .= '
+					</table>';
+		
+		return $output;
+		
+	}
+	
 	/*Builds the html version of the top of the table.*/
 	function build_html_table_top(){
 		
@@ -164,37 +201,7 @@ class fileInfo {
 		
 	}
 	
-	/*Builds the html version of the bottom of the table.*/
-	function build_html_table_bottom(){
-		
-		$output  =  '';
-		
-		$output  .= '
-					</table>';
-		
-		return $output;
-		
-	}
-	
-	/*Builds the html version  a row of the table.*/
-	function build_updated_table_row_html($name, $datelastmodified){
-	
-		$output  =  '';
-		
-		$output  .='
-						<tr>
-							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
-								<font color="ffd700">'.$name.'</font>
-							</td>
-							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
-								<font color="ffd700">'.$datelastmodified.'</font>
-							</td>
-						</tr>';
-						
-		return $output;
-	}
-	
-	/*Builds the html version of the top of the table.*/
+	/*Builds the html version of the top of the  updated files table.*/
 	function build_html_updated_table_top(){
 		
 		$output  =  '';
@@ -246,7 +253,25 @@ Name: '.$name."\n"
 	
 	}
 	
-	/**/
+	/*Builds the html version  a row of the tupdated files table.*/
+	function build_updated_table_row_html($name, $datelastmodified){
+	
+		$output  =  '';
+		
+		$output  .='
+						<tr>
+							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
+								<font color="ffd700">'.$name.'</font>
+							</td>
+							<td style="border: 1px solid #FFFFFF; width: 11%; text-align: center;">
+								<font color="ffd700">'.$datelastmodified.'</font>
+							</td>
+						</tr>';
+						
+		return $output;
+	}
+	
+	/*Builds the text version  a row of the tupdated files table*/
 	function build_updared_table_row_txt($name,$datelastmodified){
 	
 	$output  =  '';
@@ -259,30 +284,8 @@ Name: '.$name."\n"
 	
 	}
 	
-	/*Builds the text version of the email.*/
-	function build_email_txt(){
-	
-		$output  =  '';
-		$output = $this ->fileInfo_table_txt();
-		if (count($this ->updatedFiles)>1){
-			$output .= 'Pages that have been updated:'."\n\n";
-			$output .= $this ->updated_files_table_txt();
-		}
-		
-		if (count($this ->addedFiles)>1){
-		
-			$output .= 'Pages that have been added:'."\n\n";
-			$output .= $this ->added_files_table_txt();
-		}
-		
-		$output .= $this ->build_email_txt_bottom();
-		
-		
-		return $output;
-	
-	}
-	
-	/**/
+	/*Update database. Builds the headers of the email.  Builds the body of the emails. 
+	Sends the email. Logs the email for debugging  purposes. */
 	function email(){
 		
 		$filesDetails = $this ->getfilesinfo();
@@ -344,31 +347,7 @@ Name: '.$name."\n"
 		
 	}
 	
-	/**/
-	function fileInfo_table(){
-		
-		$output  =  '';
-		$output  .= $this ->build_html_table_top();
-		
-		$filesDetails = $this ->filesDetails;
-		
-		$i  =0;
-		
-		while ($i < count($filesDetails)){
-			
-			$output  .= $this ->build_table_row_html($filesDetails[$i]["name"],$filesDetails[$i]["title"],$filesDetails[$i]["datelastmodified"]);
-			//print_r($filesDetails[$i]);
-			$i ++;
-			
-			
-		}
-		
-		$output  .= $this ->build_html_table_bottom();
-		
-		return $output;
-		
-	}
-	
+	/*Test if the file already exist in the database*/
 	function file_exist_test($filename){
 	
 		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
@@ -385,15 +364,38 @@ Name: '.$name."\n"
 		$sql = 'SELECT count(*) FROM `pages` WHERE `filename` = "'.$filename.'"';
 		$query = $database ->prepare($sql );
 		$query ->execute();
-		//echo '<p>'.$sql.'</p>'."\n";
 
 		$numofrows = $query ->fetchColumn();
-		//echo '<p>'.$numofrows.'</p>'."\n";
-		//print_r($numofrows );
+		
 		return $numofrows;
 	
 	}
 	
+	/*Creates the html version of all  files table*/
+	function fileInfo_table(){
+		
+		$output  =  '';
+		$output  .= $this ->build_html_table_top();
+		
+		$filesDetails = $this ->filesDetails;
+		
+		$i  =0;
+		
+		while ($i < count($filesDetails)){
+			
+			$output  .= $this ->build_table_row_html($filesDetails[$i]["name"],$filesDetails[$i]["title"],$filesDetails[$i]["datelastmodified"]);
+			$i ++;
+			
+			
+		}
+		
+		$output  .= $this ->build_html_table_bottom();
+		
+		return $output;
+		
+	}
+	
+	/*Creates the text version of all  files table*/
 	function fileInfo_table_txt(){
 		
 		$output  =  '';
@@ -404,7 +406,6 @@ Name: '.$name."\n"
 		
 		while ($i < count($filesDetails)){
 			$output .= $this ->build_table_row_txt($filesDetails[$i]["name"],$filesDetails[$i]["title"],$filesDetails[$i]["datelastmodified"]);
-			//print_r($filesDetails[$i]);
 			$i ++;
 		}
 		
@@ -412,7 +413,61 @@ Name: '.$name."\n"
 		
 	}
 	
-	/**/
+	/*Gets details about the about files*/
+	function get_about_pages(){
+		
+		$files = Array(
+		0 =>array('name'=>'/about.html', 'title' => 'About'), 
+		1 =>array('name'=>'/about1.html', 'title' => 'About'),
+		2 =>array('name'=>'/am.html', 'title' => 'Am'), 
+		3 =>array('name'=>'/am1.html', 'title' => 'Am')
+		);
+		
+		if ($_SERVER["TERM"] == 'xterm'){
+	
+			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
+			
+				$patten = "/var/www/websites/redesign2013";
+			
+			}else{
+		
+				$patten = "/home/ycyrf718/public_html/redesign2013";
+		
+			}
+	
+		}else{
+
+			if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+			
+				$patten = "/var/www/websites/redesign2013";
+			
+			}else{
+			
+				$pattern = "/home/ycyrf718/public_html/redesign2013";
+			
+			}
+
+		}
+		
+		
+		$fileInfo = Array();
+		$i = 0;
+		
+		foreach ($files as $file){
+			
+			
+			$fileInfo[$i]["name"] = $file["name"];
+			$fileInfo[$i]["title"]  = $file["title"];
+			$fileInfo[$i]["datelastmodified"] = date('Y-m-d H:i:s',filemtime($patten.'/about.php'));
+			$i ++;
+			
+		}
+		
+		return $fileInfo;
+		
+	}	
+	
+	/*Gets files that stored on server*/
 	function getfiles(){
 		
 		if ($_SERVER["TERM"] == 'xterm'){
@@ -467,7 +522,7 @@ Name: '.$name."\n"
 
 		$skipped_dir = implode("|", $skipped_dirs);
 		$skipped_dir = '('.$skipped_dir.')';
-		//echo $skipped_dir; 
+		
 		$skipped_files =array('.shtml'
 					,'.xml'
 					,'about'
@@ -566,7 +621,7 @@ Name: '.$name."\n"
 		return $filepaths;
 	}
 	
-	/**/
+	/*Gets details about files*/
 	function getfilesinfo(){
 
 		$files = $this  ->getfiles();
@@ -618,14 +673,78 @@ Name: '.$name."\n"
 			$i++;
 		}
 		
-		$this ->filesDetails = $filesinfo;
-		return $filesinfo;
+		
+		$filesinfo1= $this ->get_about_pages();
+		$filesinfo2 = $this ->get_profiles_pages();
+		$fileInfo  = array_merge($filesinfo, $filesinfo1,$filesinfo2);
+		
+		$this ->filesDetails = $fileInfo;
+		
+		
+		return $fileInfo;
 	}
 	
+	/*Gets details about  the fan profiles files*/
+	function get_profiles_pages(){
+	
+		if ($_SERVER["TERM"] == 'xterm'){
+		
+			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
+			
+				require("/var/www/websites/redesign2013/includes/connection.php");
+				$patten = "/var/www/websites/redesign2013";
+			
+			}else{
+		
+				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+				$patten = "/home/ycyrf718/public_html/redesign2013";
+		
+			}
+		
+		
+		}else{
+		
+			if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		
+				require("/var/www/websites/redesign2013/includes/connection.php");
+				$patten = "/var/www/websites/redesign2013";
+		
+			}else{
+			
+				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+				$patten = "/home/ycyrf718/public_html/redesign2013";
+				
+			}
+		}
+		
+		$sql = "SELECT filename from fan_profile";
+		$query  =$database ->prepare($sql);
+		$query ->execute();
+		
+		$files = $query ->fetchAll();
+		$fileInfo = Array();
+		$i = 0;
+		
+		foreach ($files as $file){
+			
+			if (isset($file["filename"])){
+			
+				$fileInfo[$i]["name"] = $file["filename"];
+				$fileInfo[$i]["title"]  = "";
+				$fileInfo[$i]["datelastmodified"] = date('Y-m-d H:i:s',filemtime($patten.'/profiles/fanprofile.php'));
+				$i ++;
+			
+			}
+		}
+		
+		return $fileInfo;
+		
+	}	
+	
+	/*This update the  database and creates  lists of updated files and added files*/
 	function update_datebase(){
 	
 		$filesDetails = $this ->filesDetails;
-		//print_r($filesDetails);
 		$i = 0;
 		$countUpdated = 0;
 		$CountAdded = 0;
@@ -643,7 +762,6 @@ Name: '.$name."\n"
 	
 		while ($i < count($filesDetails)){
 			$numofrows = $this ->file_exist_test($filesDetails[$i]["name"]);
-			//echo '<p>'.$numofrows.'</p>';
 			$numofrows2 = 0;
 			$numofrows2 = $this ->update_test($filesDetails[$i]["name"], $filesDetails[$i]["datelastmodified"]);
 			
@@ -652,7 +770,6 @@ Name: '.$name."\n"
 				if ($numofrows2 == 0){
 					
 					$sql = 'UPDATE pages SET datelastmodified = "'.$filesDetails[$i]["datelastmodified"].'" where filename ="'.$filesDetails[$i]["name"].'"';
-					//echo '<p>'.$sql.'</p>'."\n";
 					
 					try{
 		
@@ -673,8 +790,6 @@ Name: '.$name."\n"
 				$sql = "INSERT INTO pages(filename, title, facebooktitle, datelastmodified )
 					VALUES('".$filesDetails[$i]["name"]."','".$filesDetails[$i]["title"]."','".$filesDetails[$i]["title"]
 					."','".$filesDetails[$i]["datelastmodified"]."')";
-				
-				//echo '<p>'.$sql.'</p>'."\n";
 				
 				try{
 		
@@ -697,19 +812,56 @@ Name: '.$name."\n"
 	
 		}
 		
-		//echo $countUpdated ;
-		//print_r($updatedFiles);
-		//echo $CountAdded;
-		//print_r($addedFiles);
-		
 		$this ->updatedFiles = $updatedFiles;
 		$this ->addedFiles = $addedFiles;
 		
 		
 		
-	}	
+	}
+
+	/*Creates the html version of updated  files table*/
+	function updated_files_table_html(){
+		
+		$output  =  '';
+		$output  .= $this ->build_html_updated_table_top();
+		
+		$updatedFiles= $this ->updatedFiles;
+		
+		$i  =0;
+		
+		while ($i < count($updatedFiles)){
+			
+			$output  .= $this ->build_updated_table_row_html($updatedFiles[$i]["name"],$updatedFiles[$i]["datelastmodified"]);
+			$i ++;
+			
+			
+		}
+		
+		$output  .= $this ->build_html_table_bottom();
+		
+		return $output;
+		
+	}
 	
-	/**/
+	/*Creates the text version of updated  files table*/
+	function updated_files_table_txt(){
+		
+		$output  =  '';
+		
+		$updatedFiles= $this ->updatedFiles;
+		
+		$i  =0;
+		
+		while ($i < count($updatedFiles)){
+			$output .= $this ->build_updared_table_row_txt($updatedFiles[$i]["name"],$updatedFiles[$i]["datelastmodified"]);
+			$i ++;
+		}
+		
+		return $output;
+		
+	}
+	
+	/*Test if the file needs updating in the database*/
 	function update_test($filename, $datelastmodified){
 		
 		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
@@ -727,58 +879,10 @@ Name: '.$name."\n"
 		$query ->execute();
 		
 		$numofrows = $query ->fetchColumn();
-		//echo $numofrows."\n";
 		
 		return $numofrows;
 		
 	
-	}
-	
-	function updated_files_table_txt(){
-		
-		$output  =  '';
-		
-		//print_r($this);
-		
-		$updatedFiles= $this ->updatedFiles;
-		//print_r($updatedFiles);
-		
-		$i  =0;
-		
-		while ($i < count($updatedFiles)){
-			$output .= $this ->build_updared_table_row_txt($updatedFiles[$i]["name"],$updatedFiles[$i]["datelastmodified"]);
-			
-			//print_r($updatedFiles[$i]);
-			$i ++;
-		}
-		
-		return $output;
-		
-	}
-	
-	/**/
-	function updated_files_table_html(){
-		
-		$output  =  '';
-		$output  .= $this ->build_html_updated_table_top();
-		
-		$updatedFiles= $this ->updatedFiles;
-		
-		$i  =0;
-		
-		while ($i < count($updatedFiles)){
-			
-			$output  .= $this ->build_updated_table_row_html($updatedFiles[$i]["name"],$updatedFiles[$i]["datelastmodified"]);
-			//print_r($filesDetails[$i]);
-			$i ++;
-			
-			
-		}
-		
-		$output  .= $this ->build_html_table_bottom();
-		
-		return $output;
-		
 	}
 	
 	/*function (){
