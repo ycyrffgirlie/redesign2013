@@ -1,7 +1,9 @@
 /* @@Author: Chritine A. Black
-@Version:0.7
+@Version:0.9
 The main style sheet for the Cyrff site
 
+Version 0.9 - Added styling for the contact form
+Version 0.8 -  Fixed it for mobile.
 Version 0.7 - Added styling for lyrics pages
 Version 0.6 - Fixed images and change the colour of back button
 Version 0.5 - Added styling for verticalspace div.
@@ -327,4 +329,52 @@ img{
 
 .translation{
 	float: right;
+}
+
+#overlay{
+	background: none repeat scroll 0% 0% ;
+	background-color: rgba(128, 0, 128, 0.7); 
+	height: 100%;
+	opacity: 0.4;
+	position: fixed;
+	width: 100%;
+	z-index: 20;
+}
+.contactScreen{ 
+	border: 5px solid #ffd700;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px 25px 25px 25px;
+	position: fixed;
+	left: 25%;
+	top: 10%;
+	display: none; 
+	z-index: 100000; 
+	width: 50%;
+	padding: 40px 20px 20px 20px;
+	height: 69%;
+	background-color: #800080;
+	color: #ffd700; 
+	
+}
+
+.close{
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	padding: 5px;
+	/*border: 5px solid #fff;*/
+	color: #ffd700; 
+	text-decoration: none;
+	
+
+}
+
+.contactContainer{
+	width: 95%;
+	margin: 0px auto;
+	padding: 5px;
 }
