@@ -2,6 +2,7 @@
 @Version:0.9
 The main style sheet for the Cyrff site
 
+Version 0.10 - Styling the close button for the contact form.
 Version 0.9 - Added styling for the contact form
 Version 0.8 -  Fixed it for mobile.
 Version 0.7 - Added styling for lyrics pages
@@ -360,17 +361,18 @@ img{
 
 .close{
 	position: absolute;
-	top: 0px;
-	right: 0px;
-	width: 30px;
-	height: 30px;
+	top: -10px;
+	right: -10px;
+	width: 25px;
+	height: 25px;
 	cursor: pointer;
-	padding: 5px;
+	padding: 5px 5px 5px 5px;
 	/*border: 5px solid #fff;*/
 	color: #ffd700; 
 	text-decoration: none;
-	
-
+	font-size: 2em;
+	background-color: #FFFFFF;
+	border-radius: 20px 20px 20px 20px;
 }
 
 .contactContainer{
