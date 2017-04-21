@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.1
+@Version:0.2
 @todo: 
 
+Version 0.2 - Added a close button to the form.
 Version 0.1 - Added the contact class to the site. */
 
 class contact{
@@ -90,7 +91,7 @@ class contact{
 <div id="overlay"></div>
 <div class="contactScreen" contactScreen" style="display: block;">
 	
-	<a class="close" href="">X</a>
+	<a class="close" href="" aria-label="Button to close the contact form."><div style="margin: 0px auto; width:20px;">&times;</div></a>
 	<div class="contactContainer">
 		<p>Thank you, your email has been sent. I will be in touch soon.</p>
 		<p>Diolch i chi, eich e-bost wedi cael ei anfon. Byddaf yn cysylltu &acirc; chi cyn bo hir</p>
@@ -110,7 +111,7 @@ class contact{
 		$output = '
 <div class="contactScreen"'.(isset($_GET["v"] )?$_GET["v"] == 'fail'?' style="display: block;"':' style="display: block;"':'').'>
 	
-	<a class="close" href="">X</a>
+	<a class="close" href="" aria-label="Button to close the contact form."><div style="margin: 0px auto; width:20px;">&times;</div></a>
 	<div class="contactContainer">
 	<form id="contactForm" name="contactForm" method="post" action="'.$filename.'">
 	'. (isset($_GET["v"] )?$_GET["v"] == 'fail'? '<p class="white">Please check that you have enter your name and email address correctly.
