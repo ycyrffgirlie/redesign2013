@@ -3,6 +3,7 @@
 @Version:0.2
 @todo:  
 
+Version 0.3 - Fixed for live server, fixed PHP notices and added another check for update_test.
 Version 0.2 - Make it work with about.php and fanprofile.php. abd added comments and tidy up the file.
 Version 0.1 - Added the fileinfo class to the site. */
 
@@ -292,7 +293,7 @@ Name: '.$name."\n"
 		$this ->update_datebase();
 		
 		$to = 'ycyrffgroupie@gmail.com';
-		$subject = 'Reports';
+		$subject = 'File Information and update';
 		$semi_rand = md5(time()); 
 		$mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
 		$headers ='MIME-Version: 1.0'."\r\n";
@@ -321,10 +322,38 @@ Name: '.$name."\n"
 			
 		}
 		
+		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
+		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
+		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
+		
+		
+		if ($term == 'xterm'  || $shell == '/usr/local/cpanel/bin/jailshell'){
+	
+			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
+				
+				$logLocation = '/var/www/websites/redesign2013/logs/';
+			
+			}else{
+				
+				$logLocation = '/home/ycyrf718/logs/';
+				
+			}
+		
+		}else{
+			if ($documentRoot == '/var/www/websites/redesign2013'){
+		
+				$logLocation = '/var/www/websites/redesign2013/logs/';
+		
+			}else{
+		
+				$logLocation = '/home/ycyrf718/logs/';
+			}
+		}
+		
 		$filename = 'fileInfoEmail.txt';
 		
 		try {
-			$file = fopen('/var/www/websites/redesign2013/logs/'.$filename,'c');
+			$file = fopen($logLocation.$filename,'c');
 	
 			if ($file){
 				fwrite($file, $message);
@@ -342,7 +371,7 @@ Name: '.$name."\n"
 			echo 'Line :'.$error->getLine().' - File:'.$error->getFile()."\n";
 		}
 		
-		echo $message;
+		//echo $message;
 		return $output;
 		
 	}
@@ -350,13 +379,33 @@ Name: '.$name."\n"
 	/*Test if the file already exist in the database*/
 	function file_exist_test($filename){
 	
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
+		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
+		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 		
-			require("/var/www/websites/redesign2013/includes/connection.php");
+		if ($term == 'xterm'  || $shell == '/usr/local/cpanel/bin/jailshell'){
+	
+			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
+				
+				require("/var/www/websites/redesign2013/includes/connection.php");
 		
+			}else{
+				
+				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+				
+			}
+			
 		}else{
 			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+			if ($documentRoot == '/var/www/websites/redesign2013'){
+				
+				require("/var/www/websites/redesign2013/includes/connection.php");
+			
+			}else{
+		
+				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+			}
+		
 		}
 		
 		$numofrows = 0;
@@ -423,7 +472,11 @@ Name: '.$name."\n"
 		3 =>array('name'=>'/am1.html', 'title' => 'Am')
 		);
 		
-		if ($_SERVER["TERM"] == 'xterm'){
+		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
+		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
+		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
+		
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
 	
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 			
@@ -431,19 +484,19 @@ Name: '.$name."\n"
 			
 			}else{
 		
-				$patten = "/home/ycyrf718/public_html/redesign2013";
+				$patten = "/home/ycyrf718/public_html/";
 		
 			}
 	
 		}else{
 
-			if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+			if ($documentRoot == '/var/www/websites/redesign2013'){
 			
 				$patten = "/var/www/websites/redesign2013";
 			
 			}else{
 			
-				$pattern = "/home/ycyrf718/public_html/redesign2013";
+				$pattern = "/home/ycyrf718/public_html/";
 			
 			}
 
@@ -470,7 +523,11 @@ Name: '.$name."\n"
 	/*Gets files that stored on server*/
 	function getfiles(){
 		
-		if ($_SERVER["TERM"] == 'xterm'){
+		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
+		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
+		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
+		
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
 	
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 			
@@ -478,19 +535,19 @@ Name: '.$name."\n"
 			
 			}else{
 		
-				$pattern = "/home/ycyrf718/public_html/redesign2013/*";
+				$pattern = "/home/ycyrf718/public_html/*";
 		
 			}
 	
 		}else{
 
-			if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+			if ($documentRoot == '/var/www/websites/redesign2013'){
 			
 				$pattern = "/var/www/websites/redesign2013/*";
 			
 			}else{
 			
-				$pattern = "/home/ycyrf718/public_html/redesign2013/*";
+				$pattern = "/home/ycyrf718/public_html/*";
 			
 			}
 
@@ -544,6 +601,24 @@ Name: '.$name."\n"
 					,'template'
 					,'phpinfo'
 					,'.ajax.php'
+					,'contact.php'
+					,'imateapot.php'
+					,'.db'
+					,'.JPG'
+					,'.LOG'
+					,'.gif'
+					,'.mp3'
+					,'.htaccess'
+					,'.class'
+					,'chantalprofile.html'
+					,'khmerhunprofile.html'
+					,'lukeprofile.html'
+					,'christineprofile.html'
+					,'ffwrchamotobeicsprofile.html'
+					,'jeniwineprofile.html'
+					,'llewelynrichardsprofile.html'
+					,'mrgroovyprofile.html'
+					,'rhysprofile.html'
 				);
 
 		$skipped_file = implode("|", $skipped_files);
@@ -556,6 +631,7 @@ Name: '.$name."\n"
 					,'profiles'
 					,'reviews'
 					,'sound_clips'
+					,'Images'
 				);
 				
 
@@ -573,14 +649,15 @@ Name: '.$name."\n"
 				$counter++;
 				
 			}elseif(preg_match('/.html|.php|.htm/', $file) &&
-			!preg_match('/'.$skipped_file.'/',$file)){
+			!preg_match('/'.$skipped_file.'/',$file) && 
+			!preg_match('%'.$skipped_dir.'%',$file)){
 			
-						$cleanerfilespath[$i] = $file;
-						$i++;
+					$cleanerfilespath[$i] = $file;
+					$i++;
 
 			}
 		}
-
+		
 
 		$i = 0;
 
@@ -609,13 +686,13 @@ Name: '.$name."\n"
 
 		foreach ($files as $file){
 			if (preg_match('/.html|.php|.htm/', $file)  && !preg_match('/contact.php/', $file)  && !preg_match('/fanprofile.php/', $file)
-			 && !preg_match('/ajax.php/', $file)
+			 && !preg_match('/ajax.php/', $file) && !preg_match('/'.$skipped_file.'/',$file) && !preg_match('%Images/site%',$file)
 			){
 					$cleanerfiles1[$i] = $file;
 					$i++;
 			}
 		}
-
+		
 		$filepaths = array_merge($cleanerfilespath, $cleanerfiles1);
 		
 		return $filepaths;
@@ -643,10 +720,12 @@ Name: '.$name."\n"
 				if (preg_match( '%/var/www/websites/redesign2013%', $file)){
 				
 					$filesinfo[$i]["name"] = preg_replace('%/var/www/websites/redesign2013%', '', $file);
+					$patten = '/var/www/websites/redesign2013';
 				
 				}else{
 					
 					$filesinfo[$i]["name"] = preg_replace('%/home\/ycyrf718\/public_html%', '', $file);
+					$patten = '/home\/ycyrf718\/public_html';
 				
 				}
 		
@@ -673,10 +752,18 @@ Name: '.$name."\n"
 			$i++;
 		}
 		
-		
-		$filesinfo1= $this ->get_about_pages();
 		$filesinfo2 = $this ->get_profiles_pages();
-		$fileInfo  = array_merge($filesinfo, $filesinfo1,$filesinfo2);
+		
+		if (file_exists($patten.'/about.php')){
+			
+			$filesinfo1= $this ->get_about_pages();
+			$fileInfo  = array_merge($filesinfo, $filesinfo1,$filesinfo2);
+			
+		}else{
+			
+			$fileInfo  = array_merge($filesinfo, $filesinfo2);
+			
+		}
 		
 		$this ->filesDetails = $fileInfo;
 		
@@ -687,7 +774,11 @@ Name: '.$name."\n"
 	/*Gets details about  the fan profiles files*/
 	function get_profiles_pages(){
 	
-		if ($_SERVER["TERM"] == 'xterm'){
+		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
+		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
+		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
+		
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
 		
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 			
@@ -697,14 +788,14 @@ Name: '.$name."\n"
 			}else{
 		
 				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-				$patten = "/home/ycyrf718/public_html/redesign2013";
+				$patten = "/home/ycyrf718/public_html/";
 		
 			}
 		
 		
 		}else{
 		
-			if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+			if ($documentRoot  == '/var/www/websites/redesign2013'){
 		
 				require("/var/www/websites/redesign2013/includes/connection.php");
 				$patten = "/var/www/websites/redesign2013";
@@ -712,7 +803,7 @@ Name: '.$name."\n"
 			}else{
 			
 				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-				$patten = "/home/ycyrf718/public_html/redesign2013";
+				$patten = "/home/ycyrf718/public_html/";
 				
 			}
 		}
@@ -744,6 +835,10 @@ Name: '.$name."\n"
 	/*This update the  database and creates  lists of updated files and added files*/
 	function update_datebase(){
 	
+		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
+		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
+		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
+		
 		$filesDetails = $this ->filesDetails;
 		$i = 0;
 		$countUpdated = 0;
@@ -751,13 +846,30 @@ Name: '.$name."\n"
 		$updatedFiles = '';
 		$addedFiles = '';
 		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
 		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
+		if ($term == 'xterm'  || $shell == '/usr/local/cpanel/bin/jailshell'){
+	
+			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
+				
+				require("/var/www/websites/redesign2013/includes/connection.php");	
+				
+			}else{
+				
+				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+				
+			}
+	
 		}else{
 			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+			if ($documentRoot == '/var/www/websites/redesign2013'){
+				
+				require("/var/www/websites/redesign2013/includes/connection.php");
+				
+			}else{
+				
+				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+			}
+			
 		}
 	
 		while ($i < count($filesDetails)){
@@ -787,9 +899,11 @@ Name: '.$name."\n"
 			
 			}else{
 			
-				$sql = "INSERT INTO pages(filename, title, facebooktitle, datelastmodified )
-					VALUES('".$filesDetails[$i]["name"]."','".$filesDetails[$i]["title"]."','".$filesDetails[$i]["title"]
-					."','".$filesDetails[$i]["datelastmodified"]."')";
+				$sql = sprintf("INSERT INTO pages(filename, title, facebooktitle, datelastmodified )
+					VALUES('".$filesDetails[$i]["name"]."', %s, %s,'".$filesDetails[$i]["datelastmodified"]."')",
+					$database ->quote($filesDetails[$i]["title"]),
+					$database ->quote($filesDetails[$i]["title"])
+					);
 				
 				try{
 		
@@ -814,7 +928,6 @@ Name: '.$name."\n"
 		
 		$this ->updatedFiles = $updatedFiles;
 		$this ->addedFiles = $addedFiles;
-		
 		
 		
 	}
@@ -863,14 +976,34 @@ Name: '.$name."\n"
 	
 	/*Test if the file needs updating in the database*/
 	function update_test($filename, $datelastmodified){
+	
+		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
+		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
+		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
+		if ($term == 'xterm'  || $shell == '/usr/local/cpanel/bin/jailshell'){
+	
+			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
+				
+				require("/var/www/websites/redesign2013/includes/connection.php");	
+				
+			}else{
+				
+				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+				
+			}
+	
 		}else{
 			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+			if ($documentRoot == '/var/www/websites/redesign2013'){
+				
+				require("/var/www/websites/redesign2013/includes/connection.php");
+				
+			}else{
+				
+				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+			}
+			
 		}
 		
 		$numofrows  = 0;
@@ -879,6 +1012,23 @@ Name: '.$name."\n"
 		$query ->execute();
 		
 		$numofrows = $query ->fetchColumn();
+		
+		if ($numofrows == 0){
+			
+			$sql = 'SELECT datelastmodified FROM pages WHERE filename = "'.$filename.'"';
+			$query  =$database ->prepare($sql);
+			$query ->execute();
+		
+			$storeDates = $query ->fetch();
+			$storeDate = $storeDates["datelastmodified"];
+		
+			if ($storeDate  > $datelastmodified){
+			
+				$numofrows = 1;
+			
+			}
+		
+		}
 		
 		return $numofrows;
 		
