@@ -1,7 +1,8 @@
 /* @@Author: Chritine A. Black
-@Version:0.9
+@Version:0.11
 The main style sheet for the Cyrff site
 
+Version 0.11 - Added styling for sound clip page.
 Version 0.10 - Styling the close button for the contact form.
 Version 0.9 - Added styling for the contact form
 Version 0.8 -  Fixed it for mobile.
@@ -379,4 +380,103 @@ img{
 	width: 95%;
 	margin: 0px auto;
 	padding: 5px;
+}
+
+#audioContainer{
+	margin:0px auto;  
+	width: 460px;
+}
+
+#soundContainer{
+	width:460px;
+	margin: 0 auto;
+}
+
+.soundfilecontainer{
+	background-color: #ffffff;
+	color:#800080;
+	display: block;
+	position: relative;
+	height: 15px;
+	line-height:12px;
+	border-bottom: 1px solid #ffd700;
+	font-size: 0.75em;
+}
+
+.soundfilecontainer p{
+	color:#800080;
+	/*margin-top: -5px;*/
+}
+
+.soundfilecontainer:first-child{
+	padding-top:10px; 
+	height:40px;
+}
+
+.soundfilecontainer:last-child{
+	border-bottom: none;
+}
+
+.songtitle{
+	width: 216px;
+	position:relative;
+	display:block;
+	float: left;
+	height: 15px;
+	line-height:12px;
+	padding-left: 5px;
+}
+
+.albums{
+	width: 227px;
+	position:relative;
+	display:block;
+	float: right;
+	height: 15px;
+	line-height:12px;
+	margin: auto;
+	padding-left:5px;
+}
+
+a.info:link{
+	/*Yes I know it's 1:45 on sunday and Yes I am listening to Cymru, Lloegr a Llanrwst*/
+	color:#800080;
+	text-decoration: none;
+	cursor:pointer;
+}
+
+a.info:hover{
+	cursor:pointer;
+}
+
+a.music:link{
+	color:#800080;
+	text-decoration: none;
+	cursor:pointer;
+}
+
+a.music:hover{
+	cursor:pointer;
+}
+
+.popup{
+	border: 2px solid #ffd700;
+	background-color: #ffffff;
+	display: none;
+	color:#800080;
+	height: 100px;
+	width: 200px;
+	margin-left: 226px;
+	margin-top: -20px;
+	line-height:14px;
+	z-index:10;
+	position: relative;
+}
+
+.popup p{
+	/*padding:10px;*/
+	vertical-align: middle;
+	top: 25%;
+	margin-top: 10px;
+	position: absolute;
 }
