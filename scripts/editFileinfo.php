@@ -1,8 +1,9 @@
 <?php 
 /*@Author; Christine A. Black
-@Version:0.4
+@Version:0.5
 
-Version 0.3 -  Added twiter fields.
+Version 0.5 -  Seprated pages table into two.
+Version 0.4 -  Added twiter fields.
 Version 0.3 -  Added the sitemap field and corrected the mysql query.
 Version 0.2 -  Fixed php warning errors.
 Version 0.1 - Added editFileInfo.php to site.*/
@@ -102,7 +103,6 @@ tbody tr:hover, tbody > tr:hover{
 			$sql = isset($_POST["sql"])?$_POST["sql"]:'';
 			$countEdits = isset($_POST["countEdit"])?$_POST["countEdit"]:0;
 			
-			
 			/*Updages the database if there has been a change*/
 			if ($countEdits != 0){
 				
@@ -147,6 +147,7 @@ tbody tr:hover, tbody > tr:hover{
 					<div class="fieldname"><p>Description (Werlsh):</p></div>
 					<div class="field"><p>'.$_POST["descriptioncymraeg"].'</p></div>
 				</div>
+				<div class="clear"></div>
 				<div class="fieldline">
 					<div class="fieldname"><p>Facebook title:</p></div>
 					<div class="field"><p>'.$_POST["facebooktitle"].'</p></div>
@@ -220,112 +221,113 @@ tbody tr:hover, tbody > tr:hover{
 				<div class="clear"></div>';
 			
 			/*Creates the query base on yhe foelds that have been change*/
-			$sql = "UPDATE `pages` SET";
+			$sql = "UPDATE pages, social_media SET";
 			$countEdits = 0;
 			
 			if ( $_POST["titleH"]  !=  $_POST["title"]){
-				$sql .= '`title` = "'.$_POST["title"].'",';
+				$sql .= ' title = "'.$_POST["title"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["keywordsH"] != $_POST ["keywords"] ){
-				$sql .= '`keywords` = "'. $_POST ["keywords"].'",';
+				$sql .= ' keywords = "'. $_POST ["keywords"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["descriptionenH"] != $_POST["descriptionen"]){
-				$sql .= '`descriptionen` = "'.$_POST["descriptionen"].'",';
+				$sql .= ' descriptionen = "'.$_POST["descriptionen"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["descriptioncymraegH"] != $_POST["descriptioncymraeg"]){
-				$sql .= '`descriptioncymraeg` = "'.$_POST["descriptioncymraeg"].'",';
+				$sql .= ' descriptioncymraeg = "'.$_POST["descriptioncymraeg"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["facebooktitleH"] != $_POST["facebooktitle"]){
-				$sql .= '`facebooktitle` = "'.$_POST["facebooktitle"].'",';
+				$sql .= ' social_media.facebooktitle = "'.$_POST["facebooktitle"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["facebookdescriptionH"] != $_POST["facebookdescription"]){
-				$sql .= '`facebookdescription` = "'.$_POST["facebookdescription"].'",';
+				$sql .= ' social_media.facebookdescription = "'.$_POST["facebookdescription"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["facebookimageH"] != $_POST["facebookimage"]){
-				$sql .= '`facebookimage` = "'.$_POST["facebookimage"].'",';
+				$sql .= ' social_media.acebookimage = "'.$_POST["facebookimage"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["facebookurlH"] != $_POST["facebookurl"]){
-				$sql .= '`facebookurl` = "'.$_POST["facebookurl"].'",';
+				$sql .= ' social_media.facebookurl = "'.$_POST["facebookurl"].'",';
 				$countEdits ++;
 			}
 			
 			if ( $_POST["twittercardH"]  !=  $_POST["twittercard"]){
-				$sql .= '`twittercard` = "'.$_POST["twittercard"].'",';
+				$sql .= ' social_media.twittercard = "'.$_POST["twittercard"].'",';
 				$countEdits ++;
 			}
 			
 			if ( $_POST["twittersiteH"]  !=  $_POST[""]){
-				$sql .= '`twittersite` = "'.$_POST["twittersite"].'",';
+				$sql .= ' social_media.twittersite = "'.$_POST["twittersite"].'",';
 				$countEdits ++;
 			}
 			
 			if ( $_POST["twittertitleH"]  !=  $_POST["twittertitle"]){
-				$sql .= '`twittertitle` = "'.$_POST["twittertitle"].'",';
+				$sql .= ' social_media.twittertitle = "'.$_POST["twittertitle"].'",';
 				$countEdits ++;
 			}
 			
 			if ( $_POST["twitterdescriptionH"]  !=  $_POST["twitterdescription"]){
-				$sql .= '`twitterdescription` = "'.$_POST["twitterdescription"].'",';
+				$sql .= ' social_media.twitterdescription = "'.$_POST["twitterdescription"].'",';
 				$countEdits ++;
 			}
 			
 			if ( $_POST["twitterimageH"]  !=  $_POST["twitterimage"]){
-				$sql .= '`twitterimage` = "'.$_POST["twitterimage"].'",';
+				$sql .= ' social_media.twitterimage = "'.$_POST["twitterimage"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["whatnewenglishH"] != $_POST["whatnewenglish"]){
-				$sql .= '`whatnewenglish` = "'.$_POST["whatnewenglish"].'",';
+				$sql .= ' whatnewenglish`= "'.$_POST["whatnewenglish"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["whatnewcymraegH"] != $_POST["whatnewcymraeg"]){
-				$sql .= '`whatnewcymraeg` = "'.$_POST["whatnewcymraeg"].'",';
+				$sql .= ' whatnewcymraeg = "'.$_POST["whatnewcymraeg"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["includedinnewH"] != $_POST["includedinnew"]){
-				$sql .= '`includedinnew` = "'.$_POST["includedinnew"].'",';
+				$sql .= ' includedinnew = "'.$_POST["includedinnew"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["newsorderH"] != $_POST["newsorder"]){
-				$sql .= '`newsorder` = "'.$_POST["newsorder"].'",';
+				$sql .= ' newsorder = "'.$_POST["newsorder"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["html5H"] != $_POST["html5"]){
-				$sql .= '`html5` = "'.$_POST["html5"].'",';
+				$sql .= ' html5 = "'.$_POST["html5"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["includedinsitemapH"] != $_POST["includedinsitemap"]){
-				$sql .= '`includedinsitemap` = "'.$_POST["includedinsitemap"].'",';
+				$sql .= '  includedinsitemap = "'.$_POST["includedinsitemap"].'",';
 				$countEdits ++;
 			}
 			
 			if ($_POST["htmlcodeH"] != $_POST["htmlcode"]){
-				$sql .= '`htmlcode` = "'.$_POST["htmlcode"].'",';
+				$sql .= ' htmlcode = "'.$_POST["htmlcode"].'",';
 				$countEdits ++;
 			}
 			
 			if ($countEdits != 0){
 				$sql = rtrim($sql,',');
-				$sql .= 'WHERE `filename` = "'.$file.'"';
+				$sql .= ' WHERE pages.filename = social_media.filename
+					AND pages.filename = "'.$file.'"';
 			}
 			
 			/*Passes data to the next page*/
@@ -357,7 +359,16 @@ tbody tr:hover, tbody > tr:hover{
 			
 			
 			/*Gets detaols from the database*/
-			$sql = 'SELECT * FROM `pages` WHERE `filename`= "'.$file.'"';
+			$sql = 'SELECT pages.filename,  title,  keywords, descriptionen, descriptioncymraeg,
+			social_media.facebooktitle, social_media.facebookdescription, social_media.facebookimage, 
+			social_media.facebookurl, social_media.twittercard, social_media.twittersite, 
+			social_media.twittertitle, social_media.twitterdescription, social_media.twitterimage, 
+			whatnewenglish, whatnewcymraeg, includedinnew, newsortorder, includedinsitemap, html5,
+			datelastmodified, htmlcode
+			FROM pages, social_media  
+			WHERE pages.filename = social_media.filename
+			AND pages.filename = "'.$file.'"';
+			
 			$query = $database ->prepare($sql );
 			$query ->execute();
 			
@@ -485,6 +496,7 @@ tbody tr:hover, tbody > tr:hover{
 						</p>
 					</div>
 				</div>
+				<div class="clear"></div>
 				<div class="fieldline">
 					<div class="fieldname"><p>Twitteri mage:</p></div>
 					<div class="field">
