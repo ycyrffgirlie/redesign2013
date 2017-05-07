@@ -1,15 +1,21 @@
 <?php
 /**@@author:Christine Black
-@Version:0.1
+@Version:0.2
 @todo: 
 
+Version 0.2 - Fixed for live dev.
 Version 0.1 - Added the sitemap script.**/
+
+/*Sets $_SERvER variables*/
+$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
+$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
+$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 
 /*Setting location for files*/
 $filename = 'sitemap.xml';
 $sitemapFilename = 'sitemapLog.txt';
 
-if ($_SERVER["TERM"] == 'xterm'){
+if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
 
 	if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"]) || $_SERVER["HOME"] == "/home/christine"){
 	
@@ -21,13 +27,13 @@ if ($_SERVER["TERM"] == 'xterm'){
 	
 		require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
 		$sitemapLocation = '/home/ycyrf718/public_html/'.$filename;
-		$sitemapLogLocation = '/home/ycyrf718/redesign2013/logs/'.$sitemapFilename;
+		$sitemapLogLocation = '/home/ycyrf718/logs/'.$sitemapFilename;
 	
 	}
 
 }else{
 
-	if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+	if ($documentRoot == '/var/www/websites/redesign2013'){
 	
 		require("/var/www/websites/redesign2013/includes/connection.php");
 		$sitemapLocation = '/var/www/websites/redesign2013/logs/'.$filename;
@@ -37,7 +43,7 @@ if ($_SERVER["TERM"] == 'xterm'){
 	
 		require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
 		$sitemapLocation = '/home/ycyrf718/public_html/'.$filename;
-		$sitemapLogLocation = '/home/ycyrf718/redesign2013/logs/'.$sitemapFilename;
+		$sitemapLogLocation = '/home/ycyrf718/logs/'.$sitemapFilename;
 		
 	}
 
