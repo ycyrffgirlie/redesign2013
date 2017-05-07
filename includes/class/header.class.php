@@ -1,9 +1,11 @@
 
 <?php
 /*@Author; Christine A. Black
-@Version:0.9
+@Version:0.11
 @todo: 
 
+Version 0.11 - Changed the version number of the main style sheet
+Version 0.10 -  Seprated pages table into two.
 Version 0.9 - Changed the version number of the main style sheet
 Version 0.8 - Changed the version number of the main style sheet
 Version 0.7 - Added  twitter cards.
@@ -59,7 +61,7 @@ class header{
 		<meta name="rating" content="General" />
 		<link rel="shortcut icon" href="/images/icon/cyrff.ico" type="image/x-icon" />
 		<link rel="icon" href="/images/icon/cyrff.png" type="image/png" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.10" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
+		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.11" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
 		<link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />';
 		
 			if (preg_match('.linux.',$_SERVER["HTTP_HOST"])){
@@ -232,7 +234,7 @@ class header{
 		<meta name="rating" content="General" />
 		<link rel="shortcut icon" href="/images/icon/cyrff.ico"  type="image/x-icon" />
 		<link rel="icon" href="/images/icon/cyrff.png" type="image/png" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.10" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
+		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.11" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
 		<link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />';
 		
 		if (preg_match('.linux.',$_SERVER["HTTP_HOST"])){
@@ -276,20 +278,26 @@ class header{
 			
 			}
 			  
-			$sql = "SELECT filename,title, keywords,descriptionen, descriptioncymraeg, 
-			facebooktitle, facebookdescription, facebookimage , facebookurl, twittercard, 
-			twittersite, twittertitle, twitterdescription, twitterimage, html5, htmlcode 
-			FROM pages 
-			WHERE filename ='".$page."'";
+			$sql = "SELECT pages.filename,title, keywords,descriptionen, descriptioncymraeg, 
+			social_media.facebooktitle, social_media.facebookdescription, social_media.facebookimage, 
+			social_media.facebookurl, social_media.twittercard, social_media.twittersite, 
+			social_media.twittertitle, social_media.twitterdescription, social_media.twitterimage, 
+			html5, htmlcode 
+			FROM pages , social_media  
+			WHERE pages.filename = social_media.filename
+			AND pages.filename ='".$page."'";
 			
 
 		}else{
 		
-			$sql = "SELECT filename,title, keywords,descriptionen, descriptioncymraeg, 
-			facebooktitle, facebookdescription, facebookimage , facebookurl, twittercard,
-			twittersite, twittertitle, twitterdescription, twitterimage, html5, htmlcode 
-			FROM pages 
-			WHERE filename ='".$filename."'";
+			$sql = "SELECT pages.filename,title, keywords,descriptionen, descriptioncymraeg, 
+			social_media.facebooktitle, social_media.facebookdescription, social_media.facebookimage, 
+			social_media.facebookurl, social_media.twittercard, social_media.twittersite, 
+			social_media.twittertitle, social_media.twitterdescription, social_media.twitterimage, 
+			html5, htmlcode 
+			FROM pages , social_media  
+			WHERE  pages.filename = social_media.filename
+			AND pages.filename ='".$filename."'";
 		
 		}
 		
@@ -333,6 +341,7 @@ class header{
 	
 		}
 		
+		//echo $sql;
 		
 		$query = $database->prepare($sql);
 		$query ->execute();
@@ -405,11 +414,14 @@ class header{
 	function profile_query($profileId = 200000){
 		
 		$sql = 'SELECT pages.filename,title, keywords,descriptionen, 
-		descriptioncymraeg, facebooktitle, facebookdescription, facebookimage , 
-		facebookurl, twittercard, twittersite, twittertitle, twitterdescription, 
-		twitterimage, html5, htmlcode
-		FROM pages, fan_profile
-		WHERE pages.filename = fan_profile.filename
+		descriptioncymraeg,
+		social_media.facebooktitle, social_media.facebookdescription, social_media.facebookimage, 
+		social_media.facebookurl, social_media.twittercard, social_media.twittersite, 
+		social_media.twittertitle, social_media.twitterdescription, social_media.twitterimage, 
+		html5, htmlcode
+		FROM pages, fan_profile, social_media  
+		WHERE pages.filename = social_media.filename
+		AND pages.filename = fan_profile.filename
 		AND fan_profile.profileid ='.$profileId;
 		
 		return $sql;
