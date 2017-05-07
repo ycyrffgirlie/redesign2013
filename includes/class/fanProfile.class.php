@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.1
+@Version:0.2
 @todo: 
 
+Version 0.2 - Fixed a php warning.
 Version 0.1 - Added the fanProfile class to the site. */
 
 class fanProfile{
@@ -118,7 +119,7 @@ class fanProfile{
 		}	
 		
 	
-		$sql = $this ->get_profile_query(profileid);
+		$sql = $this ->get_profile_query($profileid);
 	
 		$query = $database ->prepare($sql);
 		$query ->execute();
