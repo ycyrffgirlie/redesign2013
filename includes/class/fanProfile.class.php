@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.2
+@Version:0.3
 @todo: 
 
+Version 0.3 - Added labels to the form.
 Version 0.2 - Fixed a php warning.
 Version 0.1 - Added the fanProfile class to the site. */
 
@@ -25,80 +26,88 @@ class fanProfile{
 <p class=\"white\">* Required information</p>
 <div id=\"content\">
 	<div class=\"fieldline\">
-		<div class=\"fieldname\"><p>Name/<span lang=\"cy\">Enw:</span><span class=\"white\">*</span>&nbsp;</p></div>
+		<div class=\"fieldname\"><label for=\"name\">Name/<span lang=\"cy\">Enw:</span><span class=\"white\">*</span>&nbsp;</label></div>
 		<div class=\"field\">
-			<p><input type=\"text\" size=\"20\" name=\"name\" ".(isset($_SESSION["profileName"])? 'value="'.$_SESSION["profileName"].'"' : '')."></p>
+			<input type=\"text\" size=\"20\" id=\"name\" name=\"name\" ".(isset($_SESSION["profileName"])? 'value="'.$_SESSION["profileName"].'"' : '').">
 		</div>
 	</div>
 	<div class=\"clear\">
 	</div>
 	<div class=\"fieldline\">
-		<div class=\"fieldname\"><p>Location/<span lang=\"cy\">LLe:</span>&nbsp;</p></div>
+		<div class=\"fieldname\"><label for=\"location\">Location/<span lang=\"cy\">LLe:</span>&nbsp;</label></div>
 		<div class=\"field\">
-			<p><input type=\"text\" size=\"20\" name=\"location\" ".(isset($_SESSION["profileLocation"]) ? 'value="'.$_SESSION["profileLocation"].'"' : '')."></p>
+			<input type=\"text\" size=\"20\" id=\"location\" name=\"location\" ".(isset($_SESSION["profileLocation"]) ? 'value="'.$_SESSION["profileLocation"].'"' : '').">
 		</div>
 	</div>
 	<div class=\"clear\">
 	</div>
 	<div class=\"fieldline\">
-		<div class=\"fieldname\"><p>Website/<span lang=\"cy\">Gwe safle:</span>&nbsp;</p></div>
+		<div class=\"fieldname\"><label for=\"website\">Website/<span lang=\"cy\">Gwe safle:</span>&nbsp;</label></div>
 		<div class=\"field\">
-			<p><input type=\"text\" size=\"20\" name=\"website\" ".(isset($_SESSION["profilWebsite"])? 'value="'.$_SESSION["profilWebsite"].'"' : '')."></p>
+			<input type=\"text\" size=\"20\" id=\"website\" name=\"website\" ".(isset($_SESSION["profilWebsite"])? 'value="'.$_SESSION["profilWebsite"].'"' : '').">
 		</div>
 	</div>
 	<div class=\"clear\">
 	</div>
 	<div class=\"fieldline\">
-		<div class=\"fieldname\"><p>E-mail/<span lang=\"cy\">E-bost:</span><span class=\"white\">*</span>&nbsp;</p></div>
-		<div class=\"field\"><p><input type=\"text\" size=\"20\" name=\"email\" ".(isset($_SESSION["profileEmail"])? 'value="'.$_SESSION["profileEmail"].'"' : '' )."></p></div>
+		<div class=\"fieldname\"><label for\"email\">E-mail/<span lang=\"cy\">E-bost:</span><span class=\"white\">*</span>&nbsp;</label></div>
+		<div class=\"field\">
+			<input type=\"text\" size=\"20\" id=\"email\" name=\"email\" ".(isset($_SESSION["profileEmail"])? 'value="'.$_SESSION["profileEmail"].'"' : '' ).">
+		</div>
 	</div>
 	<div class=\"fieldline\">
 		<div class=\"fieldname\" style=\"width: 250px;padding-right: 5px;\">
-			<p>Do you wish for your email address to be hidden?</p>
+			<label for=\"hideEmailAddress\">Do you wish for your email address to be hidden?</label>
 		</div>
 		<div class=\"field\" style=\"width: 60px;padding-left:75px;\">
-			<p>
-				<select name=\"hideEmailAddress\">
+				<select id=\"hideEmailAddress\" name=\"hideEmailAddress\">
 					<option>Yes</option>
 					<option>No</option>
 				</select>
-			</p>
 		</div>
 	</div>
-	<div>
+	<div style=\"margin-bottom: 10px;\">
 		<div align=\"center\">
-			<p>Where did you first heard about Y Cyrff/<span lang=\"cy\"> LLe naethoch chi cyntaf wedi clywed am Y Cyrff?</span></p> 
-			<br><textarea cols=\"20\" rows=\"5\" name=\"heardcyrff\">".(isset($_SESSION["profileHeardcyrff"])? $_SESSION["profileHeardcyrff"] : '' )."</textarea>
+			<label for=\"heardcyrff\">Where did you first heard about Y Cyrff/<span lang=\"cy\"> LLe naethoch chi cyntaf wedi clywed am Y Cyrff?</span></label> 
+			<br /><br /><textarea cols=\"20\" rows=\"5\" id=\"heardcyrff\" name=\"heardcyrff\">".(isset($_SESSION["profileHeardcyrff"])? $_SESSION["profileHeardcyrff"] : '' )."</textarea>
 		</div>
 	</div>
-	<div>
-		<p>Favourite Cyrff song/<span lang=\"cy\">Hoff g&acirc;n Cyrff:</span>&nbsp;
-		<br />
-		<input type=\"text\" size=\"20\" name=\"favesong\" ".(isset($_SESSION["profileFavesong"])? 'value="'.$_SESSION["profileFavesong"].'"' : '')."></p>
+	
+	<div class=\"fieldline\">
+		<div class=\"fieldname\"><label for=\"favesong\">Favourite Cyrff song/<span lang=\"cy\">Hoff g&acirc;n Cyrff:</span>&nbsp;</label></div>
+		<div class=\"field\">
+			<input type=\"text\" size=\"20\" id=\"favesong\" name=\"favesong\" ".(isset($_SESSION["profileFavesong"])? 'value="'.$_SESSION["profileFavesong"].'"' : '').">
+		</div>
+	</div>
+	<div class=\"clear\">
+	</div>
+	<div class=\"fieldline\">
+		<div class=\"fieldname\"><label for=\"favealbum\">Favoutite Cyrff album/<span lang=\"cy\">Hoff albwn Cyrff:</span>&nbsp;</label></div>
+		<div class=\"field\">
+			<input type=\"text\" size=\"20\" id=\"favealbum\" name=\"favealbum\" ".(isset($_SESSION["profileFavealbum"] )? 'value="'.$_SESSION["profileFavealbum"].'"' : '').">
+		</div>
 	</div>
 	<div class=\"clear\">
 	</div>
 	<div>
-		<p>Favoutite Cyrff album/<span lang=\"cy\">Hoff albwn Cyrff:</span>&nbsp;
-		<br />
-		<input type=\"text\" size=\"20\" name=\"favealbum\" ".(isset($_SESSION["profileFavealbum"] )? 'value="'.$_SESSION["profileFavealbum"].'"' : '')."></p>
-	</div>
-	<div>
 		<div align=\"center\">
-			<p>Other comments/<span lang=\"cy\"> Eraill sywl:</span></p>
-			<br><textarea cols=\"20\" rows=\"5\" name=\"comments\">".(isset($_SESSION["profileComments"])? $_SESSION["profileComments"] : '')."</textarea>
+			<label for=\"comments\">Other comments/<span lang=\"cy\"> Eraill sywl:</span></label>
+			<br /><br /><textarea cols=\"20\" rows=\"5\" id=\"comments\" name=\"comments\">".(isset($_SESSION["profileComments"])? $_SESSION["profileComments"] : '')."</textarea>
 		</div>
 	</div>
 
 	<br>
 	<br>
-
-	<div style=\"margin:0px auto; width:130px;\">
-		<input type=\"submit\" name=\"submit\" value=\"submit\"><input type=\"reset\" name=\"reset\" value=\"reset\">
-	</div>
-
 </div>
+
+<div style=\"margin:0px auto; width:130px;\">
+	<input type=\"submit\" name=\"submit\" value=\"submit\"><input type=\"reset\" name=\"reset\" value=\"reset\">
+</div>
+
 </form>
+
+<br />
+<br />
 
 <div class=\"clear\"></div>" ;
 		
