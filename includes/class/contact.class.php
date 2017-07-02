@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.2
+@Version:0.3
 @todo: 
 
+Version 0.3 -  make changes to the email design and fix the form.
 Version 0.2 - Added a close button to the form.
 Version 0.1 - Added the contact class to the site. */
 
@@ -35,28 +36,28 @@ class contact{
 		
 <body style="background-image:url(\'http://www.ycyrffgroupie.co.uk/images/background5.jpg\'); background-color: #800080; width:100%;">
 		
-<table>
+<table style="width:100%">
 		
 	<tr>
 		<td style="width:5%;">
 		</td>
 		<td style="width:93%;">
-		<table>
+		<table style="width:100%">
 			<tr>
-				<td style="width: 50%;text-align:right"><p style="color: #ffd700;">Name/<span lang="cy">Enw:</span>&nbsp;</p></td>
-				<td style="width: 50%;text-align:left"><p style="color: #ffd700;">'.$name.'</p></td>
+				<td style="width: 11%;text-align:right"><p style="color: #ffd700;">Name/<span lang="cy">Enw:</span>&nbsp;</p></td>
+				<td style="width: 88%;text-align:left"><p style="color: #ffd700;">'.$name.'</p></td>
 			</tr>
 			<tr>
-				<td style="width: 50%;text-align:right"><p style="color: #ffd700;">Website/<span lang="cy">Gwe safle:</span>&nbsp;</p></td>
-				<td style="width: 50%;text-align:left"><a style=\"color: #ffd700;" href="'.$website.'">'.$website.'</a></td>
+				<td style="width: 11%;text-align:right"><p style="color: #ffd700;">Website/<span lang="cy">Gwe safle:</span>&nbsp;</p></td>
+				<td style="width: 88%;text-align:left"><a style=\"color: #ffd700;" href="'.$website.'">'.$website.'</a></td>
 			</tr>
 			<tr>
-				<td style="width: 50%;text-align:right"><p style="color: #ffd700;">E-mail/<span lang="cy">E-bost:</span>&nbsp;</p></td>
-				<td style="width: 50%;text-align:left"><a style="color: #ffd700;" href="mailto:'.$email.'">'.$email.'</a></td>
+				<td style="width: 11%;text-align:right"><p style="color: #ffd700;">E-mail/<span lang="cy">E-bost:</span>&nbsp;</p></td>
+				<td style="width: 88%;text-align:left"><a style="color: #ffd700;" href="mailto:'.$email.'">'.$email.'</a></td>
 			</tr>
 			<tr>
-				<td style="width: 50%;text-align:right"><p style="color: #ffd700;">Message/<span lang="cy"> Neges:</span></p> </td>
-				<td style="width: 50%;text-align:left"><p style="color: #ffd700;">'.$message.'</p></td>
+				<td style="width: 11%;text-align:right"><p style="color: #ffd700;">Message/<span lang="cy"> Neges:</span></p> </td>
+				<td style="width: 88%;text-align:left"><p style="color: #ffd700;">'.$message.'</p></td>
 			</tr>
 		</table>
 		</td>
@@ -139,7 +140,7 @@ class contact{
 					<p><input type="text" size="20" name="website"'.(isset($_SESSION["contactWebsite"])?' value="'.$_SESSION["contactWebsite"].'"':'').'></p>
 				</div>
 			</div>
-		
+			<div class="clear"></div>
 			<div class="fieldline">
 				<div class="fieldname">
 					<p>E-mail/<span lang="cy">E-bost:</span><span class="white">*</span>&nbsp;</p>
