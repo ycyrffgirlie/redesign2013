@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.2
+@Version:0.4
 @todo:  
 
+Version 0.4 - Added another file to the skipped list.
 Version 0.3 - Fixed for live server, fixed PHP notices and added another check for update_test.
 Version 0.2 - Make it work with about.php and fanprofile.php. abd added comments and tidy up the file.
 Version 0.1 - Added the fileinfo class to the site. */
@@ -619,6 +620,7 @@ Name: '.$name."\n"
 					,'llewelynrichardsprofile.html'
 					,'mrgroovyprofile.html'
 					,'rhysprofile.html'
+					,'error_log'
 				);
 
 		$skipped_file = implode("|", $skipped_files);
