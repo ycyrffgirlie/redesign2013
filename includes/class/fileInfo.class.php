@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.4
+@Version:0.5
 @todo:  
 
+Version 0.5 - Added a line break to the email html table, fixed for dev server and added more file and dir to be excluded.
 Version 0.4 - Added another file to the skipped list.
 Version 0.3 - Fixed for live server, fixed PHP notices and added another check for update_test.
 Version 0.2 - Make it work with about.php and fanprofile.php. abd added comments and tidy up the file.
@@ -131,6 +132,10 @@ class fileInfo {
 	<head></head>
 	<body style="background-color: #800080; width:99%;" link="ffd700" alink="ffd700" >
 		<table style="width:100%;">
+			<tr>
+				<td style="width:5%">&nbsp;</td>
+				<td style="width:94%">&nbsp;</td>
+			</tr>
 			<tr>
 				<td style="width:5%">&nbsp;</td>
 				<td style="width:94%">';
@@ -328,7 +333,7 @@ Name: '.$name."\n"
 		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 		
 		
-		if ($term == 'xterm'  || $shell == '/usr/local/cpanel/bin/jailshell'){
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
 	
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 				
@@ -384,7 +389,7 @@ Name: '.$name."\n"
 		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
 		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 		
-		if ($term == 'xterm'  || $shell == '/usr/local/cpanel/bin/jailshell'){
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
 	
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 				
@@ -477,7 +482,7 @@ Name: '.$name."\n"
 		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
 		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 		
-		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
 	
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 			
@@ -528,15 +533,17 @@ Name: '.$name."\n"
 		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
 		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 		
-		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
 	
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 			
 				$pattern = "/var/www/websites/redesign2013/*";
+				$server = "Lappy";
 			
 			}else{
 		
 				$pattern = "/home/ycyrf718/public_html/*";
+				$server = "HP";
 		
 			}
 	
@@ -545,10 +552,12 @@ Name: '.$name."\n"
 			if ($documentRoot == '/var/www/websites/redesign2013'){
 			
 				$pattern = "/var/www/websites/redesign2013/*";
+				$server = "Lappy";
 			
 			}else{
 			
 				$pattern = "/home/ycyrf718/public_html/*";
+				$server = "HP";
 			
 			}
 
@@ -576,6 +585,7 @@ Name: '.$name."\n"
 						,'uploads'
 						,'log'
 						,'scripts'
+						,'LappyLinux'
 					);
 
 		$skipped_dir = implode("|", $skipped_dirs);
@@ -621,6 +631,7 @@ Name: '.$name."\n"
 					,'mrgroovyprofile.html'
 					,'rhysprofile.html'
 					,'error_log'
+					,'error.php'
 				);
 
 		$skipped_file = implode("|", $skipped_files);
@@ -643,20 +654,40 @@ Name: '.$name."\n"
 		foreach ($files as $file){
 	
 
-			if (preg_match('/'.$allowed_dir.'/',$file)&&
-			!preg_match('/'.$skipped_file.'/',$file)){
+			if ($server == "Lappy"){
 				
-			
-				$dir[$counter] =$file;
-				$counter++;
+				if (preg_match('/'.$allowed_dir.'/',$file) !== 0 &&
+				preg_match('/'.$skipped_file.'/',$file) === 0){
 				
-			}elseif(preg_match('/.html|.php|.htm/', $file) &&
-			!preg_match('/'.$skipped_file.'/',$file) && 
-			!preg_match('%'.$skipped_dir.'%',$file)){
+					$dir[$counter] =$file;
+					$counter++;
+				
+				}elseif (preg_match('/.html|.php|.htm/', $file) !== 0 &&
+				(preg_match('/'.$skipped_file.'/',$file) === 0 ||
+				preg_match('%'.$skipped_dir.'%',$file) === 0)){
 			
 					$cleanerfilespath[$i] = $file;
 					$i++;
 
+				}
+			
+			}else{
+			
+				if (preg_match('/'.$allowed_dir.'/',$file) &&
+				!preg_match('/'.$skipped_file.'/',$file)){
+				
+					$dir[$counter] =$file;
+					$counter++;
+				
+				}elseif (preg_match('/.html|.php|.htm/', $file) &&
+				!preg_match('/'.$skipped_file.'/',$file) && 
+				!preg_match('%'.$skipped_dir.'%',$file)){
+			
+					$cleanerfilespath[$i] = $file;
+					$i++;
+
+				}
+			
 			}
 		}
 		
@@ -780,7 +811,7 @@ Name: '.$name."\n"
 		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
 		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 		
-		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
 		
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 			
@@ -849,7 +880,7 @@ Name: '.$name."\n"
 		$addedFiles = '';
 		
 		
-		if ($term == 'xterm'  || $shell == '/usr/local/cpanel/bin/jailshell'){
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
 	
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 				
@@ -983,7 +1014,7 @@ Name: '.$name."\n"
 		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
 		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 		
-		if ($term == 'xterm'  || $shell == '/usr/local/cpanel/bin/jailshell'){
+		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
 	
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 				
