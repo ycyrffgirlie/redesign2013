@@ -41,6 +41,7 @@ if ($debug == 'false'){
 	$browserinfo = get_browser(NULL, true);
 	$browsername = $browserinfo["browser"];
 	$browserversion = $browserinfo["version"];
+	$browserinfo["platform_description"]  = isset($browserinfo["platform_description"])?$browserinfo["platform_description"]: 'unknown';
 
 	/*Sets the os as platform description is sometimes unknown.*/
 	if ($browserinfo["platform_description"] == 'unknown'){
