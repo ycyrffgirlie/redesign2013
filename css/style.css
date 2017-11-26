@@ -1,7 +1,8 @@
 /* @@Author: Chritine A. Black
-@Version:0.11
+@Version:0.12
 The main style sheet for the Cyrff site
 
+Version 0.12 - Added styling for sutemap page.
 Version 0.11 - Added styling for sound clip page.
 Version 0.10 - Styling the close button for the contact form.
 Version 0.9 - Added styling for the contact form
@@ -479,4 +480,73 @@ a.music:hover{
 	top: 25%;
 	margin-top: 10px;
 	position: absolute;
+}
+
+.sitemapContainer{
+    width:75%; 
+    float: left;
+}
+
+.section{
+    background: -webkit-gradient(linear, left top, left bottom, from(#E86100), to(#F3B07F));
+	background: -webkit-linear-gradient(top, #E86100,  #F3B07F);
+	background: -moz-linear-gradient(top,  #E86100,  #F3B07F);
+	background: -ms-linear-gradient(top, #E86100,  #F3B07F);
+	background: -o-linear-gradient(top, #E86100,  #57CDFF);
+	background: linear-gradient(to bottom, #E86100,  #F3B07F);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E86100', endColorstr='#F3B07F',GradientType=1 );
+    height: 157px;
+    width:200px;
+    margin-bottom: 15px;
+    float: left;
+    position: relative;
+    margin-right: 20px;
+    padding: 0px 0px 10px 0px
+}
+
+.section:hover{
+	background: -webkit-gradient(linear, left top, left bottom, from(#006700), to(#00CD00));
+	background: -webkit-linear-gradient(top, #006700,  #00CD00);
+	background: -moz-linear-gradient(top,  #006700,  #00CD00);
+	background: -ms-linear-gradient(top, #006700,  #00CD00);
+	background: -o-linear-gradient(top, #006700,  #00CD00);
+	background: linear-gradient(to bottom, #006700,  #00CD00);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006700', endColorstr='#00CD00',GradientType=1 );
+	color: #ffd700;
+}
+
+.sectionHeader{
+    background-color: #FFFFFF;
+    color: #800080;
+    width: 200px;
+    text-align: center;
+    padding: 5px 0px 2px 0px;
+}
+
+.sectionHeader > a{
+    text-decoration: none;
+}
+
+.item{
+    background-color: transparent;
+    width: 190px;
+    padding: 5px 5px 0px 5px;
+}
+
+.item:hover{
+    background-color: #800080;
+    color: #FFFFFF;
+}
+
+.item > a{
+    color: #800080;
+    text-decoration: none;
+}
+
+.section:hover > .item > a{
+    color: #ffd700;
+}
+
+.section:hover > .item:hover > a{
+    color: #FFFFFF;
 }
