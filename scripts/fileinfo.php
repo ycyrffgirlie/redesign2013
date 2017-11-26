@@ -16,7 +16,7 @@ $documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 /*Location of the log file.*/
 $filename = 'fileInfoLog.txt';
 
-if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
+if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
 	
 	if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 	
