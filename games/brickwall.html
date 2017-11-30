@@ -1,0 +1,53 @@
+<?php include '../includes/header.php'; ?>
+
+<body>
+<script src="/includes/javascript/brickWall.js"></script>
+<div class="container">
+<div id="menu">
+	<ul class="menu">
+		<?php include '../includes/menu.html';?>
+	</ul>
+</div>
+
+<h1>Graffiti Wall</h1>
+
+<!--<applet code="ClrDrawApplet.class" width="400" height="285">
+</applet> -->
+
+
+
+<div id="brick_wallContainer">
+	<embed codetype="application/x-java-applet" width="400" height="285" code="ClrDrawApplet.class">
+		<!-- Fallback code-->
+		
+		<canvas id="brick_wall" width="400" height="285">
+			Sorry your browser  xan't support this feature.
+		</canvas>
+		<p>Sorry Java plugin isn't installed. </p>
+		<select class="colour" name="colour">
+			<option value="Red">Red</option>
+			<option value="Green">Green</option>
+			<option value="Black">Black</option>
+			<option value="Yellow">Yellow</option>
+			<option value="Blue">Blue</option>
+			<option value="Cyan">Cyan</option>
+			<option value="Magenta">Magenta</option>
+			<option value="Orange">Orange</option>
+		</select>
+		<button type="button" class="clearBtn" name="clearBtn">Clear</button>
+	</embed> 
+</div>
+
+<div class="clear"></div>
+
+<?php echo backButton($filename ); ?>
+
+<?php include '../includes/footer.php'; ?>
+
+</div>
+
+
+
+</body>
+
+</html>
