@@ -1,9 +1,10 @@
 
 <?php
 /*@Author; Christine A. Black
-@Version:0.12
+@Version:0.13
 @todo: 
 
+Version 0.13 - Changed the version number of the main style sheet
 Version 0.12 - Changed the version number of the main style sheet
 Version 0.11 - Changed the version number of the main style sheet
 Version 0.10 -  Seprated pages table into two.
@@ -62,7 +63,7 @@ class header{
 		<meta name="rating" content="General" />
 		<link rel="shortcut icon" href="/images/icon/cyrff.ico" type="image/x-icon" />
 		<link rel="icon" href="/images/icon/cyrff.png" type="image/png" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.12" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
+		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.13" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
 		<link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />';
 		
 			if (preg_match('.linux.',$_SERVER["HTTP_HOST"])){
@@ -235,7 +236,7 @@ class header{
 		<meta name="rating" content="General" />
 		<link rel="shortcut icon" href="/images/icon/cyrff.ico"  type="image/x-icon" />
 		<link rel="icon" href="/images/icon/cyrff.png" type="image/png" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.12" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
+		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.13" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
 		<link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />';
 		
 		if (preg_match('.linux.',$_SERVER["HTTP_HOST"])){
