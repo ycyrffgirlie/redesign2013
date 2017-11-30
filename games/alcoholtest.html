@@ -1,0 +1,41 @@
+<?php include '../includes/header.php'; ?>
+
+<body>
+<script src="/includes/javascript/alcoholTest.js"></script>
+<div class="container">
+<div id="menu">
+	<ul class="menu">
+		<?php include '../includes/menu.html';?>
+	</ul>
+</div>
+
+<h1>How Drunk Are You?</h1>
+
+<p>Alcohol Test</p>
+
+
+<p>If you can't click this button, you must be drunk!<br />You have one 60 sec.</p>
+
+<p>
+
+<input type="button" id="button1" value="CLICK IF NOT DRUNK" />
+
+<input type="button" id="button2" value="CLICK IF NOT DRUNK" />
+
+<input type="button" id="button3" value="CLICK IF NOT DRUNK" />
+</p>
+
+<p><span id="output"></span></p>
+
+
+<?php echo backButton($filename ); ?>
+
+<?php include '../includes/footer.php'; ?>
+
+</div>
+
+
+
+</body>
+
+</html>
