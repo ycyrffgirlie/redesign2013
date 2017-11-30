@@ -1,0 +1,89 @@
+<?php include '../includes/header.php'; ?>
+
+<body>
+<script src="/includes/javascript/quiz.js"></script>
+<div class="container">
+<div id="menu">
+	<ul class="menu">
+		<?php include '../includes/menu.html';?>
+	</ul>
+</div>
+
+<div id="content">
+
+	<h1><span lang="cy">Y Cyrff</span> Quiz</h1>
+	<p><span class="bold">Test your knowledge of Y Cyrff!</span></p>
+	<hr>
+	
+	<form name="quiz" id="quiz" method="post" action="quiz.html">
+		<p>
+			<span class="bold">1. Where are <span lang="cy">Y Cyrff</span> from?</span><br />
+			<input type="radio" name="q1" value="a" />a) LLanwrst<br />
+			<input type="radio" name="q1" value="b" />b) Worthing<br />
+			<input type="radio" name="q1" value="c" />c) London<br />
+			<input type="radio" name="q1" value="d" />d) Cardiff
+			</p>
+
+		<p>
+			<span class="bold">2. Who was the lead singer?</span><br />
+			<input type="radio" name="q2" value="a" />a) Paul Jones<br />
+			<input type="radio" name="q2" value="b" />b) Barry Crawley<br />
+			<input type="radio" name="q2" value="c" />c) Mark Roberts<br />
+			<input type="radio" name="q2" value="d" />d) Dylan Hughes
+		</p>
+
+		<p>
+			<span class="bold">3. What language did <span lang="cy">Y Cyrff</span> sing in?</span><br />
+			<input type="radio" name="q3" value="a" />a) English<br />
+			<input type="radio" name="q3" value="b" />b) Welsh<br />
+			<input type="radio" name="q3" value="c" />c) Russian<br />
+			<input type="radio" name="q3" value="d" />d) French  
+		</p>
+
+		<p>
+			<span class="bold">4. Finish the name of this title <span lang="cy">Mae DDoe Yn ...</span></span><br />
+			<input type="radio" name="q4" value="a" />a) <span lang="cy">Cymru</span><br />
+			<input type="radio" name="q4" value="b" />b) <span lang="cy">Doe</span><br />
+			<input type="radio" name="q4" value="c" />c) <span lang="cy">DDoe</span><br />
+			<input type="radio" name="q4" value="d"/>d) LLanrwst  
+		</p>
+
+		<p>
+			<span class="bold">5. Which year did <span lang="cy">Y Cyrff</span> split up?</span><br />
+			<input type="radio" name="q5" value="a" />a) 1992<br />
+			<input type="radio" name="q5" value="b" />b) 2002<br />
+			<input type="radio" name="q5" value="c" />c) 1892<br />
+			<input type="radio" name="q5" value="d" />d) 1969 
+		</p>
+
+		<p>
+			<span class="bold">6. MarkRoberts and Paul Jones went on to be in which group?</span><br />
+			<input type="radio" name="q6" value="a" />a) Manic Street Preachers<br />
+			<input type="radio" name="q6" value="b" />b) Sterophonics<br />
+			<input type="radio" name="q6" value="c" />c) Super Furries Animals<br />
+			<input type="radio" name="q6" value="d" />d) Catatonia
+		</p>
+
+
+		<p><input type="submit" value="Well... How did I do?"></p>
+
+
+	</form>
+
+</div>
+
+<div class="clear"></div>
+<p></p>
+
+
+<?php echo backButton($filename ); ?>
+
+<?php include '../includes/footer.php'; ?>
+
+</div>
+
+
+
+</body>
+
+</html>
