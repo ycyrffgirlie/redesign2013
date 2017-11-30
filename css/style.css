@@ -1,8 +1,9 @@
 /* @@Author: Chritine A. Black
-@Version:0.12
+@Version:0.13
 The main style sheet for the Cyrff site
 
-Version 0.12 - Added styling for sutemap page.
+Version 0.13 - Added styling for  game pages and bold style.
+Version 0.12 - Added styling for sitemap page.
 Version 0.11 - Added styling for sound clip page.
 Version 0.10 - Styling the close button for the contact form.
 Version 0.9 - Added styling for the contact form
@@ -93,6 +94,10 @@ p.smaller. span.smaller{
 	font-size: 0.750em;
 	margin-top: 0;
 	padding-top: 0;
+}
+
+.bold{
+	font-weight: bold;
 }
 
 h1, h2, h3{
@@ -549,4 +554,71 @@ a.music:hover{
 
 .section:hover > .item:hover > a{
     color: #FFFFFF;
+}
+
+#brick_wallContainer{
+    width:400px; 
+    height: 339px; 
+    float: left; 
+    overflow: hidden;
+}
+
+#brick_wall{
+    background: url(/games/brick_wall2.gif);
+}
+
+.colour{
+    top: -339px;
+    position: relative;
+    left: 175px;
+    display: none;
+}
+.clearBtn{
+    position: relative;
+    top: -339px;
+    left: 175px;
+    display: none;
+}
+
+#button1, #button2, #button3{
+    top: 300px;
+    left: 200px;
+}
+
+#button1, #button3{
+    display: none;
+}
+
+.hangmanContainer{
+	width:67%; 
+	background-color: #FFFFFF;  
+	float: right; 
+	border: 5px solid #ffd700; 
+	border-radius: 6%; 
+	box-shadow: -5px -5px 5px #A2A200;
+	padding: 5px; 
+	color: #800080; 
+	text-align: center;
+}
+
+.hangmanContainer h2, .hangmanContainer h3, .letter a, .hangmanContainer  p{
+	color: #800080;
+}
+
+.lettersContainer{
+	width: 56%; 
+	margin: 0px auto; 
+	height: 45px;
+}
+
+.letter{
+	width: 20px; 
+	height:20px; 
+	text-align: center; 
+	float:left;
+}
+
+p.red{
+	color: red;
+	font-size: 32px;
 }
