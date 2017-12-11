@@ -10,16 +10,17 @@
 
 <h1>Privacy and Cookies Policy</h1>
 
-<h2>Content:</h2>
+<div class="contentContainer">
+	<h2>Content:</h2>
 
-<ul style="list-style:none;">
-<li><a class="normal" href="#privacy"><h3>Privacy Statement</h3></a></li>
-<li><a class="normal" href="#whatarecookies"><h3>What are cookies?</h3></a></li>
-<li><a class="normal" href="#cookiesuse"><h3>How does this site used cookies?</h3></a></li>
-<li><a class="normal" href="#managingcookies"><h3>Managing Cookies</h3></a></li>
-<li><a class="normal" href="#cookiesdetails"><h3>Cookies Details</h3></li>
-</ul>
-
+	<ul>
+		<li><a class="normal" href="#privacy"><h3>Privacy Statement</h3></a></li>
+		<li><a class="normal" href="#whatarecookies"><h3>What are cookies?</h3></a></li>
+		<li><a class="normal" href="#cookiesuse"><h3>How does this site used cookies?</h3></a></li>
+		<li><a class="normal" href="#managingcookies"><h3>Managing Cookies</h3></a></li>
+		<li><a class="normal" href="#cookiesdetails"><h3>Cookies Details</h3></a></li>
+	</ul>
+</div>
 
 <a name="privacy"><h3>Privacy Statement</h3></a>
 
@@ -32,21 +33,6 @@
 <p>By seeing how the site is being used and who or what uses the site can me improve the site and add new features to the site.</p>
 
 <p>If you sent an e-mail to me via the form on the site, I do not pass on your e-mail address to third parties without asking you first if I can pass on your details. All information in e-mails that sent to me is treated with confidial unless otherwise stated.</p>
-
-<p>I also use a piece of software on the site that hides e-mail addresses from spammers. To see it work, find a page on the site that has an e-mail address on it and right click then click on view source. For example, ycyrffgroupie@gmail.com and the code becomes</p>
-
-<code>
-<pre>ycyrffgroupie@gm&lt;a id="__cf_email__" 
-href="http://cloudflare.com/email-protection.html" 
-class="29484045074a4644"&gt;[email&nbsp;protected]&lt;/a&gt;
-&lt;script type="text/javascript"&gt;
-/* &lt;;![CDATA[ */
-(function(){try{var s,a,i,j,r,c,l=document.getElementById("__cf_email__");
-a=l.className;if(a){s='';r=parseInt(a.substr(0,2),16);
-for(j=2;a.length-j;j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c);
-}s=document.createTextNode(s);l.parentNode.replaceChild(s,l);}}catch(e){}})();
-/* ]]&gt; */
-&lt;/script&gt;</pre></code>
 
 <p>I take the sharing of personal details and privacy very seriously.</p>
 
@@ -66,10 +52,10 @@ for(j=2;a.length-j;j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c
 
 <p>Below are the instructions of how to clear cookies depening on your browsers.</p>
 <ul class="browser">
-	<li class="browser">
-		<div id="browser-container">
+	<!--li class="browser"-->
+		<div class="browser-container">
 			<a class="browser-ie1">
-				<div id="browser-name">
+				<div class="browser-name">
 					<p class="browser"><!--<img class="browser-ie1" src="" style="float:left;">-->
 					&nbsp;Internet Explorer</p>
 
@@ -81,155 +67,157 @@ for(j=2;a.length-j;j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c
 				<p>Because differnt versions of Internet Explorer have differnt methods of deleting cookies, I am refering you to <a class="normal" href="http://support.microsoft.com/kb/278835">Microsoft's Help</a> which list the differnt methods used by the various versions (IE 6 - IE 9).</p>
 			</div>
 		</div>
-	</li>
+	<!--/li-->
 
-</li>
-<div id="browser-container">
-<a class="browser-chrome1">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-chrome1" src="" style="float:left;">-->
-&nbsp;Chrome</p>
+	<!--li class="browser"-->
+		<div class="browser-container">
+			<a class="browser-chrome1">
+				<div class="browser-name">
+					<p class="browser"><!--<img class="browser-chrome1" src="" style="float:left;">-->
+					&nbsp;Chrome</p>
 
-</div>
-</a>
+				</div>
+			</a>
 
-<div class="zippy-content-chrome1">
-<p><ol>
-<li>Click the wrench icon  on the browser toolbar.</li>
-<li>Select Settings.</li>
-<li>Click Show advanced settings.</li>
-<li>In the "Privacy" section, click the Content settings button.</li>
-<li>In the "Cookies" section, you can either:</li>
-<ul>
-<li>Delete all cookies, click Remove all at the bottom of the dialog.</li>
-<li>Delete a specific cookie, select the site that issued the cookie, then the cookie, and click Remove.</li>
-</ul>
-</ol>
-</p>
+			<div class="zippy-content-chrome1">
+				<p><ol>
+						<li>Click the wrench icon  on the browser toolbar.</li>
+						<li>Select Settings.</li>
+						<li>Click Show advanced settings.</li>
+						<li>In the "Privacy" section, click the Content settings button.</li>
+						<li>In the "Cookies" section, you can either:</li>
+						<ul>
+							<li>Delete all cookies, click Remove all at the bottom of the dialog.</li>
+							<li>Delete a specific cookie, select the site that issued the cookie, then the cookie, and click Remove.</li>
+						</ul>
+					</ol>
+				</p>
 
-<p>Taken from <a class="normal" href="http://support.google.com/chrome/bin/answer.py?hl=en&answer=95647">Google Help</a></p>
-</div>
-</div>
+				<p>Taken from <a class="normal" href="http://support.google.com/chrome/bin/answer.py?hl=en&answer=95647">Google Help</a></p>
+			</div>
+		</div>
+	<!--/li-->
 
-<div id="browser-container">
-<a class="browser-firefox1">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-firefox1" src="" style="float:left;">-->
-&nbsp;Firefox</p>
+	<!--li class="browser"-->
+		<div class="browser-container">
+			<a class="browser-firefox1">
+				<div class="browser-name">
+					<p class="browser"><!--<img class="browser-firefox1" src="" style="float:left;">-->
+					&nbsp;Firefox</p>
 
-</div>
-</a>
+				</div>
+			</a>
 
 
-<div class="zippy-content-firefox1">
+			<div class="zippy-content-firefox1">
 
-<h6>Delete all cookies</h6>
+				<h6>Delete all cookies</h6>
 
-<p>
-<ol>
-<li>At the top of the Firefox window, click on the Tools menu, and select Clear Recent History....</li>
-<li>Set Time range to clear to Everything.</li>
-<li>Click on the arrow next to Details to expand the list of history items.</li>
-<li>Select Cookies and make sure that other items you want to keep are not selected.</li>
-<li>Click Clear Now to clear the cookies and close the Clear Recent History window.</li>
-</ol>
-</p>
+				<p>
+					<ol>
+						<li>At the top of the Firefox window, click on the Tools menu, and select Clear Recent History....</li>
+						<li>Set Time range to clear to Everything.</li>
+						<li>Click on the arrow next to Details to expand the list of history items.</li>
+						<li>Select Cookies and make sure that other items you want to keep are not selected.</li>
+						<li>Click Clear Now to clear the cookies and close the Clear Recent History window.</li>
+					</ol>
+				</p>
+				
+				<h6>Delete cookies for a single site</h6>
 
-<h6>Delete cookies for a single site</h6>
+				<p>
+					<ol>
+						<li>At the top of the Firefox window, click on the Edit menu and select Preferences</li>
+						<li>Select the Privacy panel.</li>
+						<li>Set Firefox will: to Use custom settings for history.</li>
+						<li>Click Show Cookies.... The Cookies window will appear.</li>
+						<li>In the Search: field, type the name of the site whose cookies you want to remove. The cookies that match your search will be displayed.</li>
+						<li>Select the cookie(s) in the list to remove and click Remove Cookie.</li>
+						<ul>
+							<li>Select the first cookie and press Shift+End to select all the cookies in the list.</li>
+						</ul>
+						<li>Click Close to close the Cookies window.</li>
+					</ol>
+				</p>
 
-<p>
-<ol>
-<li>At the top of the Firefox window, click on the Edit menu and select Preferences</li>
-<li>Select the Privacy panel.</li>
-<li>Set Firefox will: to Use custom settings for history.</li>
-<li>Click Show Cookies.... The Cookies window will appear.</li>
-<li>In the Search: field, type the name of the site whose cookies you want to remove. The cookies that match your search will be displayed.</li>
-<li>Select the cookie(s) in the list to remove and click Remove Cookie.</li>
-<ul>
-<li>Select the first cookie and press Shift+End to select all the cookies in the list.</li>
-</ul>
-<li>Click Close to close the Cookies window.</li>
-</ol>
-</p>
+				<p>Taken from <a class="normal" href="http://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored">Mozilla Support</a></p>
+			</div>
+		</div>
+	<!--/li-->
 
-<p>Taken from <a class="normal" href="http://support.mozilla.org/en-US/kb/delete-cookies-remove-info-websites-stored">Mozilla Support</a></p>
-</div>
-</div>
-</li>
+	<!--li class="browser"-->
+		<div class="browser-container">
+			<a class="browser-opera1">
+				<div class="browser-name">
+					<p class="browser"><!--<img class="browser-opera1" src="" style="float:left;">-->
+					&nbsp;Opera</p>
 
-<li>
-<div id="browser-container">
-<a class="browser-opera1">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-opera1" src="" style="float:left;">-->
-&nbsp;Opera</p>
+				</div>
+			</a>
 
-</div>
-</a>
+			<div class="zippy-content-opera1">
+				<p>Settings > Preferences > Advanced > Cookies</p>
 
-<div class="zippy-content-opera1">
-<p>Settings > Preferences > Advanced > Cookies</p>
+				<h6>Delete new cookies when exiting Opera</h6>
 
-<h6>Delete new cookies when exiting Opera</h6>
+				<p>Some websites require you to accept cookies to use their services. If you want these sites to work, but you do not want to keep cookies between visits, select "Delete new cookies when exiting Opera".</p>
 
-<p>Some websites require you to accept cookies to use their services. If you want these sites to work, but you do not want to keep cookies between visits, select "Delete new cookies when exiting Opera".</p>
+				<p>Taken from <a class="normal" href="http://help.opera.com/Linux/12.00/en/cookies.html">Opera Help</a></p>
+			</div>
+		</div>
+	<!--/li-->
 
-<p>Taken from <a class="normal" href="http://help.opera.com/Linux/12.00/en/cookies.html">Opera Help</a></p>
-</div>
-</div>
-</li>
+	<!--li class="browser"-->
+		<div class="browser-container">
+			<a class="browser-safari1">
+				<div class="browser-name">
+					<p class="browser"><!--<img class="browser-safari1" src="" style="float:left;">-->
+					&nbsp;Safari</p>
 
-<li>
-<div id="browser-container">
-<a class="browser-safari1">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-safari1" src="" style="float:left;">-->
-&nbsp;Safari</p>
+				</div>
+			</a>
 
-</div>
-</a>
+			<div class="zippy-content-safari1">
+				<p>
+					<ol>
+						<li>Choose Safari > Preferences, and then click Privacy.</li>
+						<li>Click Details.</li>
+						<li>Select one or more website that stores cookies, and then click Remove or Remove All.</li>
+						<li>When you finish removing websites, click Done.</li>
+					</ol>
+				</p>
 
-<div class="zippy-content-safari1">
-<p>
-<ol>
-<li>Choose Safari > Preferences, and then click Privacy.</li>
-<li>Click Details.</li>
-<li>Select one or more website that stores cookies, and then click Remove or Remove All.</li>
-<li>When you finish removing websites, click Done.</li>
-</ol>
-</p>
+				<p>Taken from <a class="normal" href="http://support.apple.com/kb/PH5049">Apple Support</a></p>
+			</div>
+		</div>
+	<!--/li-->
 
-<p>Taken from <a class="normal" href="http://support.apple.com/kb/PH5049">Apple Support</a></p>
-</div>
-</div>
-</li>
+	<!--li class="browser"-->
+		<div class="browser-container">
+			<a class="browser-konqueror1">
+				<div class="browser-name">
+					<p class="browser"><!--<img class="browser-konqueror1" src="" style="float:left;">-->
+					&nbsp;Konqueror</p>
 
-<li>
-<div id="browser-container">
-<a class="browser-konqueror1">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-konqueror1" src="" style="float:left;">-->
-&nbsp;Konqueror</p>
+				</div>
+			</a>
 
-</div>
-</a>
+			<div class="zippy-content-konqueror1">
+				<ol>
+					<li>Open Konqueror and select Settings from menu bar</li>
+					<li>Click on Configure Konqueror</li>
+					<li>Select Cookies in the Configure window</li>
+					<li>Select Management tab</li>
+					<li>Either:</li>
+					<ul>
+						<li>Select the cookie you wish to delete and click on Delete</li>
+						<li>Click on Delete All to delete all cookies</li>
+					</ul>
+				</ol>
 
-<div class="zippy-content-konqueror1">
-<ol>
-<li>Open Konqueror and select Settings from menu bar</li>
-<li>Click on Configure Konqueror</li>
-<li>Select Cookies in the Configure window</li>
-<li>Select Management tab</li>
-<li>Either:</li>
-<ul>
-<li>Select the cookie you wish to delete and click on Delete</li>
-<li>Click on Delete All to delete all cookies</li>
-</ul>
-</ol>
-
-</div>
-</div>
-</li>
+			</div>
+		</div>
+	<!--/li-->
 </ul>
 
 <h4>Setting your browser's privacy settings:</h4>
@@ -237,121 +225,121 @@ for(j=2;a.length-j;j+=2){c=parseInt(a.substr(j,2),16)^r;s+=String.fromCharCode(c
 <p>These are the instructions on how set your browser's privacy setting.</p>
 
 <ul>
-<div id="browser-container">
-<a class="browser-ie2">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-ie2" src="" style="float:left;">-->
-&nbsp;Internet Explorer</p>
+	<div class="browser-container">
+		<a class="browser-ie2">
+			<div class="browser-name">
+				<p class="browser"><!--<img class="browser-ie2" src="" style="float:left;">-->
+				&nbsp;Internet Explorer</p>
 
-</div>
-</a>
+			</div>
+		</a>
 
-<div class="zippy-content-ie2">
-<p>Because differnt versions of Internet Explorer have differnt methods of deleting cookies, I am refering you to <a class="normal" href="http://support.microsoft.com/kb/278835">Microsoft's Help</a> which list the differnt methods used by the various versions (IE 6 - IE 9).</p>
-</div>
-</div>
+		<div class="zippy-content-ie2">
+			<p>Because differnt versions of Internet Explorer have differnt methods of deleting cookies, I am refering you to <a class="normal" href="http://support.microsoft.com/kb/278835">Microsoft's Help</a> which list the differnt methods used by the various versions (IE 6 - IE 9).</p>
+		</div>
+	</div>
 
-<div id="browser-container">
-<a class="browser-chrome2">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-chrome2" src="" style="float:left;">-->
-&nbsp;Chrome</p>
+	<div class="browser-container">
+		<a class="browser-chrome2">
+			<div class="browser-name">
+				<p class="browser"><!--<img class="browser-chrome2" src="" style="float:left;">-->
+				&nbsp;Chrome</p>
 
-</div>
-</a>
+			</div>
+		</a>
 
-<div class="zippy-content-chrome2">
-<ol>
-<li>Click the wrench icon  on the browser toolbar.</li>
-<li>Select Settings.</li>
-<li>Click Show advanced settings.</li>
-<li>In the "Privacy" section, click the Content settings button.</li>
-<li>In the "Cookies" section, select "Block sites from setting any data." Keep in mind that selecting this setting will prevent most sites that require you to sign in from working.</li>
-</ol>
-<p>Taken from <a class="normal" href="http://support.google.com/chrome/bin/answer.py?hl=en&answer=95647">Google Help</a></p>
+		<div class="zippy-content-chrome2">
+			<ol>
+				<li>Click the wrench icon  on the browser toolbar.</li>
+				<li>Select Settings.</li>
+				<li>Click Show advanced settings.</li>
+				<li>In the "Privacy" section, click the Content settings button.</li>
+				<li>In the "Cookies" section, select "Block sites from setting any data." Keep in mind that selecting this setting will prevent most sites that require you to sign in from working.</li>
+			</ol>
+			<p>Taken from <a class="normal" href="http://support.google.com/chrome/bin/answer.py?hl=en&answer=95647">Google Help</a></p>
 
-</div>
-</div>
+		</div>
+	</div>
 
-<div id="browser-container">
-<a class="browser-firefox2">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-firefox2" src="" style="float:left;">-->
-&nbsp;Firefox</p>
+	<div class="browser-container">
+		<a class="browser-firefox2">
+			<div class="browser-name">
+				<p class="browser"><!--<img class="browser-firefox2" src="" style="float:left;">-->
+				&nbsp;Firefox</p>
 
-</div>
-</a>
+			</div>
+		</a>
 
-<div class="zippy-content-firefox2">
-<p>Mozilla has a good <a class="normal" href="http://support.mozilla.org/en-US/kb/settings-privacy-browsing-history-do-not-track">tutorial on this</a>.</p>
-</div>
-</div>
+		<div class="zippy-content-firefox2">
+			<p>Mozilla has a good <a class="normal" href="http://support.mozilla.org/en-US/kb/settings-privacy-browsing-history-do-not-track">tutorial on this</a>.</p>
+		</div>
+	</div>
 
-<div id="browser-container">
-<a class="browser-opera2">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-opera2" src="" style="float:left;">-->
-&nbsp;Opera</p>
+	<div class="browser-container">
+		<a class="browser-opera2">
+			<div class="browser-name">
+				<p class="browser"><!--<img class="browser-opera2" src="" style="float:left;">-->
+				&nbsp;Opera</p>
 
-</div>
-</a>
+			</div>
+		</a>
 
-<div class="zippy-content-opera2">
+		<div class="zippy-content-opera2">
 
-<p>Settings > Preferences > Advanced > Cookies</p>
+			<p>Settings > Preferences > Advanced > Cookies</p>
 
-<p>The cookie preferences give you control of Opera's cookie handling. The default setting is to accept all cookies.</p>
+			<p>The cookie preferences give you control of Opera's cookie handling. The default setting is to accept all cookies.</p>
 
-<h6>Accept cookies</h6>
+			<h6>Accept cookies</h6>
 
-<p>All cookies are accepted (default)</p>
+			<p>All cookies are accepted (default)</p>
 
-<h6>Accept cookies only from the site I visit</h6>
+			<h6>Accept cookies only from the site I visit</h6>
 
-<p>Third-party cookies, for a domain outside the one you are visiting, are refused</p>
+			<p>Third-party cookies, for a domain outside the one you are visiting, are refused</p>
 
-<h6>Never accept cookies</h6>
-<p>All cookies are refused</p>
+			<h6>Never accept cookies</h6>
+			<p>All cookies are refused</p>
 
-<p>Taken from <a class="normal" href="http://help.opera.com/Linux/12.00/en/cookies.html">Opera Help</a></p>
+			<p>Taken from <a class="normal" href="http://help.opera.com/Linux/12.00/en/cookies.html">Opera Help</a></p>
 
-</div>
-</div>
+		</div>
+	</div>
 
-<div id="browser-container">
-<a class="browser-safari2">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-safari2" src="" style="float:left;">-->
-&nbsp;Safari</p>
+	<div class="browser-container">
+		<a class="browser-safari2">
+			<div class="browser-name">
+				<p class="browser"><!--<img class="browser-safari2" src="" style="float:left;">-->
+				&nbsp;Safari</p>
 
-</div>
-</a>
+			</div>
+		</a>
 
 
-<div class="zippy-content-safari2">
-<p>Choose Safari, then preferences and then click security. You should then be able to specify if and when Safari should accept cookies.</p>
-</div>
-</div>
+		<div class="zippy-content-safari2">
+			<p>Choose Safari, then preferences and then click security. You should then be able to specify if and when Safari should accept cookies.</p>
+		</div>
+	</div>
 
-<div id="browser-container">
-<a class="browser-konqueror2">
-<div id="browser-name">
-<p class="browser"><!--<img class="browser-ie1" src="" style="float:left;">-->
-&nbsp;Konqueror</p>
+	<div class="browser-container">
+		<a class="browser-konqueror2">
+			<div class="browser-name">
+				<p class="browser"><!--<img class="browser-ie1" src="" style="float:left;">-->
+				&nbsp;Konqueror</p>
 
-</div>
-</a>
+			</div>
+		</a>
 
-<div class="zippy-content-konqueror2">
-<ol>
-<li>Open Konqueror and select Settings from menu bar</li>
-<li>Click on Configure Konqueror</li>
-<li>Select Cookies in the Configure window</li>
-<li>Then change the settings in the Policy tab</li>
-</ol>
+		<div class="zippy-content-konqueror2">
+			<ol>
+				<li>Open Konqueror and select Settings from menu bar</li>
+				<li>Click on Configure Konqueror</li>
+				<li>Select Cookies in the Configure window</li>
+				<li>Then change the settings in the Policy tab</li>
+			</ol>
 
-</div>
-</div>
+		</div>
+	</div>
 </ul>
 
 
