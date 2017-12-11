@@ -1,0 +1,44 @@
+<?php 
+include 'includes/header.php'; 
+ include 'includes/class/guestbook.class.php';
+ 
+ $guestbook = new guestbook;
+?>
+
+<body>
+<div class="container">
+<div class="sign-top">
+	<a class="normal" href="submitguestbook.php">Sign Guestbook / Arwyddio'r LLyfr Gwestai</a>
+</div>
+<div class="clear"></div>
+<div id="menu">
+	<ul class="menu">
+		<?php include 'includes/menu.html';?>
+	</ul>
+</div>
+
+<h1>Guestbook / LLyfr Gwestai</h1>
+
+<?php 
+	echo $guestbook ->display_guestbook($filename);
+?>
+
+<a class="buttonlink" href="submitguestbook.php">
+	<div class="sign-button">
+		<span class="button">
+			Sign Guestbook / 
+			<br />
+			Arwyddio'r LLyfr Gwestai
+		</span>
+	</div>
+</a>
+
+<?php include 'includes/footer.php'; ?>
+
+</div>
+
+
+
+</body>
+
+</html>
