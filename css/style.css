@@ -1,7 +1,10 @@
 /* @@Author: Chritine A. Black
-@Version:0.13
+@Version:0.15
 The main style sheet for the Cyrff site
+todo: change the content float to left.
 
+Version 0.15 -  Added style for guestbook page, change the text aglinmet of .button and set .button dusplayas block.
+Version 0.14 -  Added style for P+C page.
 Version 0.13 - Added styling for  game pages and bold style.
 Version 0.12 - Added styling for sitemap page.
 Version 0.11 - Added styling for sound clip page.
@@ -142,6 +145,8 @@ hr {
 	font-family: verdana;
 	font-size: 14px;
 	color: #800080;
+	text-align: center;
+    display: block;
 }
 
 .button:hover{
@@ -621,4 +626,112 @@ a.music:hover{
 p.red{
 	color: red;
 	font-size: 32px;
+}
+
+.contentContainer{
+    width: 75%;
+    float: left;
+}
+
+.contentContainer ul{
+    list-style:none;
+}
+
+.contentContainer ul li{
+    width: 350px;
+}
+
+.zippy-content{
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding: 0;
+}
+
+a.normal h3{
+    color: #ffffff;
+}
+
+a.normal:hover h3{
+	color: #800080;
+	background-color: #ffffff;
+}
+
+.browser-container{
+
+}
+
+.browser-name{
+    position: relative;
+    width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+p.browser{
+    color: #ffd700; 
+    font-weight:bold;
+    margin: 0px;
+}
+p.browser:hover{
+    background-color: #ffffff;
+    color: #800080;
+}
+
+table.admin{
+    border-width: 2px 2px 2px 2px;
+    border-style: solid solid solid solid;
+    border-color: #FFFFFF #FFFFFF #FFFFFF #FFFFFF;
+	    border-collapse: collapse;
+}
+
+th.admin{ 	
+    color: #ffd700;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid solid solid solid;
+    border-color: #FFFFFF #FFFFFF #FFFFFF #FFFFFF;
+}
+
+td.admin{ 	
+    color: #ffd700;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid solid solid solid;
+    border-color: #FFFFFF #FFFFFF #FFFFFF #FFFFFF;
+	padding: 0px 5px;
+}
+
+.pageSelector{
+    width: 160px;
+    margin: 0px auto;
+    padding: 10px;
+}
+
+.sign-top{
+    width: 350px;
+    float: right;
+    padding: 10px;
+}
+
+.sign-button{
+    width: 190px;
+    margin: 0px auto;
+    padding: 15px;
+    color: #ffd700;
+}
+
+.sign-button .button, .sign-button > .button{
+    width: 186px;
+}
+
+.view-top{
+    width: 326px;
+    float: right;
+    padding: 10px;
+}
+
+.view-button{
+    width: 180px;
+    margin: 0px auto;
+    padding: 15px;
+    color: #ffd700;
 }
