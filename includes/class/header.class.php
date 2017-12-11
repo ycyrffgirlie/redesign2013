@@ -1,9 +1,10 @@
 
 <?php
 /*@Author; Christine A. Black
-@Version:0.13
-@todo: 
+@Version:0.14
+@todo: change the db connectuo into a class.
 
+Version 0.14 - Changed the version number of the main style sheet and added jquery libraries to thee default header.
 Version 0.13 - Changed the version number of the main style sheet
 Version 0.12 - Changed the version number of the main style sheet
 Version 0.11 - Changed the version number of the main style sheet
@@ -63,7 +64,7 @@ class header{
 		<meta name="rating" content="General" />
 		<link rel="shortcut icon" href="/images/icon/cyrff.ico" type="image/x-icon" />
 		<link rel="icon" href="/images/icon/cyrff.png" type="image/png" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.13" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
+		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.15" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
 		<link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />';
 		
 			if (preg_match('.linux.',$_SERVER["HTTP_HOST"])){
@@ -76,7 +77,9 @@ class header{
 			}else{
 		
 				$output .= '
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>';
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>';
 	
 			}
 
@@ -236,18 +239,22 @@ class header{
 		<meta name="rating" content="General" />
 		<link rel="shortcut icon" href="/images/icon/cyrff.ico"  type="image/x-icon" />
 		<link rel="icon" href="/images/icon/cyrff.png" type="image/png" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.13" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
+		<link rel="stylesheet" type="text/css" href="/css/style.css?v0.15" /><!--IE couldn\'t get the style the other way. Don\'t know why.-->
 		<link rel="stylesheet" type="text/css" href="/css/menu.css?v0.1" />';
 		
 		if (preg_match('.linux.',$_SERVER["HTTP_HOST"])){
 			
 			$output .= '
-		<script src="/includes/javascripts/jquery.min.js"></script>';
+		<script src="/includes/javascript/jquery.min.js"></script>
+		<script src="/includes/javascript/jquery-ui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="/includes/javascript/jquery-ui.css" />';
 		
 		}else{
 		
 			$output .= '
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>';
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>';
 	
 		}
 		
