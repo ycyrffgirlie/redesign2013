@@ -1,7 +1,8 @@
 <?php 
 /*@Author; Christine A. Black
-@Version:0.5
+@Version:0.6
 
+Version 0.6 - Changed the db connectuo into a class and fixed error wirh keywords.
 Version 0.5 -  Seprated pages table into two.
 Version 0.4 -  Added twiter fields.
 Version 0.3 -  Added the sitemap field and corrected the mysql query.
@@ -12,15 +13,6 @@ $action = isset($_GET["action"])? $_GET["action"]: '';
 
 /*Includes the header class files and database connections*/
 include '../includes/header.php'; 
-
-if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}
 
 /*A function to convert html into plain text*/
 function converthtmlToPlain($code){
@@ -224,102 +216,102 @@ tbody tr:hover, tbody > tr:hover{
 			$sql = "UPDATE pages, social_media SET";
 			$countEdits = 0;
 			
-			if ( $_POST["titleH"]  !=  $_POST["title"]){
+			if ( $_POST["titleH"]  !==  $_POST["title"]){
 				$sql .= ' title = "'.$_POST["title"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["keywordsH"] != $_POST ["keywords"] ){
+			if ($_POST["keywordsH"] !== $_POST ["keywords"] ){
 				$sql .= ' keywords = "'. $_POST ["keywords"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["descriptionenH"] != $_POST["descriptionen"]){
+			if ($_POST["descriptionenH"] !== $_POST["descriptionen"]){
 				$sql .= ' descriptionen = "'.$_POST["descriptionen"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["descriptioncymraegH"] != $_POST["descriptioncymraeg"]){
+			if ($_POST["descriptioncymraegH"] !== $_POST["descriptioncymraeg"]){
 				$sql .= ' descriptioncymraeg = "'.$_POST["descriptioncymraeg"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["facebooktitleH"] != $_POST["facebooktitle"]){
+			if ($_POST["facebooktitleH"] !== $_POST["facebooktitle"]){
 				$sql .= ' social_media.facebooktitle = "'.$_POST["facebooktitle"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["facebookdescriptionH"] != $_POST["facebookdescription"]){
+			if ($_POST["facebookdescriptionH"] !== $_POST["facebookdescription"]){
 				$sql .= ' social_media.facebookdescription = "'.$_POST["facebookdescription"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["facebookimageH"] != $_POST["facebookimage"]){
+			if ($_POST["facebookimageH"] !== $_POST["facebookimage"]){
 				$sql .= ' social_media.acebookimage = "'.$_POST["facebookimage"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["facebookurlH"] != $_POST["facebookurl"]){
+			if ($_POST["facebookurlH"] !== $_POST["facebookurl"]){
 				$sql .= ' social_media.facebookurl = "'.$_POST["facebookurl"].'",';
 				$countEdits ++;
 			}
 			
-			if ( $_POST["twittercardH"]  !=  $_POST["twittercard"]){
+			if ( $_POST["twittercardH"]  !==  $_POST["twittercard"]){
 				$sql .= ' social_media.twittercard = "'.$_POST["twittercard"].'",';
 				$countEdits ++;
 			}
 			
-			if ( $_POST["twittersiteH"]  !=  $_POST[""]){
+			if ( $_POST["twittersiteH"]  !=  $_POST["twittersite"]){
 				$sql .= ' social_media.twittersite = "'.$_POST["twittersite"].'",';
 				$countEdits ++;
 			}
 			
-			if ( $_POST["twittertitleH"]  !=  $_POST["twittertitle"]){
+			if ( $_POST["twittertitleH"]  !==  $_POST["twittertitle"]){
 				$sql .= ' social_media.twittertitle = "'.$_POST["twittertitle"].'",';
 				$countEdits ++;
 			}
 			
-			if ( $_POST["twitterdescriptionH"]  !=  $_POST["twitterdescription"]){
+			if ( $_POST["twitterdescriptionH"]  !==  $_POST["twitterdescription"]){
 				$sql .= ' social_media.twitterdescription = "'.$_POST["twitterdescription"].'",';
 				$countEdits ++;
 			}
 			
-			if ( $_POST["twitterimageH"]  !=  $_POST["twitterimage"]){
+			if ( $_POST["twitterimageH"]  !==  $_POST["twitterimage"]){
 				$sql .= ' social_media.twitterimage = "'.$_POST["twitterimage"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["whatnewenglishH"] != $_POST["whatnewenglish"]){
+			if ($_POST["whatnewenglishH"] !== $_POST["whatnewenglish"]){
 				$sql .= ' whatnewenglish`= "'.$_POST["whatnewenglish"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["whatnewcymraegH"] != $_POST["whatnewcymraeg"]){
+			if ($_POST["whatnewcymraegH"] !== $_POST["whatnewcymraeg"]){
 				$sql .= ' whatnewcymraeg = "'.$_POST["whatnewcymraeg"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["includedinnewH"] != $_POST["includedinnew"]){
+			if ($_POST["includedinnewH"] !== $_POST["includedinnew"]){
 				$sql .= ' includedinnew = "'.$_POST["includedinnew"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["newsorderH"] != $_POST["newsorder"]){
+			if ($_POST["newsorderH"] !== $_POST["newsorder"]){
 				$sql .= ' newsorder = "'.$_POST["newsorder"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["html5H"] != $_POST["html5"]){
+			if ($_POST["html5H"] !== $_POST["html5"]){
 				$sql .= ' html5 = "'.$_POST["html5"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["includedinsitemapH"] != $_POST["includedinsitemap"]){
+			if ($_POST["includedinsitemapH"] !== $_POST["includedinsitemap"]){
 				$sql .= '  includedinsitemap = "'.$_POST["includedinsitemap"].'",';
 				$countEdits ++;
 			}
 			
-			if ($_POST["htmlcodeH"] != $_POST["htmlcode"]){
+			if ($_POST["htmlcodeH"] !== $_POST["htmlcode"]){
 				$sql .= ' htmlcode = "'.$_POST["htmlcode"].'",';
 				$countEdits ++;
 			}
@@ -394,7 +386,7 @@ tbody tr:hover, tbody > tr:hover{
 					<div class="field">
 						<p>
 							<input type="hidden" name="keywordsH" value = "'.$fileInfo["keywords"].'" />
-							<textarea name="keywords" >'.$fileInfo["keywords"].' </textarea>
+							<textarea name="keywords" >'.$fileInfo["keywords"].'</textarea>
 						</p>
 					</div>
 				</div>
