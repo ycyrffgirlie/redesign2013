@@ -1,8 +1,9 @@
 <?php
 /**@@Author; Christine A. Black
-@Version:0.2
+@Version:0.3
 @todo: 
 
+Version 0.3 - Changed the db connectuo into a class.
 Version 0.2 - Fixed for live dev.
 Version 0.1 - Added the file info script.**/
 
@@ -15,16 +16,19 @@ $documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 
 /*Location of the log file.*/
 $filename = 'fileInfoLog.txt';
+$databaseClass = "class/database.class.php";
 
 if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
 	
 	if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 	
+		$databaseLocation = "/var/www/websites/redesign2013/includes/".$databaseClass;
 		$fileInfoLocation= '/var/www/websites/redesign2013/includes/class/fileInfo.class.php';
 		$fileInfoLogLocation = '/var/www/websites/redesign2013/logs/'.$filename;
 	
 	}else{
 	
+		$databaseLocation = "/home/ycyrf718/public_html/redesign2013/includes/".$databaseClass;
 		$fileInfoLocation= '/home/ycyrf718/public_html/redesign2013/includes/class/fileInfo.class.php';
 		$fileInfoLogLocation = '/home/ycyrf718/logs/'.$filename;
 	
@@ -34,12 +38,14 @@ if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 
 
 	if ($documentRoot == '/var/www/websites/redesign2013'){
 	
+		$databaseLocation = "/var/www/websites/redesign2013/includes/".$databaseClass;
 		$fileInfoLocation= '/var/www/websites/redesign2013/includes/class/fileInfo.class.php';
 		$fileInfoLogLocation = '/var/www/websites/redesign2013/logs/'.$filename;
 
 	
 	}else{
 	
+		$databaseLocation = "/home/ycyrf718/public_html/redesign2013/includes/".$databaseClass;
 		$fileInfoLocation= '/home/ycyrf718/public_html/redesign2013/includes/class/fileInfo.class.php';
 		$fileInfoLogLocation = '/home/ycyrf718/logs/'.$filename;
 		
@@ -47,15 +53,18 @@ if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 
 
 }
 
+require $databaseLocation;
 include $fileInfoLocation;
 
-
+$db = new database;
 $fileInfo = new fileInfo;
+
+$database = $db ->connect();
 
 /*Saves the output to a variable.*/
 $output = "\n".'Starting script...'."\n";
 $output .= 'Script started at: '.date('H:i:s d/m/y', time()).'.'."\n";
-$output .= $fileInfo ->email();
+$output .= $fileInfo ->email($database);
 $output .= 'Script finished at: '.date('H:i:s d/m/y', time()).'.'."\n";
 
 /*Outputs the output variable.*/
