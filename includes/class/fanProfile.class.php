@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.3
-@todo: 
+@Version:0.4
+@todo:  Default variables.update accdcFiles query  to insert into social media pages.
 
+Version 0.4 - Changed the db connectuo into a class.
 Version 0.3 - Added labels to the form.
 Version 0.2 - Fixed a php warning.
 Version 0.1 - Added the fanProfile class to the site. */
@@ -116,18 +117,8 @@ class fanProfile{
 	}
 	
 	/*This displays the fan profile.*/
-	function get_profile($profileid,$title){
+	function get_profile($profileid,$title, $database){
 		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
-		
-	
 		$sql = $this ->get_profile_query($profileid);
 	
 		$query = $database ->prepare($sql);
@@ -277,11 +268,11 @@ class fanProfile{
 	}
 	
 	/**/
-	function submit_form_success($name,$location, $website, $email, $hideEmailAddress, $heardcyrff , $favesong, $favealbum, $comments){
+	function submit_form_success($name,$location, $website, $email, $hideEmailAddress, $heardcyrff , $favesong, $favealbum, $comments, $database){
 		
 		$this ->submit_email($name,$location, $website, $email, $hideEmailAddress, $heardcyrff , $favesong, $favealbum, $comments);
 		
-		$this ->submit_query($name,$location, $website, $email, $hideEmailAddress, $heardcyrff , $favesong, $favealbum, $comments);
+		$this ->submit_query($name,$location, $website, $email, $hideEmailAddress, $heardcyrff , $favesong, $favealbum, $comments, $database);
 	
 		$output = "<p>Thank you, your profile has been submitted. I will add your profile soon so come back to check.</p>
 	<p>Diolch i chi, eich proffil wedi ei gyflwyno. Byddaf yn ychwanegu eich proffil fuan er mwyn dod yn &ocirc;l i wirio.</p>";
@@ -291,16 +282,7 @@ class fanProfile{
 	
 	/*This is the query to submit a new fan profile.*/
 	function submit_query($name,$location, $website, $email, $hideEmailAddress, $heardcyrff , 
-	$favesong, $favealbum, $comments){
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
+	$favesong, $favealbum, $comments, $database){
 		
 		$sql= sprintf("INSERT INTO fan_profile ( name, place, website, email, email_hidden, firstheard, favesong, favealbum, comment) 
 			VALUES(%s,%s,%s,%s, ".$hideEmailAddress.",%s,%s,%s,%s)",
