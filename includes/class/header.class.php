@@ -1,9 +1,10 @@
 
 <?php
 /*@Author; Christine A. Black
-@Version:0.14
-@todo: change the db connectuo into a class.
+@Version:0.15
+@todo: 
 
+Version 0.15 - Changed the db connectuo into a class.
 Version 0.14 - Changed the version number of the main style sheet and added jquery libraries to thee default header.
 Version 0.13 - Changed the version number of the main style sheet
 Version 0.12 - Changed the version number of the main style sheet
@@ -315,18 +316,9 @@ class header{
 	}
 	
 	/**/
-	function display_header(){
+	function display_header($database = ""){
 		
 		$filename = $this ->get_filename();
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
 		
 		if ($filename == '/profiles/fanprofile.php'){
 			
@@ -350,8 +342,6 @@ class header{
 	
 		}
 		
-		//echo $sql;
-		
 		$query = $database->prepare($sql);
 		$query ->execute();
 
@@ -360,9 +350,6 @@ class header{
 		$this ->start_session();
 
 		if ($fileinfo){
-		
-			//print_r($fileinfo);
-			//die();
 			
 			$output = $this -> built_header($fileinfo['filename'], $fileinfo["title"], 
 			$fileinfo["keywords"], $fileinfo["descriptionen"], $fileinfo["descriptioncymraeg"], 
