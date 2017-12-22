@@ -65,7 +65,7 @@ include '../includes/header.php'; ?>
 	//if ($_POST["name"] !=NULL && $_POST["name"] != ' ' &&  $_POST["email"]  != NULL && $_POST["email"] != ' ' ){
 		
 
-		echo $fanProfile ->submit_form_success($name,$location, $website, $email, $hideEmailAddress, $heardcyrff , $favesong, $favealbum, $comments);
+		echo $fanProfile ->submit_form_success($name,$location, $website, $email, $hideEmailAddress, $heardcyrff , $favesong, $favealbum, $comments, $database);
 	
 	
 }else{
