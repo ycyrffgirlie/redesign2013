@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.5
-@todo:  
+@Version:0.6
+@todo:  Default variables.
 
+Version 0.6 - Changed the db connectuo into a class and fixed an error woth displaying the added amd updated tables when there only one file.
 Version 0.5 - Added a line break to the email html table, fixed for dev server and added more file and dir to be excluded.
 Version 0.4 - Added another file to the skipped list.
 Version 0.3 - Fixed for live server, fixed PHP notices and added another check for update_test.
@@ -63,7 +64,7 @@ class fileInfo {
 		$output  .= $this ->build_email_html_top();
 		$output  .= $this -> fileInfo_table();
 		
-		if (count($this ->updatedFiles)>1){
+		if (count($this ->updatedFiles) >= 1){
 		
 			$output .= '
 					<table style="padding: 15px 0px;">
@@ -76,7 +77,7 @@ class fileInfo {
 			$output .= $this ->updated_files_table_html();
 		}
 		
-		if (count($this ->addedFiles)>1){
+		if (count($this ->addedFiles) >= 1){
 			$output .= '
 					<table style="padding: 15px 0px;">
 						<tr>
@@ -149,12 +150,12 @@ class fileInfo {
 	
 		$output  =  '';
 		$output = $this ->fileInfo_table_txt();
-		if (count($this ->updatedFiles)>1){
+		if (count($this ->updatedFiles) >=1){
 			$output .= 'Pages that have been updated:'."\n\n";
 			$output .= $this ->updated_files_table_txt();
 		}
 		
-		if (count($this ->addedFiles)>1){
+		if (count($this ->addedFiles) >=1){
 		
 			$output .= 'Pages that have been added:'."\n\n";
 			$output .= $this ->added_files_table_txt();
@@ -293,10 +294,10 @@ Name: '.$name."\n"
 	
 	/*Update database. Builds the headers of the email.  Builds the body of the emails. 
 	Sends the email. Logs the email for debugging  purposes. */
-	function email(){
+	function email($database){
 		
-		$filesDetails = $this ->getfilesinfo();
-		$this ->update_datebase();
+		$filesDetails = $this ->getfilesinfo($database);
+		$this ->update_datebase($database);
 		
 		$to = 'ycyrffgroupie@gmail.com';
 		$subject = 'File Information and update';
@@ -383,36 +384,7 @@ Name: '.$name."\n"
 	}
 	
 	/*Test if the file already exist in the database*/
-	function file_exist_test($filename){
-	
-		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
-		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
-		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
-		
-		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
-	
-			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
-				
-				require("/var/www/websites/redesign2013/includes/connection.php");
-		
-			}else{
-				
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-				
-			}
-			
-		}else{
-			
-			if ($documentRoot == '/var/www/websites/redesign2013'){
-				
-				require("/var/www/websites/redesign2013/includes/connection.php");
-			
-			}else{
-		
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-			}
-		
-		}
+	function file_exist_test($filename, $database){
 		
 		$numofrows = 0;
 		
@@ -732,12 +704,10 @@ Name: '.$name."\n"
 	}
 	
 	/*Gets details about files*/
-	function getfilesinfo(){
+	function getfilesinfo($database){
 
 		$files = $this  ->getfiles();
 		
-		
-	
 		$i = 0;
 
 			while ($i < count($files)){
@@ -785,7 +755,7 @@ Name: '.$name."\n"
 			$i++;
 		}
 		
-		$filesinfo2 = $this ->get_profiles_pages();
+		$filesinfo2 = $this ->get_profiles_pages($database);
 		
 		if (file_exists($patten.'/about.php')){
 			
@@ -805,7 +775,7 @@ Name: '.$name."\n"
 	}
 	
 	/*Gets details about  the fan profiles files*/
-	function get_profiles_pages(){
+	function get_profiles_pages($database){
 	
 		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
 		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
@@ -815,12 +785,10 @@ Name: '.$name."\n"
 		
 			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
 			
-				require("/var/www/websites/redesign2013/includes/connection.php");
 				$patten = "/var/www/websites/redesign2013";
 			
 			}else{
 		
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
 				$patten = "/home/ycyrf718/public_html/";
 		
 			}
@@ -829,13 +797,11 @@ Name: '.$name."\n"
 		}else{
 		
 			if ($documentRoot  == '/var/www/websites/redesign2013'){
-		
-				require("/var/www/websites/redesign2013/includes/connection.php");
+				
 				$patten = "/var/www/websites/redesign2013";
 		
 			}else{
-			
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+				
 				$patten = "/home/ycyrf718/public_html/";
 				
 			}
@@ -866,12 +832,8 @@ Name: '.$name."\n"
 	}	
 	
 	/*This update the  database and creates  lists of updated files and added files*/
-	function update_datebase(){
+	function update_datebase($database){
 	
-		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
-		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
-		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
-		
 		$filesDetails = $this ->filesDetails;
 		$i = 0;
 		$countUpdated = 0;
@@ -879,36 +841,10 @@ Name: '.$name."\n"
 		$updatedFiles = '';
 		$addedFiles = '';
 		
-		
-		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
-	
-			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
-				
-				require("/var/www/websites/redesign2013/includes/connection.php");	
-				
-			}else{
-				
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-				
-			}
-	
-		}else{
-			
-			if ($documentRoot == '/var/www/websites/redesign2013'){
-				
-				require("/var/www/websites/redesign2013/includes/connection.php");
-				
-			}else{
-				
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-			}
-			
-		}
-	
 		while ($i < count($filesDetails)){
-			$numofrows = $this ->file_exist_test($filesDetails[$i]["name"]);
+			$numofrows = $this ->file_exist_test($filesDetails[$i]["name"], $database);
 			$numofrows2 = 0;
-			$numofrows2 = $this ->update_test($filesDetails[$i]["name"], $filesDetails[$i]["datelastmodified"]);
+			$numofrows2 = $this ->update_test($filesDetails[$i]["name"], $filesDetails[$i]["datelastmodified"], $database);
 			
 			if ($numofrows >= 1){
 			
@@ -959,9 +895,13 @@ Name: '.$name."\n"
 	
 		}
 		
-		$this ->updatedFiles = $updatedFiles;
-		$this ->addedFiles = $addedFiles;
+		if ($countUpdated >= 1){
+			$this ->updatedFiles = $updatedFiles;
+		}
 		
+		if ($CountAdded >= 1){
+			$this ->addedFiles = $addedFiles;
+		}
 		
 	}
 
@@ -1008,36 +948,7 @@ Name: '.$name."\n"
 	}
 	
 	/*Test if the file needs updating in the database*/
-	function update_test($filename, $datelastmodified){
-	
-		$term =  isset($_SERVER["TERM"])? $_SERVER["TERM"] : "";
-		$shell= isset($_SERVER["SHELL"])? $_SERVER["SHELL"] : '';
-		$documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
-		
-		if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell' || $term == 'xterm-256color'){
-	
-			if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"])){
-				
-				require("/var/www/websites/redesign2013/includes/connection.php");	
-				
-			}else{
-				
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-				
-			}
-	
-		}else{
-			
-			if ($documentRoot == '/var/www/websites/redesign2013'){
-				
-				require("/var/www/websites/redesign2013/includes/connection.php");
-				
-			}else{
-				
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-			}
-			
-		}
+	function update_test($filename, $datelastmodified, $database){
 		
 		$numofrows  = 0;
 		$sql = 'SELECT count(*) FROM pages WHERE filename ="'.$filename.'" AND datelastmodified = "'.$datelastmodified.'"';
