@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.1
-@todo: 
+@Version:0.2
+@todo: Default variables.
 
+Version 0.2 - Changed the db connectuo into a class.
 Version 0.1 - Added the guestbook class to the site. */
 
 class guestbook{
@@ -109,8 +110,8 @@ class guestbook{
 	}
 	
 	/*Display guestbook*/
-	function display_guestbook($filename){
-		$this ->init_guestbook();
+	function display_guestbook($filename, $database){
+		$this ->init_guestbook($database);
 		
 		$output = '';
 		$output = $this ->display_comments();
@@ -121,17 +122,8 @@ class guestbook{
 	}
 	
 	/*This didplays the main page of the admin section*/
-	function display_guestbook_admin_default(){
+	function display_guestbook_admin_default($database){
 		$output = '';
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-			
-		}else{
-				
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}
 		
 		$query = $database ->prepare("SELECT * FROM holding_Guestbook");
 		$query ->execute();
@@ -251,18 +243,9 @@ class guestbook{
 	}
 	
 	/*This display the delete page of the admin section*/
-	function display_guestbook_admin_delete(){
+	function display_guestbook_admin_delete($database){
 		$output = '';
 		$messageId = isset($_GET['messageId'])? $_GET['messageId']: '';
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-				
-		}else{
-					
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}
 		
 		$query = $database ->prepare("SELECT * FROM holding_Guestbook where message_id = ".$messageId);
 		$query ->execute();
@@ -295,19 +278,10 @@ class guestbook{
 	}
 	
 	/*This is the page that updates the database*/
-	function display_guestbook_admin_delete_confirm(){
+	function display_guestbook_admin_delete_confirm($database){
 		$output = '';
 		$sql  = isset($_POST['sql'])? $_POST['sql']: '';
 		$count = isset($_POST['count'] )? $_POST['count'] : 1;
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-				
-		}else{
-					
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}
 		
 		if (isset($sql)){
 		
@@ -388,21 +362,11 @@ class guestbook{
 	}
 	
 	/*This display the edit page of the admin section*/
-	function display_guestbook_admin_edit(){
+	function display_guestbook_admin_edit($database){
 		$output = '';
 		$messageId = isset($_GET['messageId'])? $_GET['messageId']: '';
 		
 		if (is_numeric($messageId)){
-		
-			if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-			
-				require("/var/www/websites/redesign2013/includes/connection.php");
-					
-			}else{
-						
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-			}
-			
 			$query = $database ->prepare("SELECT * FROM holding_Guestbook where message_id = ".$messageId);
 			$query ->execute();
 			$comment = $query ->fetch();
@@ -458,7 +422,7 @@ class guestbook{
 	}
 	
 	/*This display the edit save page of the admin section*/
-	function display_guestbook_admin_edit_save(){
+	function display_guestbook_admin_edit_save($database){
 		$output = '';
 		
 		$messageId = isset($_GET['messageId'])? $_GET['messageId']: '';
@@ -522,21 +486,12 @@ class guestbook{
 	}
 	
 	/*This is the page that updates the database*/
-	function display_guestbook_admin_edit_update(){
+	function display_guestbook_admin_edit_update($database){
 		$output = '';
 		
 		/*Gets data from previous page*/
 		$sql = isset($_POST["sql"])?$_POST["sql"]:'';
 		$countEdits = isset($_POST["countEdit"])?$_POST["countEdit"]:0;
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-				
-		}else{
-					
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}
 
 		/*Updages the database if there has been a change*/
 		if ($countEdits != 0){
@@ -574,18 +529,9 @@ class guestbook{
 	}
 	
 	/*This display the save page of the admin section*/
-	function display_guestbook_admin_save(){
+	function display_guestbook_admin_save($database){
 		$output = '';
 		$messageId = isset($_GET['messageId'])? $_GET['messageId']: '';
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-				
-		}else{
-					
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}
 		
 		$query = $database ->prepare("SELECT * FROM holding_Guestbook where message_id = ".$messageId);
 		$query ->execute();
@@ -624,21 +570,12 @@ class guestbook{
 	}
 	
 	/*This is the page that updates the database*/
-	function display_guestbook_admin_save_confirm(){
+	function display_guestbook_admin_save_confirm($database){
 		$output = '';
 		
 		
 		$sql = isset($_POST['sql'])? $_POST['sql']: '';
 		$sql2 = isset($_POST['sql2'])? $_POST['sql2']: '';
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-				
-		}else{
-					
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}
 		
 		$query = $database ->prepare($sql);
 		$query2 = $database ->prepare($sql2);
@@ -663,7 +600,7 @@ class guestbook{
 	}
 	
 	/*This display the save multi page of the admin section*/
-	function display_guestbook_admin_save_multi(){
+	function display_guestbook_admin_save_multi($database){
 		$output ='';
 		$i = 0;
 		$count = 0;
@@ -690,15 +627,6 @@ class guestbook{
 			}
 			
 			$selectedSql = rtrim($selectedSql , " OR ");
-			
-			if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-			
-				require("/var/www/websites/redesign2013/includes/connection.php");
-					
-			}else{
-						
-				require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-			}
 			
 			$query = $database ->prepare($selectedSql);
 			$query ->execute();
@@ -831,18 +759,9 @@ class guestbook{
 	}
 	
 	/*This displays the success message for adding a comment*/
-	function guestbook_form_success($name, $website, $comment){
+	function guestbook_form_success($name, $website, $comment, $database){
 		$output = '';
 		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}
-	
 		$sql = sprintf("INSERT INTO holding_Guestbook(name, website, comment, posted_date) VALUES( %s, %s, %s, NOW())",
 			$database ->quote($name),
 			$database ->quote($website),
@@ -867,18 +786,9 @@ class guestbook{
 	}
 	
 	/*This starts up the variables for displaying the guestbook*/
-	function init_guestbook(){
+	function init_guestbook($database){
 		$page = isset($_GET["page"])?$_GET["page"]: 1;
 		$page = is_numeric($page)? $page: 1;
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}
 
 		$query = $database ->prepare("SELECT COUNT(*) FROM guestbook");
 		$query ->execute();
