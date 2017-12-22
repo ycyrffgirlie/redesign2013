@@ -45,7 +45,7 @@ if (isset($_POST["name"] )){
 <?php
 if (isset($_POST["name"]) &&  $_GET["v"] != 'fail'){
 
-	echo $guestbook ->guestbook_form_success($name, $website, $comment);
+	echo $guestbook ->guestbook_form_success($name, $website, $comment, $database);
 	
 }else{
 	
