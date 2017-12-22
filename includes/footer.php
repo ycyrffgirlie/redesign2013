@@ -4,9 +4,10 @@ error_reporting(E_ALL | E_WARNING | E_NOTICE);
 ini_set('display_errors', TRUE);
 
 /*@Author; Christine A. Black
-@Version:0.14
+@Version:0.15
 @todo: test . 
 
+Version 0.15 - Changed the db connectuo into a class.
 Version 0.14 - Fixed a php error.
 Version 0.13 - Tested MSIE and unknown.
 Version 0.12 - Commented rest of code.
@@ -75,7 +76,7 @@ if ($visitor ->domainName_check($_SESSION["domainname"] != true)){
 echo $footer ->footer_right();
 
 /*Checks whether the browser is supported.*/
-$visitor ->os_check();
+$visitor ->os_check($database);
 
 /*Sets a message if it's a develomet site.*/
 if ($visitor ->domainName_check($_SESSION["domainname"] == true)){
