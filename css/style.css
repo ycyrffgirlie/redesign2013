@@ -1,8 +1,9 @@
 /* @@Author: Chritine A. Black
-@Version:0.15
+@Version:0.16
 The main style sheet for the Cyrff site
-todo: change the content float to left.
+todo: Remove coomment out code. Merge common rules.
 
+Version 0.16 -  change the content float to left.
 Version 0.15 -  Added style for guestbook page, change the text aglinmet of .button and set .button dusplayas block.
 Version 0.14 -  Added style for P+C page.
 Version 0.13 - Added styling for  game pages and bold style.
@@ -193,7 +194,7 @@ a.buttonlink{
 }
 
 #content{
-	 float: right;
+	 float: left;
 	width: 69%;
 	/*margin-bottom: 20px;
 	padding-bottom: 30px*/
