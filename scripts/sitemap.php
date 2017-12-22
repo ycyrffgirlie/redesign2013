@@ -1,8 +1,9 @@
 <?php
 /**@@author:Christine Black
-@Version:0.2
+@Version:0.3
 @todo: 
 
+Version 0.3 - Changed the db connectuo into a class.
 Version 0.2 - Fixed for live dev.
 Version 0.1 - Added the sitemap script.**/
 
@@ -14,18 +15,19 @@ $documentRoot = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
 /*Setting location for files*/
 $filename = 'sitemap.xml';
 $sitemapFilename = 'sitemapLog.txt';
+$databaseClass = "class/database.class.php";
 
 if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
 
 	if (preg_match( '%/var/www/websites/redesign2013%', $_SERVER["PWD"]) || $_SERVER["HOME"] == "/home/christine"){
 	
-		require("/var/www/websites/redesign2013/includes/connection.php");
+		require("/var/www/websites/redesign2013/includes/".$databaseClass);
 		$sitemapLocation = '/var/www/websites/redesign2013/logs/'.$filename;
 		$sitemapLogLocation = '/var/www/websites/redesign2013/logs/'.$sitemapFilename;
 	
 	}else{
 	
-		require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		require("/home/ycyrf718/public_html/redesign2013/includes/".$databaseClass);
 		$sitemapLocation = '/home/ycyrf718/public_html/'.$filename;
 		$sitemapLogLocation = '/home/ycyrf718/logs/'.$sitemapFilename;
 	
@@ -35,19 +37,22 @@ if ($term == 'xterm' || $shell == '/usr/local/cpanel/bin/jailshell'){
 
 	if ($documentRoot == '/var/www/websites/redesign2013'){
 	
-		require("/var/www/websites/redesign2013/includes/connection.php");
+		require("/var/www/websites/redesign2013/includes/".$databaseClass);
 		$sitemapLocation = '/var/www/websites/redesign2013/logs/'.$filename;
 		$sitemapLogLocation = '/var/www/websites/redesign2013/logs/'.$sitemapFilename;
 	
 	}else{
 	
-		require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
+		require("/home/ycyrf718/public_html/redesign2013/includes/".$databaseClass);
 		$sitemapLocation = '/home/ycyrf718/public_html/'.$filename;
 		$sitemapLogLocation = '/home/ycyrf718/logs/'.$sitemapFilename;
 		
 	}
 
 }
+
+$db = new database;
+$database = $db ->connect();
 
 $output = "\n".'Starting script...'."\n";
 $output .= 'Script started at: '.date('H:i:s d/m/y', time()).'.'."\n";
