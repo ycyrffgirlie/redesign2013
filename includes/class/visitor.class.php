@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.16
-@todo: 
+@Version:0.17
+@todo: Default variables.
 
+Version 0.17 - Changed the db connectuo into a class.
 Version 0.16 - Fixed a php error.
 Version 0.15 - Fixed for live site.
 Version 0.14 - Added the header class.
@@ -530,7 +531,7 @@ class visitor{
 	/*Sets the browser version that the site supported.  Checks to see if user's browser 
 	is supported. Updates the visitor's table. Displays the unsupported message is browser is 
 	not supported.*/
-	function os_check() {
+	function os_check($database) {
 		
 		/*switch($this->os){
 		   case 'linux';*/
@@ -579,14 +580,14 @@ class visitor{
 		}*/
 		
 		if ($browserCheck  == 0){
-			$updateTable  = $this -> visitor_table();
+			$updateTable  = $this -> visitor_table($database);
 		}elseif ($browserCheck  == 1){
 			
 			$output = $this -> display_message();
-			$updateTable = $this -> visitor_table();
+			$updateTable = $this -> visitor_table($database);
 			
 		}else{
-			$updateTable = $this -> visitor_table();
+			$updateTable = $this -> visitor_table($database);
 		}
 		
 		if (isset($output)){
@@ -616,17 +617,8 @@ class visitor{
 	}
 	
 	/*Inserts visitor's details into the visitor's table.*/
-	function visitor_table(){
-	
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
+	function visitor_table($database){
 		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		};
-
 		$sql = "INSERT INTO visitor(
 						os, browser_name, browser_version,
 						domainName, ipAddress, refererPage,
