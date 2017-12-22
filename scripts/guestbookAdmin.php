@@ -8,15 +8,6 @@ include '../includes/header.php';
  
  $guestbook = new guestbook;
 
-if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-	require("/var/www/websites/redesign2013/includes/connection.php");
-		
-}else{
-			
-	require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-}
-
 ?>
 
 <div class="container">
@@ -28,12 +19,12 @@ if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
 switch($action){
 	case 'delete':
 	
-		echo $guestbook ->display_guestbook_admin_delete();
+		echo $guestbook ->display_guestbook_admin_delete($database);
 	
 	break;
 	case 'deleteConfirm';
 		
-		echo $guestbook ->display_guestbook_admin_delete_confirm();
+		echo $guestbook ->display_guestbook_admin_delete_confirm($database);
 		
 	break;
 	case 'deleteMulti':
@@ -43,12 +34,12 @@ switch($action){
 	break;
 	case 'deleteMultiConfirm':
 	
-		echo $guestbook ->display_guestbook_admin_delete_confirm();
+		echo $guestbook ->display_guestbook_admin_delete_confirm($database);
 	
 	break;
 	case 'edit';
 	
-		echo $guestbook ->display_guestbook_admin_edit();
+		echo $guestbook ->display_guestbook_admin_edit($database);
 	
 	break;
 	case 'editSave':
@@ -58,32 +49,32 @@ switch($action){
 	break;
 	case 'editUpdate';
 	
-		echo $guestbook ->display_guestbook_admin_edit_update();
+		echo $guestbook ->display_guestbook_admin_edit_update($database);
 	
 	break;
 	case 'save':
 	
-		echo $guestbook ->display_guestbook_admin_save();
+		echo $guestbook ->display_guestbook_admin_save($database);
 	
 	break;
 	case 'saveConfirm':
 		
-		echo $guestbook ->display_guestbook_admin_save_confirm();
+		echo $guestbook ->display_guestbook_admin_save_confirm($database);
 		
 	break;
 	case 'saveMulti':
 		
-		echo $guestbook ->display_guestbook_admin_save_multi();
+		echo $guestbook ->display_guestbook_admin_save_multi($database);
 		
 	break;
 	case 'saveMultiConfirm':
 	
-		echo $guestbook ->display_guestbook_admin_save_confirm();
+		echo $guestbook ->display_guestbook_admin_save_confirm($database);
 	
 	break;
 	default:
 		
-		echo $guestbook ->display_guestbook_admin_default();
+		echo $guestbook ->display_guestbook_admin_default($database);
 		
 	break;
 
