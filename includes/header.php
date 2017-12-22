@@ -3,7 +3,8 @@
 @Version:0.16
 @todo:  
 
-Version 0.15 - Added fan profile class to the site.
+Version 0.17 - Changed the db connectuo into a class.
+Version 0.16 - Added fan profile class to the site.
 Version 0.15 - Added menu class.
 Version 0.14 - Added display_header and get_profile_id methods to the header class.
 Version 0.13 - Added the header class to the site.
@@ -20,22 +21,22 @@ Version 0.3 - Added jquery.
 Version 0.2 - So it works with the subdomain.
 Version 0.1 - Added footer to the site, */
 
-global $filename , $profile_id, $fileinfo ;
-if (file_exists('/includes/connection.php')){
-	require('includes/connection.php');
-}else{
-	require("connection.php");
-}
+error_reporting(E_ALL);
+global $filename , $profile_id, $fileinfo, $database;
 
 require_once 'functions.php';
 /*the included files.*/
+include 'class/database.class.php';
 include 'class/visitor.class.php';
 include 'class/footer.class.php';
 include 'class/header.class.php';
 include 'class/menu.class.php';
 include 'class/fanProfile.class.php';
 
+//$database = $factory ->create('provider');
+
 /*Set a new visitor class , sets a new footer class and sets the header class.*/
+$db = new database;
 $visitor = new visitor;
 $footer = new footer;
 $header = new header;
@@ -43,10 +44,11 @@ $menu = new menu;
 $fanProfile= new fanProfile;
 
 /*Sets variables.////*/
+$database = $db ->connect();
 $filename = $header  ->get_filename();
 $profile_id = $fanProfile   ->get_profile_id();
 
 /*Displays the header.*/
-echo $header  ->display_header();
+echo $header  ->display_header($database);
 
 ?>
