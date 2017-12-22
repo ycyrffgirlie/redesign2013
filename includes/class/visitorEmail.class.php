@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.2
+@Version:0.3
 @todo: Finish the word_wrap method. sdd csv to the email.
 
+Version 0.3 - Changed the db connectuo into a class.
 Version 0.2 - Fixed for live site.
 Version 0.1 - Added the visitor e-mail class to the site. */
 
@@ -10,7 +11,7 @@ class visitorEmail{
 	
 	
 	/*Builds the html version of the email.*/
-	function build_email_html(){
+	function build_email_html($database = ""){
 		
 		$output  =  '';
 		$output  .= $this ->build_email_html_top();
@@ -22,7 +23,7 @@ class visitorEmail{
 							</td>
 						</tr>
 					</table>';
-		$output  .= $this ->get_list_of_visitor_browsercap_html();
+		$output  .= $this ->get_list_of_visitor_browsercap_html($database);
 		$output  .= '
 					<table style="padding: 15px 0px;">
 						<tr>
@@ -31,7 +32,7 @@ class visitorEmail{
 							</td>
 						</tr>
 					</table>';
-		$output  .= $this ->get_list_of_visitor_unsupported_browsers_html();
+		$output  .= $this ->get_list_of_visitor_unsupported_browsers_html($database);
 		$output  .= '
 					<table style="padding: 15px 0px;">
 						<tr>
@@ -40,7 +41,7 @@ class visitorEmail{
 							</td>
 						</tr>
 					</table>';
-		$output  .= $this ->get_list_of_visitor_html();
+		$output  .= $this ->get_list_of_visitor_html($database);
 		$output  .= $this ->build_email_html_bottom();
 		
 		return $output;
@@ -48,15 +49,15 @@ class visitorEmail{
 	}
 	
 	/*Builds the text version of the email.*/
-	function build_email_txt(){
+	function build_email_txt($database = ""){
 		
 		$output  =  '';
 		$output  .= 'Visitors that script can\'t dectect browser versions report:'."\n\n";
-		$output  .= $this ->get_list_of_visitor_browsercap_txt();
+		$output  .= $this ->get_list_of_visitor_browsercap_txt($database);
 		$output  .= 'Visitors that are using out of date browsers report:'."\n\n";
-		$output  .= $this ->get_list_of_visitor_unsupported_browsers_txt();
+		$output  .= $this ->get_list_of_visitor_unsupported_browsers_txt($database);
 		$output  .= 'All visitors report:'."\n\n";
-		$output  .= $this ->get_list_of_visitor_txt();
+		$output  .= $this ->get_list_of_visitor_txt($database);
 		$output  .= $this ->build_email_txt_bottom();
 		
 		return $output;
@@ -206,16 +207,7 @@ class visitorEmail{
 	}
 	
 	/*Deletes all the data in the visitor table.*/
-	function cleanVisitorTable(){
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
+	function cleanVisitorTable($database = ""){
 		
 		$sql = "TRUNCATE TABLE visitor"; 
 		
@@ -235,7 +227,7 @@ class visitorEmail{
 	
 	/*Builds the headers of the email. Cleans the visitor table. Builds the body of the emails. 
 	Sends the email. Logs the email for debugging  purposes. */
-	function email(){
+	function email($database = ""){
 	
 		$to = 'ycyrffgroupie@gmail.com';
 		$subject = 'Reports';
@@ -245,10 +237,10 @@ class visitorEmail{
 		$headers .= 'Content-Type: multipart/alternative; boundary='.$mime_boundary. "\r\n";
 		$headers .='From:  "Webmistress" <webmistress@ycyrffgroupie.co.uk>'. "\r\n";	
 		
-		$htmlEmail = $this ->build_email_html();
-		$txtEmail = $this ->build_email_txt();
+		$htmlEmail = $this ->build_email_html($database);
+		$txtEmail = $this ->build_email_txt($database);
 		
-		//$this ->cleanVisitorTable();
+		//$this ->cleanVisitorTable($database);
 		
 		$message = "This is a multi-part message in MIME format.\r\n\r\n" .
 		'--'.$mime_boundary."\r\n".
@@ -299,17 +291,8 @@ class visitorEmail{
 	}
 	
 	/*Gets a html version list of all visitors.*/
-	function get_list_of_visitor_html(){
+	function get_list_of_visitor_html($database = ""){
 	
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
-		
 		$output  =  '';
 		
 		$sql ="SELECT * FROM visitor";
@@ -342,16 +325,7 @@ class visitorEmail{
 	}
 	
 	/*Gets a text version list of sll visitors.*/
-	function get_list_of_visitor_txt(){
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
+	function get_list_of_visitor_txt($database = ""){
 		
 		$output  =  '';
 		
@@ -382,17 +356,8 @@ class visitorEmail{
 	}
 	
 	/*Gets a html version list of visitors that using browser script couldn't dectect version.*/
-	function get_list_of_visitor_browsercap_html(){
+	function get_list_of_visitor_browsercap_html($database = ""){
 	
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
-		 
 		$output  =  '';
 		
 		$sql ="SELECT * FROM visitor WHERE browser_version = 0";
@@ -425,16 +390,7 @@ class visitorEmail{
 	}
 	
 	/*Gets a text version list of visitors that using browser script couldn't dectect version.*/
-	function get_list_of_visitor_browsercap_txt(){
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
+	function get_list_of_visitor_browsercap_txt($database = ""){
 		
 		$output  =  '';
 		
@@ -465,17 +421,8 @@ class visitorEmail{
 	}
 	
 	/*Gets a html version list of visitors that are using unsupported browsers.*/
-	function get_list_of_visitor_unsupported_browsers_html(){
+	function get_list_of_visitor_unsupported_browsers_html($database = ""){
 	
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
-		
 		$output  =  '';
 		
 		$sql ="SELECT * FROM visitor WHERE 
@@ -514,16 +461,7 @@ class visitorEmail{
 	}
 	
 	/*Gets a text version list of visitors that are using unsupported browsers.*/
-	function get_list_of_visitor_unsupported_browsers_txt(){
-		
-		if ($_SERVER["DOCUMENT_ROOT"] == '/var/www/websites/redesign2013'){
-		
-			require("/var/www/websites/redesign2013/includes/connection.php");
-		
-		}else{
-			
-			require("/home/ycyrf718/public_html/redesign2013/includes/connection.php");
-		}	
+	function get_list_of_visitor_unsupported_browsers_txt($database = ""){
 		
 		$output  =  '';
 		
