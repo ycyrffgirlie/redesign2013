@@ -5,6 +5,14 @@ $(document).ready(function(){
 		$('body').prepend('<div id="overlay"></div>');
 		$('.contactScreen').show();
 	});
+	
+	$('.contactScreen > .close').click(function(event){
+		event.preventDefault();
+		
+		$('#overlay').remove();
+		$(this).parent().hide();
+	});
+
 
 	$('#contactForm').submit(function(){
 		var name = $('input[name="name"]').val();
