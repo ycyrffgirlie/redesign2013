@@ -10,6 +10,8 @@ function openPage($url){
     curl_close($ch);    
 }
 
+$documentRoot  = isset($_SERVER["DOCUMENT_ROOT"])? $_SERVER["DOCUMENT_ROOT"]:'';
+
 if ($documentRoot == '/var/www/websites/redesign2013'){
 
     $websiteURL = 'http://redesign2013.linux.ycyrffgroupie.co.uk/';
