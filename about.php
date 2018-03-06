@@ -11,7 +11,7 @@ include 'includes/lang/'.$lang.'.about.php';
 .lang{
 	float: right;
 	padding: 10px;
-	width: 150px;
+	width: 159px;
 }
 </style>
 	<body>
