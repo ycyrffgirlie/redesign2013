@@ -1,8 +1,9 @@
 <?php
 /*@Author; Christine A. Black
-@Version:0.2
+@Version:0.3
 @todo: Default variables.
 
+Version 0.3 - fixed styliing for moblie.
 Version 0.2 - Changed the db connectuo into a class.
 Version 0.1 - Added the guestbook class to the site. */
 
@@ -712,7 +713,7 @@ class guestbook{
 		
 		$output = '
 <form id="guestbookForm"action="submitguestbook.php" method="post">
-	<div style="float: right; width: 76%;">
+	<div style="float: right; width: 65%;">
 		<p>To leave a comment in the guestbook, please fill in the form.
 		<br />
 		Adael sylw yn y llyfr gwestai, llenwch y ffurflen.
@@ -749,7 +750,7 @@ class guestbook{
 		</div>
 	</div>
 
-	<div style="margin:0px auto; width:195px;">
+	<div style="margin:0px auto; width:205px;">
 		<input type="submit" name="submit" value="Submit /  Anfon" /> <input type="reset" name="reset" value="Reset / Clir" />
 	</div>
 
