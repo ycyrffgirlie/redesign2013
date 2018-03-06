@@ -1,8 +1,9 @@
 /* @@Author: Chritine A. Black
-@Version:0.16
+@Version:0.17
 The main style sheet for the Cyrff site
 todo: Remove coomment out code. Merge common rules.
 
+Version 0.17 -  Fixed it for mobile.
 Version 0.16 -  change the content float to left.
 Version 0.15 -  Added style for guestbook page, change the text aglinmet of .button and set .button dusplayas block.
 Version 0.14 -  Added style for P+C page.
@@ -27,6 +28,32 @@ Version 0.1 - Create style sheet
 		background-image: none;
 	}
 	
+	.sitemapContainer{
+		width: 60%; 
+	}
+	
+	.contentContainer{
+		width:65%;
+	}
+	
+}
+
+@media only screen 
+and (max-device-width: 480px)
+and (orientation: landscape){
+	body{
+		background-color: #800080;
+		background-image: none;
+	}
+}
+
+@media only screen 
+and (max-height: 769px)
+and (max-width: 1024px){
+	body{
+		background-color: #800080;
+		background-image: none;
+	}
 }
 
 @media only screen and (min-device-width: 1024px){
@@ -38,6 +65,14 @@ Version 0.1 - Create style sheet
 		-moz-background-size: cover;
 		-o-background-size: cover;
 		background-size: cover;
+	}
+	
+	.sitemapContainer{
+		width:75%; 
+	}
+	
+	.contentContainer{
+		width:75%;
 	}
 }
 
@@ -271,14 +306,15 @@ footer a{
 }
 .recordDetails, 
 .tracklisting {
-    width: 43%;
     float: left;
     padding: 10px;
 }
 .recordDetails{
+	 width: 31%;
 	/*height: 232px;
 	vertical-align: middle;
 	position: relative;*/
+	margin-right: 13%;
 }
 .recordDetails > ul {
     background-color: #FFFFFF;
@@ -287,6 +323,10 @@ footer a{
     list-style: none outside none;
     padding: 5px;
     width: 200px;
+}
+
+.tracklisting {
+	width: 43%;
 }
 
 .fieldline{
@@ -354,6 +394,7 @@ img{
 	width: 100%;
 	z-index: 20;
 }
+
 .contactScreen{ 
 	border: 5px solid #ffd700;
 	-webkit-border-radius: 25px;
@@ -494,7 +535,7 @@ a.music:hover{
 }
 
 .sitemapContainer{
-    width:75%; 
+    /*width:75%; */
     float: left;
 }
 
@@ -630,7 +671,7 @@ p.red{
 }
 
 .contentContainer{
-    width: 75%;
+    /*width: 75%;*/
     float: left;
 }
 
